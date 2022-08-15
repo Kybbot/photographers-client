@@ -23,6 +23,8 @@
 	},
 	"plugins": ["react", "@typescript-eslint", "import", "jsx-a11y", "react-hooks", "prettier"],
 	"rules": {
-		"prettier/prettier": "error"
+		"prettier/prettier": "error",
+		"react/prop-types": "off",
+		"react/display-name": "off"
 	}
 }

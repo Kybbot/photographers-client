@@ -1,0 +1,64 @@
+.react-tel-input {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-family: "Karla", sans-serif;
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+
+.react-tel-input .form-control {
+	position: relative;
+	font-size: 16px;
+	line-height: 21px;
+	letter-spacing: normal;
+	margin: 0;
+	background-color: #f4f4f4;
+	border: 1px solid #eeeeee;
+	border-radius: 10px;
+	padding: 0 13px;
+	height: 40px;
+	width: 100%;
+	outline: initial;
+}
+
+.react-tel-input .flag-dropdown {
+	order: -1;
+	position: static;
+	height: 40px;
+	width: 70px;
+	background-color: #f4f4f4;
+	border: 1px solid #eeeeee;
+	border-radius: 10px;
+	margin-right: 10px;
+	overflow: hidden;
+}
+
+.react-tel-input .selected-flag:hover,
+.react-tel-input .selected-flag:focus {
+	background-color: #f4f4f4;
+	border-radius: 10px;
+}
+
+.react-tel-input .flag-dropdown.open {
+	background-color: #f4f4f4;
+	border-radius: 10px;
+}
+
+.react-tel-input .flag-dropdown.open .selected-flag {
+	background-color: #f4f4f4;
+	border-radius: 10px;
+}
+
+.react-tel-input .selected-flag {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding: 0;
+	margin-left: -5px;
+}
+
+.react-tel-input .country-list {
+	width: 100%;
+}

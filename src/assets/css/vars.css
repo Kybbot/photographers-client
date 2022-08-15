@@ -4,21 +4,16 @@
 
 :root {
 	--main-bg: #ffffff;
+	--accent-color: #3300cc;
 
-	--text-color: #1a1919;
-	--accent-color: #c409d1;
-
-	--radius: 12px;
+	--main-text: #262626;
+	--secondary-text: #6d6d6d;
+	--btn-text: #ffffff;
 }
 
 html {
 	scroll-behavior: smooth;
 	scroll-padding-top: 40px;
-	height: 100%;
-}
-
-#root {
-	height: 100%;
 }
 
 .h-100 {

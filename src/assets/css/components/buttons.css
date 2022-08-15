@@ -1,0 +1,17 @@
+.btn {
+	background-color: var(--accent-color);
+	font-family: "Karla", sans-serif;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 23px;
+	padding: 14px 20px;
+	border-style: none;
+	border-radius: 50px;
+	color: var(--btn-text);
+	cursor: pointer;
+	width: 100%;
+}
+
+.btn:disabled {
+	opacity: 0.33;
+}

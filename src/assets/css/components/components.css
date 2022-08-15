@@ -2,3 +2,9 @@
 
 @import "./main.css";
 @import "./container.css";
+@import "./buttons.css";
+@import "./header.css";
+@import "./form.css";
+
+@import "./phoneForm.css";
+@import "./otp.css";

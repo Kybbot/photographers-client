@@ -1,0 +1,29 @@
+.header {
+	padding: 20px 0 19px 0;
+	border-top: 1px solid #f1f0ec;
+	border-bottom: 1px solid #f1f0ec;
+}
+
+.header__container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+.header__btn {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 17px;
+	background-color: transparent;
+	border-style: none;
+	padding: 0;
+	align-self: flex-start;
+	cursor: pointer;
+}
+
+.header__btn--visible {
+	display: block;
+}
