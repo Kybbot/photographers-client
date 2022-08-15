@@ -3,6 +3,7 @@ import React from "react";
 import { PhoneForm } from "./components/PhoneForm";
 import { OTPForm } from "./components/OTPForm";
 import logo from "../../assets/img/logo.svg";
+import { SelfiForm } from "./components/SelfiForm";
 
 const Signup: React.FC = () => {
 	const [phoneResult, setPhoneResult] = React.useState(false);
@@ -35,6 +36,7 @@ const Signup: React.FC = () => {
 					<section className="signup">
 						{!phoneResult && <PhoneForm setPhoneResult={setPhoneResult} />}
 						{!otpResult && phoneResult && <OTPForm setOtpResult={setOtpResult} />}
+						{otpResult && phoneResult && <SelfiForm />}
 					</section>
 				</div>
 			</main>
