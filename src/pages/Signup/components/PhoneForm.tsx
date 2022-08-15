@@ -1,12 +1,12 @@
 import React, { Dispatch, FormEvent } from "react";
-// import PhoneInput from "react-phone-input-2";
+import PhoneInput from "react-phone-input-2";
 
 type PhoneFormProps = {
 	setPhoneResult: Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const PhoneForm: React.FC<PhoneFormProps> = ({ setPhoneResult }) => {
-	// const [phone, setPhone] = React.useState("");
+	const [phone, setPhone] = React.useState("");
 
 	const formHandler = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -18,7 +18,7 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({ setPhoneResult }) => {
 			<h1 className="phoneForm__title">Let’s get started</h1>
 			<p className="phoneForm__text">Enter your phone number</p>
 			<form onSubmit={formHandler}>
-				{/* <PhoneInput enableSearch country={"us"} value={phone} onChange={(phone) => setPhone(phone)} /> */}
+				<PhoneInput enableSearch country={"us"} value={phone} onChange={(phone) => setPhone(phone)} />
 				<button type="submit" className="btn">
 					Create account
 				</button>
