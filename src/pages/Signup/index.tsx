@@ -8,12 +8,20 @@ const Signup: React.FC = () => {
 	const [phoneResult, setPhoneResult] = React.useState(false);
 	const [otpResult, setOtpResult] = React.useState(false);
 
+	const goBackHandler = () => {
+		setPhoneResult(false);
+	};
+
 	return (
 		<>
 			<header className="header">
 				<div className="container">
 					<div className="header__container">
-						<button className="header__btn" aria-label="Go back">
+						<button
+							onClick={goBackHandler}
+							className={`header__btn ${!otpResult && phoneResult ? "header__btn--visible" : ""}`}
+							aria-label="Go back"
+						>
 							<svg width="8" height="17" fill="none" focusable="false" aria-hidden="true">
 								<use xlinkHref="#left-arrow" />
 							</svg>
