@@ -1,5 +1,11 @@
 import React, { Dispatch, FormEvent } from "react";
-import PhoneInput from "react-phone-input-2";
+import RPI, { PhoneInputProps } from "react-phone-input-2";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const ReactPhoneInput: React.FC<PhoneInputProps> = RPI.default ? RPI.default : RPI;
+
+// const PhoneInput = PhInput.default ? PhInput.default : PhInput;
 
 type PhoneFormProps = {
 	setPhoneResult: Dispatch<React.SetStateAction<boolean>>;
@@ -18,7 +24,7 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({ setPhoneResult }) => {
 			<h1 className="phoneForm__title">Let’s get started</h1>
 			<p className="phoneForm__text">Enter your phone number</p>
 			<form onSubmit={formHandler}>
-				<PhoneInput enableSearch country={"us"} value={phone} onChange={(phone) => setPhone(phone)} />
+				<ReactPhoneInput enableSearch country={"us"} value={phone} onChange={(phone) => setPhone(phone)} />
 				<button type="submit" className="btn">
 					Create account
 				</button>
