@@ -2,15 +2,17 @@ import React from "react";
 
 import { PhoneForm } from "./components/PhoneForm";
 import { OTPForm } from "./components/OTPForm";
-import logo from "../../assets/img/logo.svg";
 import { SelfiForm } from "./components/SelfiForm";
+import logo from "../../assets/img/logo.svg";
 
 const Signup: React.FC = () => {
+	const [phone, setPhone] = React.useState("");
 	const [phoneResult, setPhoneResult] = React.useState(false);
 	const [otpResult, setOtpResult] = React.useState(false);
 
 	const goBackHandler = () => {
 		setPhoneResult(false);
+		setOtpResult(false);
 	};
 
 	return (
@@ -20,7 +22,9 @@ const Signup: React.FC = () => {
 					<div className="header__container">
 						<button
 							onClick={goBackHandler}
-							className={`header__btn ${!otpResult && phoneResult ? "header__btn--visible" : ""}`}
+							className={`header__btn ${
+								(phoneResult && !otpResult) || (phoneResult && otpResult) ? "header__btn--visible" : ""
+							}`}
 							aria-label="Go back"
 						>
 							<svg width="8" height="17" fill="none" focusable="false" aria-hidden="true">
@@ -34,8 +38,8 @@ const Signup: React.FC = () => {
 			<main className="main">
 				<div className="container">
 					<section className="signup">
-						{!phoneResult && <PhoneForm setPhoneResult={setPhoneResult} />}
-						{!otpResult && phoneResult && <OTPForm setOtpResult={setOtpResult} />}
+						{!phoneResult && <PhoneForm phone={phone} setPhone={setPhone} setPhoneResult={setPhoneResult} />}
+						{phoneResult && !otpResult && <OTPForm phone={phone} setOtpResult={setOtpResult} />}
 						{otpResult && phoneResult && <SelfiForm />}
 					</section>
 				</div>

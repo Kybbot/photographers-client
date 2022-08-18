@@ -5,15 +5,13 @@ import RPI, { PhoneInputProps } from "react-phone-input-2";
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const ReactPhoneInput: React.FC<PhoneInputProps> = RPI.default ? RPI.default : RPI;
 
-// const PhoneInput = PhInput.default ? PhInput.default : PhInput;
-
 type PhoneFormProps = {
+	phone: string;
+	setPhone: Dispatch<React.SetStateAction<string>>;
 	setPhoneResult: Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const PhoneForm: React.FC<PhoneFormProps> = ({ setPhoneResult }) => {
-	const [phone, setPhone] = React.useState("");
-
+export const PhoneForm: React.FC<PhoneFormProps> = ({ phone, setPhone, setPhoneResult }) => {
 	const formHandler = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setPhoneResult(true);
