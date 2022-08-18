@@ -159,7 +159,12 @@ export const OTP: React.FC<OTPProps> = React.memo(({ length, isNumberInput, disa
 				.map((_, index) => (
 					<OTPInput
 						key={`SingleInput-${index}`}
-						type={isNumberInput ? "number" : "text"}
+						type={"text"}
+						min={0}
+						max={9}
+						maxLength={1}
+						autoComplete="off"
+						inputMode="numeric"
 						focus={activeInput === index}
 						value={otpValues && otpValues[index]}
 						onFocus={() => handleOnFocus(index)}
