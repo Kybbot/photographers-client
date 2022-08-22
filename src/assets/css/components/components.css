@@ -10,3 +10,8 @@
 @import "./otp.css";
 @import "./selfi.css";
 @import "./dashboard.css";
+
+@import "./settings/index.css";
+@import "./settings/settings-name.css";
+@import "./settings/settings-account.css";
+@import "./settings/settings-notification.css";

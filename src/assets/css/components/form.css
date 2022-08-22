@@ -1,3 +1,61 @@
+.input {
+	font-size: 16px;
+	line-height: 21px;
+	font-weight: 400;
+	font-family: "Karla", sans-serif;
+	margin: 0;
+	background-color: #f4f4f4;
+	border: 1px solid #eeeeee;
+	border-radius: 10px;
+	padding: 0 13px;
+	height: 40px;
+	width: 100%;
+}
+
+.custom-checkbox {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+
+.custom-checkbox__input {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	opacity: 0.00001;
+	margin: 0;
+	font-size: 100%;
+	border: none;
+	cursor: pointer;
+}
+
+.custom-checkbox__wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 20px;
+	height: 20px;
+	color: transparent;
+	border: 1px solid #e3e0d8;
+	border-radius: 5px;
+	margin-right: 10px;
+	transition: all 0.1s linear;
+}
+
+.custom-checkbox__svg * {
+	transition: all 0.1s linear;
+}
+
+.custom-checkbox__input:checked + .custom-checkbox__wrapper {
+	border: 1px solid var(--accent-color);
+	color: var(--accent-color);
+}
+
+.custom-checkbox__input:focus:not(:focus-visible) svg {
+	outline: none;
+}
+
 .react-tel-input {
 	display: flex;
 	align-items: center;
@@ -10,6 +68,8 @@
 .react-tel-input .form-control {
 	position: relative;
 	font-size: 16px;
+	font-family: "Karla", sans-serif;
+	font-weight: 400;
 	line-height: 21px;
 	letter-spacing: normal;
 	margin: 0;
