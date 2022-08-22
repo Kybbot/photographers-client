@@ -27,3 +27,21 @@
 .header__btn--visible {
 	display: block;
 }
+
+.header__avatar {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+}
+
+.header__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+}

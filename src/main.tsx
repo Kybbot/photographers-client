@@ -6,6 +6,7 @@ import App from "./App";
 import { ScrollToTop } from "./components/ScrollToTop";
 
 import "react-phone-input-2/lib/style.css";
+import "swiper/css";
 import "./assets/css/index.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
