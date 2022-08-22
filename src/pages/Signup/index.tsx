@@ -3,7 +3,6 @@ import React from "react";
 import { PhoneForm } from "./components/PhoneForm";
 import { OTPForm } from "./components/OTPForm";
 import { SelfiForm } from "./components/SelfiForm";
-import logo from "../../assets/img/logo.svg";
 
 const Signup: React.FC = () => {
 	const [phone, setPhone] = React.useState("");
@@ -31,18 +30,18 @@ const Signup: React.FC = () => {
 								<use xlinkHref="#left-arrow" />
 							</svg>
 						</button>
-						<img src={logo} alt="PhotoDrop" />
+						<img src="/logo.svg" alt="PhotoDrop" />
 					</div>
 				</div>
 			</header>
 			<main className="main">
-				<div className="container">
-					<section className="signup">
+				<section className="signup">
+					<div className="container">
 						{!phoneResult && <PhoneForm phone={phone} setPhone={setPhone} setPhoneResult={setPhoneResult} />}
 						{phoneResult && !otpResult && <OTPForm phone={phone} setOtpResult={setOtpResult} />}
 						{otpResult && phoneResult && <SelfiForm />}
-					</section>
-				</div>
+					</div>
+				</section>
 			</main>
 		</>
 	);

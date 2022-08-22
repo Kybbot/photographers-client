@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import logo from "../../assets/img/logo.svg";
-import message from "../../assets/img/message.svg";
 import realAvatar from "../../assets/img/real-avatar.jpg";
 
 const Dashboard: React.FC = () => {
@@ -12,7 +10,7 @@ const Dashboard: React.FC = () => {
 			<header className="header">
 				<div className="container">
 					<div className="header__container">
-						<img src={logo} alt="PhotoDrop" />
+						<img src="/logo.svg" alt="PhotoDrop" />
 						<Link to={"/settings"} className="header__avatar" aria-label="Settings">
 							<img src={realAvatar} alt="avatar" aria-hidden="true" className="header__img" />
 						</Link>
@@ -22,7 +20,7 @@ const Dashboard: React.FC = () => {
 			<main className="main">
 				<section className="dashboard">
 					<div className="container">
-						<img className="dashboard__dec" src={message} alt="" arica-hidden="true" />
+						<img className="dashboard__dec" src="/message.svg" alt="" arica-hidden="true" />
 						<h1 className="dashboard__title">Your photos will drop soon.</h1>
 						<p className="dashboard__text">
 							You will get a text message when they are ready. It can take up to 48 hours.

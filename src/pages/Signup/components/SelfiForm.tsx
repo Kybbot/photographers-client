@@ -1,8 +1,6 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import Cropper, { Area } from "react-easy-crop";
 
-import avatar from "../../../assets/img/avatar.png";
-
 export const SelfiForm: React.FC = () => {
 	const [file, setFile] = React.useState<string | null>(null);
 	const [form, setForm] = React.useState(false);
@@ -46,7 +44,7 @@ export const SelfiForm: React.FC = () => {
 			<h2 className="selfi__title">Add a selfie</h2>
 			<p className="selfi__text">A selfie allows your photos to be synced with your account.</p>
 			<div className="selfi__wrapper">
-				<img aria-hidden="true" src={avatar} alt="avatar placeholder" className="selfi__avatar" />
+				<img aria-hidden="true" src="/avatar.png" alt="avatar placeholder" className="selfi__avatar" />
 				<div className="selfi__picker">
 					<input ref={fileInputRef} type="file" name="selfi" id="selfi" className="selfi__btn" onChange={fileHandler} />
 					<label htmlFor="selfi" className="selfi__label" aria-label="Add a selfie">
