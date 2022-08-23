@@ -5,9 +5,9 @@ import Dashboard from "./pages/Dashboard";
 import Signup from "./pages/Signup";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
-import SettingsName from "./pages/SettingsName";
-import SettingsAccount from "./pages/SettingsAccount";
-import SettingsNotification from "./pages/SettingsNotification";
+import SettingsName from "./pages/Settings/SettingsName";
+import SettingsAccount from "./pages/Settings/SettingsAccount";
+import SettingsNotification from "./pages/Settings/SettingsNotification";
 
 const App: React.FC = () => {
 	return (
