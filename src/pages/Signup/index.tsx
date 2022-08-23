@@ -1,8 +1,8 @@
-import React from "react";
+import React, { FormEvent } from "react";
 
 import { PhoneForm } from "./components/PhoneForm";
-import { OTPForm } from "./components/OTPForm";
 import { SelfiForm } from "./components/SelfiForm";
+import { OTPForm } from "../../components/OTPForm";
 
 const Signup: React.FC = () => {
 	const [phone, setPhone] = React.useState("");
@@ -12,6 +12,11 @@ const Signup: React.FC = () => {
 	const goBackHandler = () => {
 		setPhoneResult(false);
 		setOtpResult(false);
+	};
+
+	const otpFormHandler = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		setOtpResult(true);
 	};
 
 	return (
@@ -38,7 +43,7 @@ const Signup: React.FC = () => {
 				<section className="signup">
 					<div className="container">
 						{!phoneResult && <PhoneForm phone={phone} setPhone={setPhone} setPhoneResult={setPhoneResult} />}
-						{phoneResult && !otpResult && <OTPForm phone={phone} setOtpResult={setOtpResult} />}
+						{phoneResult && !otpResult && <OTPForm phone={phone} formHandler={otpFormHandler} />}
 						{otpResult && phoneResult && <SelfiForm />}
 					</div>
 				</section>
