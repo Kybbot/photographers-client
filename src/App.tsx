@@ -8,6 +8,9 @@ import NotFound from "./pages/NotFound";
 import SettingsName from "./pages/Settings/SettingsName";
 import SettingsAccount from "./pages/Settings/SettingsAccount";
 import SettingsNotification from "./pages/Settings/SettingsNotification";
+import SettingsPhone from "./pages/Settings/SettingsPhone";
+import SettingsOtp from "./pages/Settings/SettingsOtp";
+import SettingsEmail from "./pages/Settings/SettingsEmail";
 
 const App: React.FC = () => {
 	return (
@@ -18,6 +21,9 @@ const App: React.FC = () => {
 			<Route path="settings/name" element={<SettingsName />} />
 			<Route path="settings/account" element={<SettingsAccount />} />
 			<Route path="settings/notifications" element={<SettingsNotification />} />
+			<Route path="settings/phone" element={<SettingsPhone />} />
+			<Route path="settings/otp" element={<SettingsOtp />} />
+			<Route path="settings/email" element={<SettingsEmail />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);
