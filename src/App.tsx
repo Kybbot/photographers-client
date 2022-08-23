@@ -12,6 +12,7 @@ import SettingsPhone from "./pages/Settings/SettingsPhone";
 import SettingsOtp from "./pages/Settings/SettingsOtp";
 import SettingsEmail from "./pages/Settings/SettingsEmail";
 import SettingsSelfi from "./pages/Settings/SettingsSelfi";
+import SettingsFinal from "./pages/Settings/SettingsFinal";
 
 const App: React.FC = () => {
 	return (
@@ -26,6 +27,7 @@ const App: React.FC = () => {
 			<Route path="settings/otp" element={<SettingsOtp />} />
 			<Route path="settings/email" element={<SettingsEmail />} />
 			<Route path="settings/selfi" element={<SettingsSelfi />} />
+			<Route path="settings/final" element={<SettingsFinal />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);
