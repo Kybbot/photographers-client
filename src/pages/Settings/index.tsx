@@ -25,7 +25,7 @@ const Settings: React.FC = () => {
 						<h2 className="settings__subtitle">Your selfie</h2>
 						<div className="settings__avatar">
 							<img src={realAvatar} alt="avatar" className="settings__img" />
-							<Link to="/" className="settings__pencil" aria-label="Edit avatar">
+							<Link to="/settings/selfi" className="settings__pencil" aria-label="Edit avatar">
 								<svg width="16" height="22" fill="none" focusable="false" aria-hidden="true">
 									<use xlinkHref="#pencil" />
 								</svg>
