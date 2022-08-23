@@ -106,3 +106,7 @@
 .settings--green {
 	color: #015b08;
 }
+
+.settings__input {
+	margin-bottom: 20px;
+}

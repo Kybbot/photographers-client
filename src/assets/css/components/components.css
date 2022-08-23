@@ -15,3 +15,6 @@
 @import "./settings/settings-name.css";
 @import "./settings/settings-account.css";
 @import "./settings/settings-notification.css";
+@import "./settings/settings-phone.css";
+@import "./settings/settings-otp.css";
+@import "./settings/settings-email.css";
