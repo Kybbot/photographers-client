@@ -31,7 +31,7 @@ const SettingsAccount: React.FC = () => {
 								<p className="settings__text">+1 123-456-7890</p>
 							</div>
 							<div className="settings__arrow">
-								<Link to="/settings/account/phone" className="settings__link" aria-label="Change your name">
+								<Link to="/settings/phone" className="settings__link" aria-label="Change your name">
 									<svg className="settings__svg" width="8" height="17" fill="none" focusable="false" aria-hidden="true">
 										<use xlinkHref="#left-arrow" />
 									</svg>
@@ -47,7 +47,7 @@ const SettingsAccount: React.FC = () => {
 								<p className="settings__text">the.real.jane.smith@gmail.com</p>
 							</div>
 							<div className="settings__arrow">
-								<Link to="/settings/account/email" className="settings__link" aria-label="Change your name">
+								<Link to="/settings/email" className="settings__link" aria-label="Change your name">
 									<svg className="settings__svg" width="8" height="17" fill="none" focusable="false" aria-hidden="true">
 										<use xlinkHref="#left-arrow" />
 									</svg>

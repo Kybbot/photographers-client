@@ -24,7 +24,7 @@ const SettingsName: React.FC = () => {
 							<label className="sr-only" htmlFor="name">
 								Your name
 							</label>
-							<input type="text" className="input settings-name__input" autoComplete="name" name="name" id="name" />
+							<input type="text" className="input settings__input" autoComplete="name" name="name" id="name" />
 							<button type="submit" className="btn">
 								Save
 							</button>
