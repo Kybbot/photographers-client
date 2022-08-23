@@ -4,10 +4,23 @@ import { Link } from "react-router-dom";
 const NotFound: React.FC = () => {
 	return (
 		<>
-			<h1>Page not found!</h1>
-			<Link to="/" className="btn" title="Go back">
-				Go back
-			</Link>
+			<header className="header">
+				<div className="container">
+					<div className="header__container">
+						<img src="/logo.svg" alt="PhotoDrop" />
+					</div>
+				</div>
+			</header>
+			<main className="main">
+				<section className="notFound">
+					<div className="container">
+						<h1 className="notFound__title">Page not found!</h1>
+						<Link to="/" className="btn" title="Go back">
+							Go back
+						</Link>
+					</div>
+				</section>
+			</main>
 		</>
 	);
 };
