@@ -13,21 +13,24 @@ import SettingsOtp from "./pages/Settings/SettingsOtp";
 import SettingsEmail from "./pages/Settings/SettingsEmail";
 import SettingsSelfi from "./pages/Settings/SettingsSelfi";
 import SettingsFinal from "./pages/Settings/SettingsFinal";
+import SettingsLayout from "./layouts/SettingLayout";
 
 const App: React.FC = () => {
 	return (
 		<Routes>
-			<Route path="/" element={<Dashboard />} />
-			<Route path="/signup" element={<Signup />} />
-			<Route path="/settings" element={<Settings />} />
-			<Route path="/settings/name" element={<SettingsName />} />
-			<Route path="/settings/account" element={<SettingsAccount />} />
-			<Route path="/settings/notifications" element={<SettingsNotification />} />
-			<Route path="/settings/phone" element={<SettingsPhone />} />
-			<Route path="/settings/otp" element={<SettingsOtp />} />
-			<Route path="/settings/email" element={<SettingsEmail />} />
-			<Route path="/settings/selfi" element={<SettingsSelfi />} />
-			<Route path="/settings/final" element={<SettingsFinal />} />
+			<Route index element={<Dashboard />} />
+			<Route path="settings" element={<SettingsLayout />}>
+				<Route index element={<Settings />} />
+				<Route path="name" element={<SettingsName />} />
+				<Route path="account" element={<SettingsAccount />} />
+				<Route path="notifications" element={<SettingsNotification />} />
+				<Route path="phone" element={<SettingsPhone />} />
+				<Route path="otp" element={<SettingsOtp />} />
+				<Route path="email" element={<SettingsEmail />} />
+				<Route path="selfi" element={<SettingsSelfi />} />
+				<Route path="final" element={<SettingsFinal />} />
+			</Route>
+			<Route path="signup" element={<Signup />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const SettingsFinal: React.FC = () => {
 	return (
@@ -7,12 +6,7 @@ const SettingsFinal: React.FC = () => {
 			<header className="header">
 				<div className="container">
 					<div className="header__container">
-						<Link to="/settings" className="header__btn header__btn--visible" aria-label="Go back">
-							<svg width="8" height="17" fill="none" focusable="false" aria-hidden="true">
-								<use xlinkHref="#left-arrow" />
-							</svg>
-						</Link>
-						<img src="/logo.svg" alt="PhotoDrop" />
+						<img src="/logo.svg" alt="PhotoDrop" width={125} height={17} />
 					</div>
 				</div>
 			</header>

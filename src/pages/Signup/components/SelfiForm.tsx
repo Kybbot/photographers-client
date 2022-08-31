@@ -44,7 +44,14 @@ export const SelfiForm: React.FC = () => {
 			<h2 className="selfi__title">Add a selfie</h2>
 			<p className="selfi__text">A selfie allows your photos to be synced with your account.</p>
 			<div className="selfi__wrapper">
-				<img aria-hidden="true" src="/avatar.png" alt="avatar placeholder" className="selfi__avatar" />
+				<img
+					aria-hidden="true"
+					src="/avatar.png"
+					alt="avatar placeholder"
+					className="selfi__avatar"
+					width={181}
+					height={181}
+				/>
 				<div className="selfi__picker">
 					<input ref={fileInputRef} type="file" name="selfi" id="selfi" className="selfi__btn" onChange={fileHandler} />
 					<label htmlFor="selfi" className="selfi__label" aria-label="Add a selfie">
