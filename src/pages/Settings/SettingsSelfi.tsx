@@ -42,52 +42,50 @@ const SettingsSelfi: React.FC = () => {
 	};
 	return (
 		<form className="selfi__form selfi__form--visible" onSubmit={formHandler}>
-			<div className="container">
-				<div className="selfi__container">
-					<button className="selfi__close" type="button" aria-label="Close selfi form" onClick={closeHandler}>
-						<svg width="17" height="17" fill="none" focusable="false" aria-hidden="true">
-							<use xlinkHref="#close" />
-						</svg>
+			<div className="selfi__container">
+				<button className="selfi__close" type="button" aria-label="Close selfi form" onClick={closeHandler}>
+					<svg width="17" height="17" fill="none" focusable="false" aria-hidden="true">
+						<use xlinkHref="#close" />
+					</svg>
+				</button>
+				<h3 className="selfi__subtitle">Take selfie</h3>
+				<p className="selfi__subtext">Drag and zoom image to crop</p>
+				<input
+					ref={fileInputRef}
+					type="file"
+					name="selfi"
+					id="selfi"
+					className="settings-selfi__input sr-only"
+					onChange={fileHandler}
+				/>
+				<Cropper
+					image={file ? file : ""}
+					aspect={1}
+					crop={crop}
+					zoom={zoom}
+					showGrid={false}
+					minZoom={minZoom}
+					cropShape="round"
+					objectFit="horizontal-cover"
+					onCropChange={setCrop}
+					onCropComplete={onCropComplete}
+					onZoomChange={setZoom}
+					cropSize={{ width: 285, height: 285 }}
+					onMediaLoaded={({ height, width }) => {
+						const smallerSide = height >= width ? width : height;
+						setMinZoom(285 / smallerSide);
+						setZoom(285 / smallerSide);
+					}}
+					disableAutomaticStylesInjection
+				/>
+				<fieldset className="selfi__fieldset">
+					<button className="btn selfi__retake" type="button" onClick={retakeHandler}>
+						Retake
 					</button>
-					<h3 className="selfi__subtitle">Take selfie</h3>
-					<p className="selfi__subtext">Drag and zoom image to crop</p>
-					<input
-						ref={fileInputRef}
-						type="file"
-						name="selfi"
-						id="selfi"
-						className="settings-selfi__input sr-only"
-						onChange={fileHandler}
-					/>
-					<Cropper
-						image={file ? file : ""}
-						aspect={1}
-						crop={crop}
-						zoom={zoom}
-						showGrid={false}
-						minZoom={minZoom}
-						cropShape="round"
-						objectFit="horizontal-cover"
-						onCropChange={setCrop}
-						onCropComplete={onCropComplete}
-						onZoomChange={setZoom}
-						cropSize={{ width: 285, height: 285 }}
-						onMediaLoaded={({ height, width }) => {
-							const smallerSide = height >= width ? width : height;
-							setMinZoom(285 / smallerSide);
-							setZoom(285 / smallerSide);
-						}}
-						disableAutomaticStylesInjection
-					/>
-					<fieldset className="selfi__fieldset">
-						<button className="btn selfi__retake" type="button" onClick={retakeHandler}>
-							Retake
-						</button>
-						<button className="btn selfi__save" type="submit">
-							Save
-						</button>
-					</fieldset>
-				</div>
+					<button className="btn selfi__save" type="submit">
+						Save
+					</button>
+				</fieldset>
 			</div>
 		</form>
 	);
