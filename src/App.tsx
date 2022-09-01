@@ -1,6 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
+import SettingsLayout from "./layouts/SettingLayout";
+import OnBoardingLayout from "./layouts/OnboardingLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
+
 import Dashboard from "./pages/Dashboard";
 import Signup from "./pages/Signup";
 import Settings from "./pages/Settings";
@@ -13,13 +17,15 @@ import SettingsOtp from "./pages/Settings/SettingsOtp";
 import SettingsEmail from "./pages/Settings/SettingsEmail";
 import SettingsSelfi from "./pages/Settings/SettingsSelfi";
 import SettingsFinal from "./pages/Settings/SettingsFinal";
-import SettingsLayout from "./layouts/SettingLayout";
-import OnBoardingLayout from "./layouts/OnboardingLayout";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 
 const App: React.FC = () => {
 	return (
 		<Routes>
-			<Route index element={<Dashboard />} />
+			<Route path="/" element={<DashboardLayout />}>
+				<Route index element={<Dashboard />} />
+			</Route>
 			<Route path="settings" element={<SettingsLayout />}>
 				<Route index element={<Settings />} />
 				<Route path="name" element={<SettingsName />} />
@@ -34,6 +40,8 @@ const App: React.FC = () => {
 				<Route index element={<SettingsFinal />} />
 			</Route>
 			<Route path="signup" element={<Signup />} />
+			<Route path="terms" element={<Terms />} />
+			<Route path="privacy" element={<Privacy />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);
