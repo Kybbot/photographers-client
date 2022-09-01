@@ -1,29 +1,32 @@
 import React from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 
 const SettingsLayout: React.FC = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const goBackHandler = () => {
-		navigate(-1);
+		if (location.pathname === "/settings") {
+			navigate("/");
+		} else navigate(-1);
 	};
 
 	return (
 		<>
 			<header className="header">
-				<div className="container">
-					<div className="header__container">
-						<button className="header__btn header__btn--visible" aria-label="Go back" onClick={goBackHandler}>
-							<svg width="8" height="17" fill="none" focusable="false" aria-hidden="true">
-								<use xlinkHref="#left-arrow" />
-							</svg>
-						</button>
-						<img src="/logo.svg" alt="PhotoDrop" width={125} height={17} />
-					</div>
+				<div className="header__container">
+					<button className="header__btn header__btn--visible" aria-label="Go back" onClick={goBackHandler}>
+						<svg width="8" height="17" fill="none" focusable="false" aria-hidden="true">
+							<use xlinkHref="#left-arrow" />
+						</svg>
+					</button>
+					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={17} />
 				</div>
 			</header>
-			<main className="main">
-				<Outlet />
+			<main className="main h-100">
+				<div className="container__settings h-100">
+					<Outlet />
+				</div>
 			</main>
 		</>
 	);
