@@ -14,6 +14,7 @@ import SettingsEmail from "./pages/Settings/SettingsEmail";
 import SettingsSelfi from "./pages/Settings/SettingsSelfi";
 import SettingsFinal from "./pages/Settings/SettingsFinal";
 import SettingsLayout from "./layouts/SettingLayout";
+import OnBoardingLayout from "./layouts/OnboardingLayout";
 
 const App: React.FC = () => {
 	return (
@@ -28,7 +29,9 @@ const App: React.FC = () => {
 				<Route path="otp" element={<SettingsOtp />} />
 				<Route path="email" element={<SettingsEmail />} />
 				<Route path="selfi" element={<SettingsSelfi />} />
-				<Route path="final" element={<SettingsFinal />} />
+			</Route>
+			<Route path="onboarding" element={<OnBoardingLayout />}>
+				<Route index element={<SettingsFinal />} />
 			</Route>
 			<Route path="signup" element={<Signup />} />
 			<Route path="*" element={<NotFound />} />
