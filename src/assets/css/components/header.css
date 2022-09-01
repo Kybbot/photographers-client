@@ -4,6 +4,15 @@
 	border-bottom: 1px solid #f1f0ec;
 }
 
+.header--small {
+	position: relative;
+	padding: 10px 0;
+}
+
+.header--small > .header__btn {
+	left: 7px;
+}
+
 .header__container {
 	display: flex;
 	justify-content: center;
@@ -14,12 +23,38 @@
 	margin: 0 auto;
 }
 
+.header__container--left {
+	justify-content: left;
+}
+
+.header__content {
+	margin-left: 40px;
+}
+
+.header__title {
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 22px;
+	margin: 0 0 5px 0;
+}
+
+.header__info {
+	font-style: 14px;
+	line-height: 18px;
+	margin: 0;
+}
+
+.header__amount {
+	color: var(--accent-color);
+}
+
 .header__btn {
 	display: none;
 	width: 24px;
 	height: 24px;
 	position: absolute;
-	top: 0;
+	top: 50%;
+	transform: translateY(-50%);
 	left: 10px;
 	background-color: transparent;
 	border-style: none;

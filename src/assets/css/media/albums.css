@@ -1,0 +1,25 @@
+@media (min-width: 1024px) {
+	.albums {
+		margin-top: 40px;
+	}
+
+	.albums__title {
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	.album__container {
+		margin: 20px 0 100px 0;
+	}
+
+	.album__wrapper {
+		width: 200px;
+		height: 255px;
+		border-radius: 20px;
+	}
+
+	.album__container .swiper-slide {
+		width: 200px !important;
+		margin-right: 5px;
+	}
+}

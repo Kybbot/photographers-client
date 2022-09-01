@@ -4,6 +4,10 @@
 	margin: 0 auto;
 }
 
+.container--full {
+	padding: 0;
+}
+
 .container__settings {
 	max-width: 375px;
 	padding: 0 15px;

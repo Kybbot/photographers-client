@@ -1,6 +1,5 @@
 @import "./body.css";
 
-@import "./main.css";
 @import "./container.css";
 @import "./buttons.css";
 @import "./notFound.css";
@@ -12,6 +11,9 @@
 @import "./otp.css";
 @import "./selfi.css";
 @import "./dashboard.css";
+@import "./albums.css";
+@import "./album.css";
+@import "./photos.css";
 
 @import "./settings/index.css";
 @import "./settings/settings-name.css";

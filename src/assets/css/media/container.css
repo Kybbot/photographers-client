@@ -3,11 +3,15 @@
 		max-width: 1230px;
 	}
 
+	.container--full {
+		padding: 0 15px;
+	}
+
 	.container__settings {
 		max-width: 450px;
 	}
 
 	.container__left {
-		max-width: 1215px;
+		max-width: 1230px;
 	}
 }
