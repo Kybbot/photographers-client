@@ -1,0 +1,11 @@
+@media (min-width: 1024px) {
+	.custom-checkbox {
+		font-size: 18px;
+		line-height: 23px;
+	}
+
+	.react-tel-input .form-control {
+		font-size: 18px;
+		line-height: 23px;
+	}
+}

@@ -3,7 +3,7 @@
 	font-weight: 700;
 	line-height: 26px;
 	text-align: center;
-	margin: 72px 0 14px 0;
+	margin: 0 0 15px 0;
 }
 
 .selfi__text {
@@ -72,7 +72,7 @@
 	width: 100%;
 	height: 100%;
 	background-color: #262626;
-	padding: 23px 0 40px 0;
+	padding: 23px 15px 40px 15px;
 }
 
 .selfi__form--visible {
@@ -99,14 +99,14 @@
 	line-height: 23px;
 	text-align: center;
 	color: #ffffff;
-	margin: 0 0 94px 0;
+	margin: 0 0 95px 0;
 }
 
 .selfi__subtext {
 	line-height: 20px;
 	text-align: center;
 	color: #ffffff;
-	margin: 0 0 42px 0;
+	margin: 0 0 40px 0;
 }
 
 .selfi__fieldset {

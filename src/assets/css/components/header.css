@@ -1,5 +1,5 @@
 .header {
-	padding: 20px 0 19px 0;
+	padding: 20px 0;
 	border-top: 1px solid #f1f0ec;
 	border-bottom: 1px solid #f1f0ec;
 }
@@ -9,6 +9,9 @@
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	max-width: 375px;
+	padding: 0 15px;
+	margin: 0 auto;
 }
 
 .header__btn {
@@ -17,7 +20,7 @@
 	height: 24px;
 	position: absolute;
 	top: 0;
-	left: 0;
+	left: 10px;
 	background-color: transparent;
 	border-style: none;
 	padding: 0;
@@ -32,7 +35,7 @@
 .header__avatar {
 	position: absolute;
 	top: 50%;
-	right: 0;
+	right: 10px;
 	transform: translateY(-50%);
 	width: 35px;
 	height: 35px;

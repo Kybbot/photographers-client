@@ -6,6 +6,7 @@
 @import "./notFound.css";
 @import "./header.css";
 @import "./form.css";
+@import "./footer.css";
 
 @import "./phoneForm.css";
 @import "./otp.css";
@@ -17,6 +18,4 @@
 @import "./settings/settings-account.css";
 @import "./settings/settings-notification.css";
 @import "./settings/settings-phone.css";
-@import "./settings/settings-otp.css";
-@import "./settings/settings-email.css";
 @import "./settings/settings-final.css";

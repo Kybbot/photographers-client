@@ -1,0 +1,22 @@
+@media (min-width: 1024px) {
+	.signup > .otp__title {
+		font-size: 30px;
+		line-height: 36px;
+		margin: 0 0 30px 0;
+	}
+
+	.otp__text {
+		font-size: 18px;
+		line-height: 23px;
+	}
+
+	.otp__number {
+		font-size: 18px;
+		line-height: 23px;
+	}
+
+	.otp__resend {
+		font-size: 18px;
+		line-height: 23px;
+	}
+}

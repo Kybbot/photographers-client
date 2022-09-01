@@ -1,0 +1,13 @@
+@media (min-width: 1024px) {
+	.container {
+		max-width: 1230px;
+	}
+
+	.container__settings {
+		max-width: 450px;
+	}
+
+	.container__left {
+		max-width: 1215px;
+	}
+}

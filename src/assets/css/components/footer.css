@@ -1,0 +1,49 @@
+.footer {
+	padding: 60px 0 40px 0;
+	background-color: var(--footer-bg);
+}
+
+.footer__container {
+	max-width: 375px;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+
+.footer__title {
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 22px;
+	letter-spacing: -0.02em;
+	margin: 0 0 15px 0;
+	color: var(--light--text);
+}
+
+.footer__text {
+	letter-spacing: -0.02em;
+	color: var(--light--text);
+	margin: 20px 0 40px 0;
+}
+
+.footer__date {
+	letter-spacing: -0.02em;
+	color: var(--light--text);
+	margin: 20px 0 20px 0;
+}
+
+.footer__email {
+	letter-spacing: -0.02em;
+	color: var(--light--text);
+	margin: 0 0 20px 0;
+}
+
+.footer__links {
+	display: grid;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+.footer__link {
+	letter-spacing: -0.02em;
+	color: var(--light--text);
+	text-decoration: none;
+}
