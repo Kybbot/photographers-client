@@ -6,4 +6,8 @@
 	.btn--transparent {
 		max-width: 300px;
 	}
+
+	.btn--white {
+		max-width: 200px;
+	}
 }

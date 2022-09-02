@@ -20,6 +20,11 @@
 	border: 2px solid #ffffff;
 }
 
+.btn--white {
+	background-color: #ffffff;
+	color: var(--main-text);
+}
+
 .btn:disabled {
 	opacity: 0.33;
 }

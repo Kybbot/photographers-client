@@ -1,6 +1,6 @@
 .footer {
 	padding: 60px 0 40px 0;
-	background-color: var(--footer-bg);
+	background-color: var(--secondary-bg);
 }
 
 .footer__container {
