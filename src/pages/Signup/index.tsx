@@ -2,7 +2,7 @@ import React, { FormEvent } from "react";
 
 import { PhoneForm } from "./components/PhoneForm";
 import { SelfiForm } from "./components/SelfiForm";
-import { OTPForm } from "../../components/OTPForm";
+import { OTPForm } from "../../components";
 
 const Signup: React.FC = () => {
 	const [phone, setPhone] = React.useState("");

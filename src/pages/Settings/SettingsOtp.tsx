@@ -1,7 +1,7 @@
 import React, { FormEvent } from "react";
 import { Location, useLocation } from "react-router-dom";
 
-import { OTPForm } from "../../components/OTPForm";
+import { OTPForm } from "../../components";
 
 interface locationState extends Location {
 	state: {

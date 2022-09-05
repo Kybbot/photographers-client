@@ -1,4 +1,5 @@
 export * from "./OTP";
-export * from "./OTPInput";
+export * from "./OTPForm";
 export * from "./ScrollToTop";
 export * from "./Lightbox";
+export * from "./StripeModal";
