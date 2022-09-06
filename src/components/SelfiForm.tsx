@@ -1,12 +1,14 @@
 import React, { FormEvent } from "react";
 import Cropper, { Area } from "react-easy-crop";
 
+import { useWindowSize } from "../hooks/useWindowSize";
+
 type SelfiFormProps = {
 	fileData: string | null;
 	fileInputRef: React.RefObject<HTMLInputElement>;
 	stream: MediaStream | null;
 	closeHandler: () => void;
-	openOptions?: () => void;
+	openOptions?: (openBtnRef: React.RefObject<HTMLButtonElement>) => void;
 };
 
 export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, stream, closeHandler, openOptions }) => {
@@ -14,6 +16,9 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, st
 	const [zoom, setZoom] = React.useState(1);
 	const [minZoom, setMinZoom] = React.useState(1);
 
+	const { width } = useWindowSize();
+
+	const retakeBtnRef = React.useRef<HTMLButtonElement>(null);
 	const videoRef = React.useRef<HTMLVideoElement>(null);
 
 	const onCropComplete = React.useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
@@ -26,7 +31,7 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, st
 
 	const retakeHandlerDk = () => {
 		if (openOptions) {
-			openOptions();
+			openOptions(retakeBtnRef);
 		}
 	};
 
@@ -85,14 +90,21 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, st
 						/>
 					)}
 				</div>
-
 				<fieldset className="selfi__fieldset">
-					<button className="btn selfi__retake selfi__retake--mb" type="button" onClick={retakeHandlerMb}>
-						Retake
-					</button>
-					<button className="btn selfi__retake selfi__retake--dk" type="button" onClick={retakeHandlerDk}>
-						Retake
-					</button>
+					{width && width < 1024 ? (
+						<button className="btn selfi__retake selfi__retake--mb" type="button" onClick={retakeHandlerMb}>
+							Retake
+						</button>
+					) : (
+						<button
+							ref={retakeBtnRef}
+							className="btn selfi__retake selfi__retake--dk"
+							type="button"
+							onClick={retakeHandlerDk}
+						>
+							Retake
+						</button>
+					)}
 					<button className="btn selfi__save" type="submit">
 						Save
 					</button>
