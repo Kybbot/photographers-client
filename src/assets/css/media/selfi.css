@@ -6,17 +6,24 @@
 	}
 
 	.selfi__form {
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
 		max-width: 380px;
 		max-height: 650px;
 		border-radius: 20px;
 	}
 
-	.selfi__save,
-	.selfi__retake {
-		font-size: 16px;
-		line-height: 20px;
+	.selfi__picker {
+		display: none;
+	}
+
+	.selfi__open {
+		display: inline-flex;
+	}
+
+	.selfi__retake--mb {
+		display: none;
+	}
+
+	.selfi__retake--dk {
+		display: block;
 	}
 }
