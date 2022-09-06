@@ -2,12 +2,16 @@ import React, { ChangeEvent } from "react";
 
 import { ModalOverlay, SelfiForm, UploadOptions } from "../../../components";
 
+import { useModal } from "../../../hooks/useModal";
+
 export const Selfi: React.FC = () => {
 	const [file, setFile] = React.useState<string | null>(null);
 	const [stream, setStream] = React.useState<MediaStream | null>(null);
-	const [form, setForm] = React.useState(false);
-	const [options, setOptions] = React.useState(false);
 
+	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
+	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
+
+	const selfiBtnRef = React.useRef<HTMLButtonElement>(null);
 	const fileInputRef = React.useRef<HTMLInputElement>(null);
 
 	const cleanStream = () => {
@@ -18,7 +22,7 @@ export const Selfi: React.FC = () => {
 				track.stop();
 			});
 
-			setStream(null);
+			openModal1(selfiBtnRef);
 		}
 	};
 
@@ -29,31 +33,26 @@ export const Selfi: React.FC = () => {
 			const file = event.target.files[0];
 
 			setFile(URL.createObjectURL(file));
-			setForm(true);
 		}
+	};
+
+	const openSelfiForm = () => {
+		fileInputRef.current?.click();
+		openModal1(selfiBtnRef);
 	};
 
 	const closeSelfiForm = () => {
 		cleanStream();
-
 		setFile(null);
-		setForm(false);
-	};
-
-	const openOptions = () => {
-		setOptions(true);
-	};
-
-	const closeOptions = () => {
-		setOptions(false);
+		closeModal1();
 	};
 
 	const openCamera = async () => {
 		setFile(null);
 		const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
 		setStream(stream);
-		setForm(true);
-		closeOptions();
+		openModal1(selfiBtnRef);
+		closeModal2();
 	};
 
 	return (
@@ -69,47 +68,39 @@ export const Selfi: React.FC = () => {
 					width={181}
 					height={181}
 				/>
-				<div className="selfi__picker">
-					<input
-						ref={fileInputRef}
-						type="file"
-						name="selfi"
-						id="selfi"
-						className="selfi__btn"
-						capture="user"
-						onChange={fileHandler}
-					/>
-					<label htmlFor="selfi" className="selfi__label" aria-label="Add a selfie">
-						<svg
-							focusable="false"
-							aria-hidden="true"
-							width="24"
-							height="24"
-							fill="none"
-							stroke="#ffffff"
-							strokeWidth="2"
-						>
-							<use xlinkHref="#plus" />
-						</svg>
-					</label>
-				</div>
-				<button type="button" className="selfi__open" aria-label="Add a selfie" onClick={openOptions}>
+				<button
+					ref={selfiBtnRef}
+					type="button"
+					className="selfi__open"
+					aria-label="Add a selfie"
+					onClick={openSelfiForm}
+				>
 					<svg focusable="false" aria-hidden="true" width="24" height="24" fill="none" stroke="#ffffff" strokeWidth="2">
 						<use xlinkHref="#plus" />
 					</svg>
 				</button>
+				<input
+					ref={fileInputRef}
+					tabIndex={-1}
+					type="file"
+					name="selfi"
+					id="selfi"
+					className="selfi__btn"
+					capture="user"
+					onChange={fileHandler}
+				/>
 			</div>
-			<ModalOverlay active={form}>
+			<ModalOverlay active={isActive1} closeModal={closeModal1}>
 				<SelfiForm
 					fileData={file}
 					fileInputRef={fileInputRef}
 					stream={stream}
 					closeHandler={closeSelfiForm}
-					openOptions={openOptions}
+					openOptions={openModal2}
 				/>
 			</ModalOverlay>
-			<ModalOverlay active={options}>
-				<UploadOptions fileHandler={fileHandler} closeHandler={closeOptions} openCamera={openCamera} />
+			<ModalOverlay active={isActive2} closeModal={closeModal2}>
+				<UploadOptions fileHandler={fileHandler} closeHandler={closeModal2} openCamera={openCamera} />
 			</ModalOverlay>
 		</>
 	);
