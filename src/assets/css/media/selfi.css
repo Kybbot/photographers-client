@@ -10,20 +10,4 @@
 		max-height: 650px;
 		border-radius: 20px;
 	}
-
-	.selfi__picker {
-		display: none;
-	}
-
-	.selfi__open {
-		display: inline-flex;
-	}
-
-	.selfi__retake--mb {
-		display: none;
-	}
-
-	.selfi__retake--dk {
-		display: block;
-	}
 }
