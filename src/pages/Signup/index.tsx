@@ -1,7 +1,7 @@
 import React, { FormEvent } from "react";
 
 import { PhoneForm } from "./components/PhoneForm";
-import { SelfiForm } from "./components/SelfiForm";
+import { Selfi } from "./components/Selfi";
 import { OTPForm } from "../../components";
 
 const Signup: React.FC = () => {
@@ -42,7 +42,7 @@ const Signup: React.FC = () => {
 					<div className="signup settings__container">
 						{!phoneResult && <PhoneForm phone={phone} setPhone={setPhone} setPhoneResult={setPhoneResult} />}
 						{phoneResult && !otpResult && <OTPForm phone={phone} formHandler={otpFormHandler} />}
-						{otpResult && phoneResult && <SelfiForm />}
+						{otpResult && phoneResult && <Selfi />}
 					</div>
 				</div>
 			</main>
