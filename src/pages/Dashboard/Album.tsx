@@ -1,8 +1,16 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { StripeModal } from "../../components";
+
+import { useModal } from "../../hooks/useModal";
+
 const Album: React.FC = () => {
 	const navigate = useNavigate();
+
+	const stripeBtnRef = React.useRef<HTMLButtonElement>(null);
+
+	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
 
 	const goBackHandler = () => {
 		navigate(-1);
@@ -27,6 +35,7 @@ const Album: React.FC = () => {
 			</header>
 			<main className="main">
 				<section className="album">
+					<StripeModal active={isActive2} closeModal={closeModal2} />
 					<div className="container container--full">
 						<div className="album__gallery">
 							<div className="album__item">
@@ -67,7 +76,14 @@ const Album: React.FC = () => {
 						</div>
 					</div>
 					<div className="container">
-						<button className="btn album__btn">Unlock your photos</button>
+						<button
+							ref={stripeBtnRef}
+							type="button"
+							className="btn album__btn"
+							onClick={() => openModal2(stripeBtnRef)}
+						>
+							Unlock your photos
+						</button>
 					</div>
 				</section>
 			</main>
