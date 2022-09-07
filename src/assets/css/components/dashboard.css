@@ -1,3 +1,10 @@
+.dashboard {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
 .dashboard__dec {
 	display: block;
 	margin: 20px auto;

@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const OnBoardingLayout: React.FC = () => {
 	return (
-		<>
+		<div className="settings">
 			<header className="header">
 				<div className="container">
 					<div className="header__container">
@@ -11,12 +11,12 @@ const OnBoardingLayout: React.FC = () => {
 					</div>
 				</div>
 			</header>
-			<main className="main h-100">
+			<main className="main">
 				<div className="container__settings h-100">
 					<Outlet />
 				</div>
 			</main>
-		</>
+		</div>
 	);
 };
 

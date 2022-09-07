@@ -2,8 +2,8 @@ import React from "react";
 
 const SettingsEmail: React.FC = () => {
 	return (
-		<section className="settings__container">
-			<form className="settings-email__form">
+		<section className="settings__center">
+			<form className="settings-email__form settings__center--helper">
 				<h1 className="settigs__title">Your email</h1>
 				<label className="sr-only" htmlFor="email">
 					Your email

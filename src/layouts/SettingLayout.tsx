@@ -12,7 +12,7 @@ const SettingsLayout: React.FC = () => {
 	};
 
 	return (
-		<>
+		<div className="settings">
 			<header className="header">
 				<div className="header__container">
 					<button className="header__btn header__btn--visible" aria-label="Go back" onClick={goBackHandler}>
@@ -23,12 +23,12 @@ const SettingsLayout: React.FC = () => {
 					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={17} />
 				</div>
 			</header>
-			<main className="main h-100">
+			<main className="main">
 				<div className="container__settings h-100">
 					<Outlet />
 				</div>
 			</main>
-		</>
+		</div>
 	);
 };
 

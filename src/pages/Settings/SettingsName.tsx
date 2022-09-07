@@ -2,8 +2,8 @@ import React from "react";
 
 const SettingsName: React.FC = () => {
 	return (
-		<section className="settings__container">
-			<form className="settings-name__form">
+		<section className="settings__center">
+			<form className="settings-name__form settings__center--helper">
 				<h1 className="settigs__title">Your name</h1>
 				<label className="sr-only" htmlFor="name">
 					Your name

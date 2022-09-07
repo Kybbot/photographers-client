@@ -54,7 +54,7 @@ const Settings: React.FC = () => {
 	};
 
 	return (
-		<section className="settings">
+		<section className="settings-welcome">
 			<ModalOverlay active={isActive1} closeModal={closeModal1}>
 				<SelfiForm
 					fileData={file}

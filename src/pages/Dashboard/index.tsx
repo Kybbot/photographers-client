@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const Dashboard: React.FC = () => {
 	return (
-		<section className="dashboard">
+		<section className="dashboard__container">
 			<div className="container">
 				<img className="dashboard__dec" src="/message.svg" alt="" arica-hidden="true" width={82} height={75} />
 				<h1 className="dashboard__title">Your photos will drop soon.</h1>

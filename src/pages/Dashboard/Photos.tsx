@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const Photos: React.FC = () => {
 	return (
-		<section className="dashboard">
+		<section className="dashboard__container">
 			<div className="albums">
 				<div className="container__left">
 					<h2 className="albums__title">Albums</h2>

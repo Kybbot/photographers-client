@@ -17,15 +17,17 @@ const SettingsPhone: React.FC = () => {
 	};
 
 	return (
-		<section className="settings__container">
-			<h1 className="settigs__title">Mobile number</h1>
-			<p className="settings-phone__text">Update your number and we’ll send a verification code to this number.</p>
-			<form onSubmit={formHandler}>
-				<ReactPhoneInput enableSearch country={"us"} value={phone} onChange={(phone) => setPhone(phone)} />
-				<button type="submit" className="btn">
-					Next
-				</button>
-			</form>
+		<section className="settings__center">
+			<div className="settings__center--helper">
+				<h1 className="settigs__title">Mobile number</h1>
+				<p className="settings-phone__text">Update your number and we’ll send a verification code to this number.</p>
+				<form onSubmit={formHandler}>
+					<ReactPhoneInput enableSearch country={"us"} value={phone} onChange={(phone) => setPhone(phone)} />
+					<button type="submit" className="btn">
+						Next
+					</button>
+				</form>
+			</div>
 		</section>
 	);
 };

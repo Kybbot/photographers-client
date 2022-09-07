@@ -22,7 +22,6 @@
 
 @import "./settings/index.css";
 @import "./settings/settings-name.css";
-@import "./settings/settings-account.css";
 @import "./settings/settings-notification.css";
 @import "./settings/settings-phone.css";
 @import "./settings/settings-final.css";

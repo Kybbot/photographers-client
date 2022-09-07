@@ -1,12 +1,22 @@
 .settings {
-	margin-top: 20px;
+	height: 100%;
+	display: grid;
+	grid-auto-rows: auto 1fr;
+	gap: 20px;
 }
 
 .settings__container {
 	height: 100%;
+}
+
+.settings__center {
+	height: 100%;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	align-items: center;
+}
+
+.settings__center--helper {
+	width: 100%;
 	margin-top: -60px;
 }
 
@@ -135,10 +145,8 @@
 }
 
 @media (min-width: 1024px) {
-	.settings,
-	.settings-account,
-	.settings-notification {
-		margin-top: 40px;
+	.settings {
+		gap: 40px;
 	}
 
 	.settigs__title {

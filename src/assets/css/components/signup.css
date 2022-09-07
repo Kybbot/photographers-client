@@ -1,3 +1,15 @@
+.signup {
+	height: 100%;
+	display: grid;
+	grid-auto-rows: auto 1fr;
+}
+
+.signup__wrapper {
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
 .signup-selfi__form {
 	display: none;
 	position: fixed;

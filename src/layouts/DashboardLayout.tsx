@@ -5,7 +5,7 @@ import realAvatar from "../assets/img/real-avatar.jpg";
 
 const DashboardLayout: React.FC = () => {
 	return (
-		<>
+		<div className="dashboard">
 			<header className="header">
 				<div className="header__container">
 					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" />
@@ -48,7 +48,7 @@ const DashboardLayout: React.FC = () => {
 					</div>
 				</div>
 			</footer>
-		</>
+		</div>
 	);
 };
 

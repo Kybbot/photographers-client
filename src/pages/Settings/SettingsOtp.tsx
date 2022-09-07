@@ -17,8 +17,10 @@ const SettingsOtp: React.FC = () => {
 	};
 
 	return (
-		<section className="settings__container">
-			<OTPForm phone={location.state.phone} formHandler={otpFormHandler} />
+		<section className="settings__center">
+			<div className="settings__center--helper">
+				<OTPForm phone={location.state.phone} formHandler={otpFormHandler} />
+			</div>
 		</section>
 	);
 };

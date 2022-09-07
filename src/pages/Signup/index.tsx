@@ -20,7 +20,7 @@ const Signup: React.FC = () => {
 	};
 
 	return (
-		<>
+		<div className="signup">
 			<header className="header">
 				<div className="header__container">
 					<button
@@ -37,16 +37,16 @@ const Signup: React.FC = () => {
 					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={17} />
 				</div>
 			</header>
-			<main className="main h-100">
-				<div className="container__settings h-100">
-					<div className="signup settings__container">
+			<main className="main">
+				<div className="signup__wrapper">
+					<div className="container__settings">
 						{!phoneResult && <PhoneForm phone={phone} setPhone={setPhone} setPhoneResult={setPhoneResult} />}
 						{phoneResult && !otpResult && <OTPForm phone={phone} formHandler={otpFormHandler} />}
 						{otpResult && phoneResult && <Selfi />}
 					</div>
 				</div>
 			</main>
-		</>
+		</div>
 	);
 };
 
