@@ -46,6 +46,7 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, st
 		}
 
 		console.log(fileData, stream);
+		closeHandler();
 	};
 
 	React.useEffect(() => {
