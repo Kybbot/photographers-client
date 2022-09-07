@@ -133,3 +133,58 @@
 .settings__input {
 	margin-bottom: 20px;
 }
+
+@media (min-width: 1024px) {
+	.settings,
+	.settings-account,
+	.settings-notification {
+		margin-top: 40px;
+	}
+
+	.settigs__title {
+		font-size: 22px;
+		line-height: 26px;
+		margin: 0 0 30px 0;
+	}
+
+	.settings__subtitle {
+		font-size: 18px;
+		line-height: 23px;
+	}
+
+	.settings__avatar {
+		width: 150px;
+		height: 150px;
+	}
+
+	.settings__pencil {
+		width: 43px;
+		height: 43px;
+	}
+
+	.settings__name {
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	.settings__text {
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	.settings-notification__text {
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	.settings-phone__text {
+		font-size: 18px;
+		line-height: 23px;
+	}
+
+	.settigs-final__title {
+		font-size: 30px;
+		line-height: 36px;
+		margin: 0 0 30px 0;
+	}
+}

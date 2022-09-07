@@ -17,3 +17,9 @@
 .album__btn {
 	margin: 40px 0;
 }
+
+.album__btn {
+	display: block;
+	max-width: 300px;
+	margin: 100px auto;
+}

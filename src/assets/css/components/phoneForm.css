@@ -30,3 +30,16 @@
 	text-decoration: underline;
 	text-decoration-color: var(--accent-color);
 }
+
+@media (min-width: 1024px) {
+	.phoneForm__title {
+		font-size: 30px;
+		line-height: 36px;
+		margin: 0 0 30px 0;
+	}
+
+	.phoneForm__description {
+		font-size: 16px;
+		line-height: 20px;
+	}
+}

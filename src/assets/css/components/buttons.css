@@ -34,3 +34,17 @@
 .btn:disabled {
 	opacity: 0.33;
 }
+
+@media (min-width: 1024px) {
+	.btn {
+		font-size: 22px;
+	}
+
+	.btn--transparent {
+		max-width: 300px;
+	}
+
+	.btn--white {
+		max-width: 200px;
+	}
+}
