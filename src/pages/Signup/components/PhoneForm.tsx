@@ -1,4 +1,5 @@
 import React, { Dispatch, FormEvent } from "react";
+import { Link } from "react-router-dom";
 import RPI, { PhoneInputProps } from "react-phone-input-2";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -23,7 +24,7 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({ phone, setPhone, setPhoneR
 			<p className="phoneForm__text">Enter your phone number</p>
 			<form onSubmit={formHandler}>
 				<ReactPhoneInput enableSearch country={"us"} value={phone} onChange={(phone) => setPhone(phone)} />
-				<button type="submit" className="btn">
+				<button type="submit" className="btn" disabled={phone.length < 10}>
 					Create account
 				</button>
 			</form>
@@ -33,13 +34,13 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({ phone, setPhone, setPhoneR
 			</p>
 			<p className="phoneForm__description">
 				By continuing, you indicate that you have read and agree to our{" "}
-				<a className="phoneForm__link" href="/">
+				<Link to="/terms" className="phoneForm__link">
 					Terms of Use
-				</a>{" "}
+				</Link>{" "}
 				&#38;{" "}
-				<a className="phoneForm__link" href="/">
+				<Link to="/privacy" className="phoneForm__link">
 					Privacy Policy
-				</a>
+				</Link>
 			</p>
 		</>
 	);

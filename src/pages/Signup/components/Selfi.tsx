@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { ModalOverlay, SelfiForm, UploadOptions } from "../../../components";
 
@@ -7,6 +8,8 @@ import { useModal } from "../../../hooks/useModal";
 export const Selfi: React.FC = () => {
 	const [file, setFile] = React.useState<string | null>(null);
 	const [stream, setStream] = React.useState<MediaStream | null>(null);
+
+	const navigate = useNavigate();
 
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
@@ -45,6 +48,7 @@ export const Selfi: React.FC = () => {
 		cleanStream();
 		setFile(null);
 		closeModal1();
+		navigate("/");
 	};
 
 	const openCamera = async () => {
