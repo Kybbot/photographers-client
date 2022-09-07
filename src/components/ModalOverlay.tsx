@@ -17,7 +17,7 @@ export const ModalOverlay: React.FC<ModalOverlayProps> = ({ active, children, cl
 		if (active) {
 			if (wrapperRef.current) {
 				const elems: NodeListOf<HTMLButtonElement & HTMLInputElement> =
-					wrapperRef.current.querySelectorAll("button, input");
+					wrapperRef.current.querySelectorAll("button, input, a");
 				const arrOfEllems = Array.from(elems);
 
 				for (const elem of elems) {
