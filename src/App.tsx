@@ -19,7 +19,7 @@ import SettingsSelfi from "./pages/Settings/SettingsSelfi";
 import SettingsFinal from "./pages/Settings/SettingsFinal";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
-import Photos from "./pages/Dashboard/Photos";
+import { Photos } from "./pages/Dashboard/components/Photos";
 import Album from "./pages/Dashboard/Album";
 
 const App: React.FC = () => {
