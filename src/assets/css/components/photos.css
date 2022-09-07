@@ -13,6 +13,10 @@
 
 .photos__item {
 	aspect-ratio: 1 / 1;
+	background-color: transparent;
+	border-style: none;
+	padding: 0;
+	cursor: pointer;
 }
 
 .photos__img {

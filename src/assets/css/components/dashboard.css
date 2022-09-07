@@ -47,6 +47,10 @@
 	width: 167px;
 	height: 215px;
 	border-radius: 20px;
+	background-color: transparent;
+	border-style: none;
+	padding: 0;
+	cursor: pointer;
 }
 
 .dashboard__img {

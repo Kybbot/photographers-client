@@ -9,19 +9,20 @@
 	margin: 0;
 }
 
-.album__container {
+.albums__container {
 	margin: 10px 0 40px 0;
 }
 
-.album__wrapper {
+.albums__wrapper {
+	display: block;
 	position: relative;
 	width: 110px;
 	height: 140px;
 	border-radius: 20px;
-	background-color: #000000;
+	background-color: var(--secondary-bg);
 }
 
-.album__wrapper::before {
+.albums__wrapper::before {
 	content: "";
 	position: absolute;
 	left: 0;
@@ -33,7 +34,7 @@
 	border-radius: 20px;
 }
 
-.album__picture {
+.albums__img {
 	display: block;
 	width: 100%;
 	height: 100%;
@@ -41,9 +42,13 @@
 	border-radius: 20px;
 }
 
-.album__container .swiper-slide {
+.albums__container .swiper-slide {
 	width: 110px !important;
 	margin-right: 5px;
+}
+
+.albums__container .swiper-wrapper {
+	padding: 2px 2px !important;
 }
 
 @media (min-width: 1024px) {
@@ -56,17 +61,17 @@
 		line-height: 20px;
 	}
 
-	.album__container {
+	.albums__container {
 		margin: 20px 0 100px 0;
 	}
 
-	.album__wrapper {
+	.albums__wrapper {
 		width: 200px;
 		height: 255px;
 		border-radius: 20px;
 	}
 
-	.album__container .swiper-slide {
+	.albums__container .swiper-slide {
 		width: 200px !important;
 		margin-right: 5px;
 	}

@@ -68,8 +68,14 @@
 	cursor: pointer;
 }
 
+.lightbox__download {
+	color: var(--btn-text);
+	text-decoration: none;
+}
+
 .lightbox__svg {
-	margin-bottom: 5px;
+	display: block;
+	margin: 0 auto 5px auto;
 }
 
 .lightbox__see {

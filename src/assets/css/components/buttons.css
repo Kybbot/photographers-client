@@ -33,6 +33,7 @@
 
 .btn:disabled {
 	opacity: 0.33;
+	cursor: auto;
 }
 
 @media (min-width: 1024px) {
