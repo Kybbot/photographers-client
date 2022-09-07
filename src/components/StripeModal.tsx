@@ -1,16 +1,58 @@
 import React from "react";
 
+import { onTab } from "../utils/onTab";
+
 type StripeModalProps = {
 	active: boolean;
+	closeModal: () => void;
 };
 
-export const StripeModal: React.FC<StripeModalProps> = ({ active }) => {
+export const StripeModal: React.FC<StripeModalProps> = ({ active, closeModal }) => {
+	const wrapperRef = React.useRef<HTMLDivElement>(null);
+
+	React.useEffect(() => {
+		let handleModalKeyboard: (event: KeyboardEvent) => void;
+
+		if (active) {
+			if (wrapperRef.current) {
+				const elems: NodeListOf<HTMLButtonElement & HTMLInputElement> =
+					wrapperRef.current.querySelectorAll("button, input, a");
+				const arrOfEllems = Array.from(elems);
+
+				for (const elem of elems) {
+					elem.style.display = "block";
+				}
+
+				handleModalKeyboard = onTab(wrapperRef, arrOfEllems, closeModal);
+
+				document.addEventListener("keydown", handleModalKeyboard);
+			}
+		} else {
+			if (wrapperRef.current) {
+				const elems: NodeListOf<HTMLButtonElement & HTMLInputElement> =
+					wrapperRef.current.querySelectorAll("button, input");
+
+				for (const elem of elems) {
+					elem.style.display = "none";
+				}
+			}
+		}
+
+		return () => document.removeEventListener("keydown", handleModalKeyboard);
+	}, [active, closeModal]);
+
+	React.useEffect(() => {
+		if (active) {
+			wrapperRef.current?.querySelector("button")?.focus();
+		}
+	}, [active]);
+
 	return (
 		<div aria-hidden={!active} className={`stripeModal ${active ? "stripeModal--visible" : ""}`}>
-			<div className="stripeModal__content" role="dialog" aria-modal="true" aria-label="Modal window">
+			<div ref={wrapperRef} className="stripeModal__content" role="dialog" aria-modal="true" aria-label="Modal window">
 				<form>
 					<div className="stripeModal__header">
-						<button className="stripeModal__close" aria-label="Close payment modal">
+						<button type="button" className="stripeModal__close" aria-label="Close payment modal" onClick={closeModal}>
 							<svg focusable="false" aria-hidden="true" width="17" height="17" fill="none">
 								<use xlinkHref="#close" />
 							</svg>
@@ -36,11 +78,13 @@ export const StripeModal: React.FC<StripeModalProps> = ({ active }) => {
 						</label>
 					</fieldset>
 					<div className="stripeModal__btns">
-						<button className="btn stripeModal__apple">
+						<button type="button" className="btn stripeModal__apple">
 							<img src="/pay.svg" alt="Apple pay" width={66} height={27} />
 						</button>
-						<button className="btn stripeModal__checkout">Checkout</button>
-						<button className="btn stripeModal__paypal">
+						<button type="button" className="btn stripeModal__checkout">
+							Checkout
+						</button>
+						<button type="button" className="btn stripeModal__paypal">
 							<img src="/paypal.svg" alt="PayPal" width={116} height={29} />
 						</button>
 					</div>
