@@ -6,6 +6,44 @@ type LightboxProps = {
 };
 
 export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal }) => {
+	const [copied, setCopied] = React.useState(false);
+	const [copiedText, setCopiedText] = React.useState("");
+
+	const shareData = {
+		title: "PhotoDrop",
+		url: currentPrint,
+	};
+
+	const copyToClipBoard = async (url: string) => {
+		if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+			await navigator.clipboard.writeText(url);
+			setCopiedText("Copied link to photo");
+		} else {
+			setCopiedText("Clipboard doesn't work");
+		}
+		setCopied(true);
+
+		setTimeout(() => {
+			setCopied(false);
+		}, 2000);
+	};
+
+	const shareHandler = async () => {
+		if (navigator.canShare) {
+			if (navigator.canShare(shareData)) {
+				try {
+					await navigator.share(shareData);
+				} catch (error) {
+					console.log(error);
+				}
+			} else {
+				await copyToClipBoard(shareData.url);
+			}
+		} else {
+			await copyToClipBoard(shareData.url);
+		}
+	};
+
 	return (
 		<section className="lightbox">
 			<div className="lightbox__container">
@@ -26,7 +64,12 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal }) 
 						</svg>
 						Download
 					</a>
-					<button type="button" className="lightbox__btn lightbox__share">
+					<button
+						type="button"
+						className={`lightbox__btn lightbox__share ${copied ? "lightbox__share--active" : ""}`}
+						onClick={() => void shareHandler()}
+						data-title={copiedText}
+					>
 						<svg className="lightbox__svg" focusable="false" aria-hidden="true" width="25" height="21" fill="none">
 							<use xlinkHref="#share" />
 						</svg>

@@ -73,6 +73,36 @@
 	text-decoration: none;
 }
 
+.lightbox__share {
+	position: relative;
+}
+
+.lightbox__share--active::before {
+	animation: 1s ease shareAnim;
+	animation-fill-mode: forwards;
+}
+
+.lightbox__share::before {
+	content: attr(data-title);
+	position: absolute;
+	top: -12px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 150px;
+	background-color: var(--main-bg);
+	color: var(--main-text);
+	padding: 3px;
+	border-radius: 8px;
+	opacity: 0;
+}
+
+@keyframes shareAnim {
+	to {
+		opacity: 1;
+		top: -32px;
+	}
+}
+
 .lightbox__svg {
 	display: block;
 	margin: 0 auto 5px auto;
