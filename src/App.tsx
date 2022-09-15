@@ -21,6 +21,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import { Photos } from "./pages/Dashboard/components/Photos";
 import Album from "./pages/Dashboard/Album";
+import Success from "./pages/Success";
 
 const App: React.FC = () => {
 	return (
@@ -30,6 +31,7 @@ const App: React.FC = () => {
 				<Route path="photos" element={<Photos />} />
 			</Route>
 			<Route path="album/:id" element={<Album />} />
+			<Route path="success" element={<Success />} />
 			<Route path="settings" element={<SettingsLayout />}>
 				<Route index element={<Settings />} />
 				<Route path="name" element={<SettingsName />} />
