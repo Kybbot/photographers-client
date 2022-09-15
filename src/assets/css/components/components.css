@@ -16,9 +16,11 @@
 @import "./photos.css";
 @import "./lightbox.css";
 @import "./stripeModal.css";
+@import "./stripeCheckout.css";
 @import "./modal.css";
 @import "./signup.css";
 @import "./uploadOptions.css";
+@import "./success.css";
 
 @import "./settings/index.css";
 @import "./settings/settings-name.css";

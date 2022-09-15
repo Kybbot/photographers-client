@@ -103,6 +103,10 @@
 	}
 }
 
+.lightbox__unlock {
+	margin: 0 auto;
+}
+
 .lightbox__svg {
 	display: block;
 	margin: 0 auto 5px auto;
@@ -141,7 +145,8 @@
 
 	.lightbox__btns {
 		position: absolute;
-		right: 40px;
+		right: 0;
+		left: 0;
 		bottom: 30px;
 		padding: 0;
 	}
@@ -151,7 +156,7 @@
 		transform: translateX(50%);
 	}
 
-	.lightbox__share {
-		display: none;
+	.lightbox__see {
+		margin-right: 40px;
 	}
 }
