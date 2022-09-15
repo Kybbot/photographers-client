@@ -1,9 +1,11 @@
 import React from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { AlbumItem } from "./AlbumItem";
 import { PhotosItem } from "./PhotosItem";
-import { Lightbox, ModalOverlay, StripeModal } from "../../../components";
+import { Lightbox, ModalOverlay, StripeCheckout, StripeError, StripeModal } from "../../../components";
 
 import { useModal } from "../../../hooks/useModal";
 
@@ -15,25 +17,60 @@ const arrOfPhotos = [
 	"https://images.pexels.com/photos/13391438/pexels-photo-13391438.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
 ];
 
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISH_KEY, {
+	locale: "en",
+});
+
+type responseType = {
+	client_secret: string;
+};
+
 export const Photos: React.FC = () => {
-	const [currentPhoto, setCurrentPhoto] = React.useState<string>("");
+	const [clientSecret, setClientSecret] = React.useState("");
+	const [currentPhoto, setCurrentPhoto] = React.useState("");
 
 	const stripeBtnRef = React.useRef<HTMLButtonElement>(null);
 
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
+	const { isActive: isActive3, openModal: openModal3, closeModal: closeModal3 } = useModal();
 
 	const openCurrentPhoto = (btnRef: React.RefObject<HTMLButtonElement>, url: string) => {
 		setCurrentPhoto(url);
 		openModal1(btnRef);
 	};
 
+	const fetchIntent = async () => {
+		const response = await fetch("http://localhost:5000/create-payment-intent");
+		const data = (await response.json()) as responseType;
+		setClientSecret(data.client_secret);
+	};
+
+	const options = {
+		clientSecret: clientSecret,
+		appearance: {},
+	};
+
 	return (
 		<section className="dashboard__container">
 			<ModalOverlay active={isActive1} closeModal={closeModal1}>
-				<Lightbox currentPrint={currentPhoto} closeModal={closeModal1} />
+				<Lightbox
+					currentPrint={currentPhoto}
+					closeModal={closeModal1}
+					openCheckout={openModal3}
+					fetchIntent={fetchIntent}
+				/>
 			</ModalOverlay>
-			<StripeModal active={isActive2} closeModal={closeModal2} />
+			<StripeModal active={isActive2} closeModal={closeModal2} openCheckout={openModal3} fetchIntent={fetchIntent} />
+			<ModalOverlay active={isActive3} closeModal={closeModal3}>
+				{clientSecret.length ? (
+					<Elements options={options} stripe={stripePromise}>
+						<StripeCheckout closeModal={closeModal3} />
+					</Elements>
+				) : (
+					<StripeError closeModal={closeModal3} />
+				)}
+			</ModalOverlay>
 			<div className="albums">
 				<div className="container__left">
 					<h2 className="albums__title">Albums</h2>
