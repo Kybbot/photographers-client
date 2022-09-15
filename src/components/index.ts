@@ -6,3 +6,5 @@ export * from "./StripeModal";
 export * from "./ModalOverlay";
 export * from "./SelfiForm";
 export * from "./UploadOptions";
+export * from "./StripeCheckout";
+export * from "./StripeError";

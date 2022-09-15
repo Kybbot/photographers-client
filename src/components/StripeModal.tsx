@@ -5,10 +5,13 @@ import { onTab } from "../utils/onTab";
 type StripeModalProps = {
 	active: boolean;
 	closeModal: () => void;
+	openCheckout: (openBtnRef: React.RefObject<HTMLButtonElement> | React.RefObject<HTMLInputElement>) => void;
+	fetchIntent: () => Promise<void>;
 };
 
-export const StripeModal: React.FC<StripeModalProps> = ({ active, closeModal }) => {
+export const StripeModal: React.FC<StripeModalProps> = ({ active, closeModal, openCheckout, fetchIntent }) => {
 	const wrapperRef = React.useRef<HTMLDivElement>(null);
+	const checkoutRef = React.useRef<HTMLButtonElement>(null);
 
 	React.useEffect(() => {
 		let handleModalKeyboard: (event: KeyboardEvent) => void;
@@ -47,6 +50,11 @@ export const StripeModal: React.FC<StripeModalProps> = ({ active, closeModal }) 
 		}
 	}, [active]);
 
+	const handeleCheckout = async () => {
+		await fetchIntent();
+		openCheckout(checkoutRef);
+	};
+
 	return (
 		<div aria-hidden={!active} className={`stripeModal ${active ? "stripeModal--visible" : ""}`}>
 			<div ref={wrapperRef} className="stripeModal__content" role="dialog" aria-modal="true" aria-label="Modal window">
@@ -81,7 +89,12 @@ export const StripeModal: React.FC<StripeModalProps> = ({ active, closeModal }) 
 						<button type="button" className="btn stripeModal__apple">
 							<img src="/pay.svg" alt="Apple pay" width={66} height={27} />
 						</button>
-						<button type="button" className="btn stripeModal__checkout">
+						<button
+							ref={checkoutRef}
+							type="button"
+							className="btn stripeModal__checkout"
+							onClick={() => void handeleCheckout()}
+						>
 							Checkout
 						</button>
 						<button type="button" className="btn stripeModal__paypal">

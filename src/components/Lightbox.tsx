@@ -3,11 +3,15 @@ import React from "react";
 type LightboxProps = {
 	currentPrint: string;
 	closeModal: () => void;
+	openCheckout: (openBtnRef: React.RefObject<HTMLButtonElement> | React.RefObject<HTMLInputElement>) => void;
+	fetchIntent: () => Promise<void>;
 };
 
-export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal }) => {
+export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, openCheckout, fetchIntent }) => {
 	const [copied, setCopied] = React.useState(false);
 	const [copiedText, setCopiedText] = React.useState("");
+
+	const checkoutRef = React.useRef<HTMLButtonElement>(null);
 
 	const shareData = {
 		title: "PhotoDrop",
@@ -44,6 +48,11 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal }) 
 		}
 	};
 
+	const handeleCheckout = async () => {
+		await fetchIntent();
+		openCheckout(checkoutRef);
+	};
+
 	return (
 		<section className="lightbox">
 			<div className="lightbox__container">
@@ -78,7 +87,14 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal }) 
 					<button type="button" className="btn btn--transparent lightbox__see">
 						See in a frame
 					</button>
-					{/* <button type="button" className="btn btn--white">Unlock photos</button> */}
+					{/* <button
+						ref={checkoutRef}
+						type="button"
+						className="btn btn--white lightbox__unlock"
+						onClick={() => void handeleCheckout()}
+					>
+						Unlock photos
+					</button> */}
 				</div>
 			</div>
 		</section>
