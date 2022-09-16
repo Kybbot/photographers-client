@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 
-import { ModalOverlay, SelfiForm, UploadOptions } from "../../components";
+import { Modal, SelfiForm, UploadOptions } from "../../components";
 
 import { useModal } from "../../hooks/useModal";
 
@@ -55,7 +55,7 @@ const Settings: React.FC = () => {
 
 	return (
 		<section className="settings-welcome">
-			<ModalOverlay active={isActive1} closeModal={closeModal1}>
+			<Modal overlay={true} active={isActive1} closeModal={closeModal1}>
 				<SelfiForm
 					fileData={file}
 					fileInputRef={fileInputRef}
@@ -63,10 +63,10 @@ const Settings: React.FC = () => {
 					closeHandler={closeSelfiForm}
 					openOptions={openModal2}
 				/>
-			</ModalOverlay>
-			<ModalOverlay active={isActive2} closeModal={closeModal2}>
+			</Modal>
+			<Modal overlay={true} active={isActive2} closeModal={closeModal2}>
 				<UploadOptions fileHandler={fileHandler} closeHandler={closeModal2} openCamera={openCamera} />
-			</ModalOverlay>
+			</Modal>
 			<h1 className="settigs__title">Welcome, Jane Smith.</h1>
 			<h2 className="settings__subtitle">Your selfie</h2>
 			<div className="settings__avatar">

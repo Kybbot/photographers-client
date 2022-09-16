@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ModalOverlay, SelfiForm, UploadOptions } from "../../../components";
+import { Modal, SelfiForm, UploadOptions } from "../../../components";
 
 import { useModal } from "../../../hooks/useModal";
 
@@ -94,7 +94,7 @@ export const Selfi: React.FC = () => {
 					onChange={fileHandler}
 				/>
 			</div>
-			<ModalOverlay active={isActive1} closeModal={closeModal1}>
+			<Modal overlay={true} active={isActive1} closeModal={closeModal1}>
 				<SelfiForm
 					fileData={file}
 					fileInputRef={fileInputRef}
@@ -102,10 +102,10 @@ export const Selfi: React.FC = () => {
 					closeHandler={closeSelfiForm}
 					openOptions={openModal2}
 				/>
-			</ModalOverlay>
-			<ModalOverlay active={isActive2} closeModal={closeModal2}>
+			</Modal>
+			<Modal overlay={true} active={isActive2} closeModal={closeModal2}>
 				<UploadOptions fileHandler={fileHandler} closeHandler={closeModal2} openCamera={openCamera} />
-			</ModalOverlay>
+			</Modal>
 		</>
 	);
 };

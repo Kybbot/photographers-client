@@ -2,7 +2,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Print } from "./Print";
-import { Lightbox, ModalOverlay } from "../../../components";
+import { Lightbox, Modal } from "../../../components";
 
 import { useModal } from "../../../hooks/useModal";
 
@@ -18,9 +18,9 @@ export const NoData: React.FC = () => {
 
 	return (
 		<section className="dashboard__container">
-			<ModalOverlay active={isActive} closeModal={closeModal}>
+			<Modal overlay={false} active={isActive} closeModal={closeModal}>
 				<Lightbox currentPrint={currentPrint} closeModal={closeModal} />
-			</ModalOverlay>
+			</Modal>
 			<div className="container">
 				<img className="dashboard__dec" src="/message.svg" alt="" arica-hidden="true" width={82} height={75} />
 				<h1 className="dashboard__title">Your photos will drop soon.</h1>

@@ -1,11 +1,10 @@
 import React from "react";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import { useStripe } from "@stripe/react-stripe-js";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { AlbumItem } from "./AlbumItem";
 import { PhotosItem } from "./PhotosItem";
-import { Lightbox, ModalOverlay, StripeCheckout, StripeError, StripeModal } from "../../../components";
+import { Lightbox, Modal, StripeCheckout, StripeError, PaymentForm } from "../../../components";
 
 import { useModal } from "../../../hooks/useModal";
 
@@ -17,16 +16,9 @@ const arrOfPhotos = [
 	"https://images.pexels.com/photos/13391438/pexels-photo-13391438.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
 ];
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISH_KEY, {
-	locale: "en",
-});
-
-type responseType = {
-	client_secret: string;
-};
-
 export const Photos: React.FC = () => {
-	const [clientSecret, setClientSecret] = React.useState("");
+	const stripe = useStripe();
+
 	const [currentPhoto, setCurrentPhoto] = React.useState("");
 
 	const stripeBtnRef = React.useRef<HTMLButtonElement>(null);
@@ -40,37 +32,17 @@ export const Photos: React.FC = () => {
 		openModal1(btnRef);
 	};
 
-	const fetchIntent = async () => {
-		const response = await fetch("http://localhost:5000/create-payment-intent");
-		const data = (await response.json()) as responseType;
-		setClientSecret(data.client_secret);
-	};
-
-	const options = {
-		clientSecret: clientSecret,
-		appearance: {},
-	};
-
 	return (
 		<section className="dashboard__container">
-			<ModalOverlay active={isActive1} closeModal={closeModal1}>
-				<Lightbox
-					currentPrint={currentPhoto}
-					closeModal={closeModal1}
-					openCheckout={openModal3}
-					fetchIntent={fetchIntent}
-				/>
-			</ModalOverlay>
-			<StripeModal active={isActive2} closeModal={closeModal2} openCheckout={openModal3} fetchIntent={fetchIntent} />
-			<ModalOverlay active={isActive3} closeModal={closeModal3}>
-				{clientSecret.length ? (
-					<Elements options={options} stripe={stripePromise}>
-						<StripeCheckout closeModal={closeModal3} />
-					</Elements>
-				) : (
-					<StripeError closeModal={closeModal3} />
-				)}
-			</ModalOverlay>
+			<Modal overlay={false} active={isActive1} closeModal={closeModal1}>
+				<Lightbox currentPrint={currentPhoto} closeModal={closeModal1} openCheckout={openModal3} />
+			</Modal>
+			<Modal overlay={true} active={isActive2} closeModal={closeModal2}>
+				<PaymentForm openCheckout={openModal3} closeModal={closeModal2} />
+			</Modal>
+			<Modal overlay={true} active={isActive3} closeModal={closeModal3}>
+				{stripe ? <StripeCheckout closeModal={closeModal3} /> : <StripeError closeModal={closeModal3} />}
+			</Modal>
 			<div className="albums">
 				<div className="container__left">
 					<h2 className="albums__title">Albums</h2>
