@@ -1,23 +1,4 @@
-.stripeModal {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 100vh;
-	z-index: 999;
-	opacity: 0;
-	transition: opacity 0.3s ease;
-	pointer-events: none;
-}
-
-.stripeModal--visible {
-	opacity: 1;
-	pointer-events: all;
-}
-
-.stripeModal__content {
+.paymentForm__content {
 	position: absolute;
 	width: 100%;
 	max-width: 375px;
@@ -31,7 +12,7 @@
 	box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.stripeModal__header {
+.paymentForm__header {
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -39,14 +20,14 @@
 	margin-bottom: 20px;
 }
 
-.stripeModal__title {
+.paymentForm__title {
 	font-size: 18px;
 	line-height: 22px;
 	font-weight: 600;
 	margin: 0;
 }
 
-.stripeModal__close {
+.paymentForm__close {
 	position: absolute;
 	top: 3px;
 	left: 0;
@@ -58,16 +39,16 @@
 	color: var(--main-text);
 }
 
-.stripeModal__info {
+.paymentForm__info {
 	display: flex;
 	margin-bottom: 30px;
 }
 
-.stripeModal__text {
+.paymentForm__text {
 	margin: 0 15px 0 0;
 }
 
-.stripeModal__fieldset {
+.paymentForm__fieldset {
 	display: flex;
 	flex-direction: column;
 	border: none;
@@ -75,7 +56,7 @@
 	padding: 0;
 }
 
-.stripeModal__label {
+.paymentForm__label {
 	display: grid;
 	grid-template-columns: 20px 1fr 50px;
 	gap: 10px;
@@ -83,31 +64,32 @@
 	font-weight: 500;
 }
 
-.stripeModal__radio {
+.paymentForm__radio {
 	margin: 0;
 	height: 20px;
 	width: 20px;
 	accent-color: var(--accent-color);
 }
 
-.stripeModal__radio:checked ~ span,
-.stripeModal__radio:checked ~ b {
+.paymentForm__radio:checked ~ span,
+.paymentForm__radio:checked ~ b {
 	color: var(--accent-color);
 }
 
-.stripeModal__price {
+.paymentForm__price {
 	font-weight: 500;
 	justify-self: end;
 }
 
-.stripeModal__btns {
+.paymentForm__btns {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+	grid-row: 50px;
 	row-gap: 15px;
 	column-gap: 10px;
 }
 
-.stripeModal__apple {
+.paymentForm__apple {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -115,24 +97,21 @@
 	grid-column: span 2;
 }
 
-.stripeModal__checkout {
+.paymentForm__checkout {
 	font-size: 22px;
 	line-height: 28px;
 }
 
-.stripeModal__paypal {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: #ffc439;
+.paymentForm__paypal {
+	height: 100%;
 }
 
 @media (min-width: 1024px) {
-	.stripeModal {
+	.paymentForm {
 		background-color: rgba(0, 0, 0, 0.5);
 	}
 
-	.stripeModal__content {
+	.paymentForm__content {
 		max-width: 480px;
 		top: 50%;
 		bottom: auto;
@@ -141,39 +120,33 @@
 		padding: 15px 20px 20px 20px;
 	}
 
-	.stripeModal__header {
+	.paymentForm__header {
 		margin-bottom: 15px;
 	}
 
-	.stripeModal__title {
+	.paymentForm__title {
 		font-size: 22px;
 		line-height: 26px;
 	}
 
-	.stripeModal__info {
+	.paymentForm__info {
 		margin-bottom: 20px;
 	}
 
-	.stripeModal__text,
-	.stripeModal__price,
-	.stripeModal__label {
+	.paymentForm__text,
+	.paymentForm__price,
+	.paymentForm__label {
 		font-size: 18px;
 		line-height: 23px;
 	}
 
-	.stripeModal__apple,
-	.stripeModal__checkout,
-	.stripeModal__paypal {
+	.paymentForm__apple,
+	.paymentForm__checkout {
 		padding: 11px 20px;
 	}
 
-	.stripeModal__apple img {
+	.paymentForm__apple img {
 		width: 74px;
 		height: 27px;
-	}
-
-	.stripeModal__paypal img {
-		width: 130px;
-		height: 28px;
 	}
 }
