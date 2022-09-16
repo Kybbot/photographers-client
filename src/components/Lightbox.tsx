@@ -4,10 +4,9 @@ type LightboxProps = {
 	currentPrint: string;
 	closeModal: () => void;
 	openCheckout?: (openBtnRef: React.RefObject<HTMLButtonElement> | React.RefObject<HTMLInputElement>) => void;
-	fetchIntent?: () => Promise<void>;
 };
 
-export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, openCheckout, fetchIntent }) => {
+export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, openCheckout }) => {
 	const [copied, setCopied] = React.useState(false);
 	const [copiedText, setCopiedText] = React.useState("");
 
@@ -48,9 +47,8 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, op
 		}
 	};
 
-	const handeleCheckout = async () => {
-		if (fetchIntent && openCheckout) {
-			await fetchIntent();
+	const handeleCheckout = () => {
+		if (openCheckout) {
 			openCheckout(checkoutRef);
 		}
 	};
