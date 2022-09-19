@@ -55,8 +55,10 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ closeModal, openChecko
 				requestPayerEmail: true,
 			});
 
-			void pr.canMakePayment().then((result) => {
+			await pr.canMakePayment().then((result) => {
 				if (result) {
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					//@ts-ignore
 					setPaymentRequest(pr);
 				}
 			});
