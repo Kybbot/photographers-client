@@ -111,7 +111,22 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ closeModal, openChecko
 				</label>
 			</fieldset>
 			<div className="paymentForm__btns">
-				{paymentRequest && <PaymentRequestButtonElement className="paymentForm__apple" options={{ paymentRequest }} />}
+				{paymentRequest && (
+					<PaymentRequestButtonElement
+						className="paymentForm__apple"
+						options={{
+							paymentRequest,
+							style: {
+								paymentRequestButton: {
+									height: "50px",
+									// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+									//@ts-ignore
+									borderRadius: "50px",
+								},
+							},
+						}}
+					/>
+				)}
 				<button
 					ref={checkoutRef}
 					type="button"

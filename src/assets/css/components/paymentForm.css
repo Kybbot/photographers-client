@@ -91,12 +91,14 @@
 .paymentForm__apple {
 	height: 50px;
 	grid-column: span 2;
+	border-radius: 50px;
 }
 
 .paymentForm__checkout {
 	height: 50px;
 	font-size: 22px;
 	line-height: 28px;
+	padding: 0;
 }
 
 .paymentForm__paypal {
