@@ -84,20 +84,17 @@
 .paymentForm__btns {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-row: 50px;
 	row-gap: 15px;
 	column-gap: 10px;
 }
 
 .paymentForm__apple {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: #000000;
+	height: 50px;
 	grid-column: span 2;
 }
 
 .paymentForm__checkout {
+	height: 50px;
 	font-size: 22px;
 	line-height: 28px;
 }
@@ -140,13 +137,7 @@
 		line-height: 23px;
 	}
 
-	.paymentForm__apple,
 	.paymentForm__checkout {
 		padding: 11px 20px;
-	}
-
-	.paymentForm__apple img {
-		width: 74px;
-		height: 27px;
 	}
 }

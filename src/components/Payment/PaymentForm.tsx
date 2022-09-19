@@ -111,7 +111,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ closeModal, openChecko
 				</label>
 			</fieldset>
 			<div className="paymentForm__btns">
-				{paymentRequest && <PaymentRequestButtonElement options={{ paymentRequest }} />}
+				{paymentRequest && <PaymentRequestButtonElement className="paymentForm__apple" options={{ paymentRequest }} />}
 				<button
 					ref={checkoutRef}
 					type="button"
