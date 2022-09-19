@@ -15,6 +15,9 @@ type responseType = {
 	client_secret: string;
 };
 
+const vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty("--vh", `${vh}px`);
+
 void (async () => {
 	const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISH_KEY, {
 		locale: "en",
