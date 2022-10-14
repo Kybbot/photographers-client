@@ -78,7 +78,7 @@
 	border-radius: 10px;
 	padding: 0 13px;
 	height: 40px;
-	width: 100%;
+	width: 265px;
 	outline: initial;
 }
 
@@ -132,5 +132,9 @@
 	.react-tel-input .form-control {
 		font-size: 18px;
 		line-height: 23px;
+	}
+
+	.react-tel-input .form-control {
+		width: 340px;
 	}
 }
