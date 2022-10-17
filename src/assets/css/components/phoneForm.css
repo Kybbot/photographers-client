@@ -1,17 +1,21 @@
+.phoneForm {
+	margin-top: 136px;
+}
+
 .phoneForm__title {
 	font-size: 22px;
 	font-family: "Termina", sans-serif;
 	font-weight: 700;
 	line-height: 26px;
 	text-align: center;
-	margin: 0 0 15px 0;
+	margin: 0 0 14px 0;
 }
 
 .phoneForm__text {
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 23px;
-	margin: 0 0 20px 0;
+	margin: 0 0 19px 0;
 }
 
 .phoneForm__description {
@@ -34,14 +38,27 @@
 }
 
 @media (min-width: 1024px) {
+	.phoneForm {
+		margin-top: 177px;
+	}
+
 	.phoneForm__title {
 		font-size: 30px;
 		line-height: 36px;
-		margin: 0 0 30px 0;
+		margin: 0 0 29px 0;
+	}
+
+	.phoneForm__text {
+		margin: 0 0 18px 0;
 	}
 
 	.phoneForm__description {
 		font-size: 16px;
 		line-height: 21px;
+		margin: 20px 0 0 0;
+	}
+
+	.phoneForm__description:last-child {
+		display: none;
 	}
 }

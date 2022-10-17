@@ -24,7 +24,7 @@ const SettingsLayout: React.FC = () => {
 				</div>
 			</header>
 			<main className="main">
-				<div className="container__settings h-100">
+				<div className="container__settings">
 					<Outlet />
 				</div>
 			</main>

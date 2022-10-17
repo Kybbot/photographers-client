@@ -1,0 +1,13 @@
+.settings-email__form {
+	margin-top: 166px;
+}
+
+@media (min-width: 1024px) {
+	.settings-email__form {
+		margin-top: 254px;
+	}
+
+	.settings-email__title {
+		margin: 0 0 30px 0;
+	}
+}

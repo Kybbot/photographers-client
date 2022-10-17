@@ -19,7 +19,7 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({ phone, setPhone, setPhoneR
 	};
 
 	return (
-		<>
+		<div className="phoneForm">
 			<h1 className="phoneForm__title">Let’s get started</h1>
 			<p className="phoneForm__text">Enter your phone number</p>
 			<form onSubmit={formHandler}>
@@ -42,6 +42,6 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({ phone, setPhone, setPhoneR
 					Privacy Policy
 				</Link>
 			</p>
-		</>
+		</div>
 	);
 };

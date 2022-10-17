@@ -1,8 +1,19 @@
 .settings-name__form {
 	display: grid;
 	position: relative;
+	margin-top: 167px;
 }
 
 .settings-name__input {
 	margin-bottom: 20px;
+}
+
+@media (min-width: 1024px) {
+	.settings-name__title {
+		margin: 0 0 30px 0;
+	}
+
+	.settings-name__form {
+		margin-top: 254px;
+	}
 }

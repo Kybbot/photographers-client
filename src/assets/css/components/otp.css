@@ -1,16 +1,20 @@
+.otp {
+	margin-top: 109px;
+}
+
 .otp__title {
 	font-size: 22px;
 	font-family: "Termina", sans-serif;
 	font-weight: 700;
 	line-height: 26px;
 	text-align: center;
-	margin: 0 0 15px 0;
+	margin: 0 0 14px 0;
 }
 
 .otp__text {
 	font-size: 16px;
 	line-height: 21px;
-	margin: 0 0 21px 0;
+	margin: 0 0 19px 0;
 }
 
 .otp__bold {
@@ -26,7 +30,7 @@
 	border-style: none;
 	color: var(--accent-color);
 	padding: 0;
-	margin-bottom: 20px;
+	margin-bottom: 19px;
 	cursor: pointer;
 }
 
@@ -57,15 +61,20 @@
 }
 
 @media (min-width: 1024px) {
+	.otp {
+		margin-top: 177px;
+	}
+
 	.signup .otp__title {
 		font-size: 30px;
 		line-height: 36px;
-		margin: 0 0 30px 0;
+		margin: 0 0 29px 0;
 	}
 
 	.otp__text {
 		font-size: 18px;
 		line-height: 23px;
+		margin: 0 0 18px 0;
 	}
 
 	.otp__number {
@@ -76,5 +85,6 @@
 	.otp__resend {
 		font-size: 18px;
 		line-height: 23px;
+		margin: 0 0 20px 0;
 	}
 }

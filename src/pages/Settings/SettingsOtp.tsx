@@ -16,13 +16,7 @@ const SettingsOtp: React.FC = () => {
 		event.preventDefault();
 	};
 
-	return (
-		<section className="settings__center">
-			<div className="settings__center--helper">
-				<OTPForm phone={location.state.phone} formHandler={otpFormHandler} />
-			</div>
-		</section>
-	);
+	return <OTPForm phone={location.state.phone} formHandler={otpFormHandler} />;
 };
 
 export default SettingsOtp;

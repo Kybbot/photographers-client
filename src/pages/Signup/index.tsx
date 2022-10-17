@@ -34,7 +34,7 @@ const Signup: React.FC = () => {
 							<use xlinkHref="#left-arrow" />
 						</svg>
 					</button>
-					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={17} />
+					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
 				</div>
 			</header>
 			<main className="main">

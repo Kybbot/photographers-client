@@ -60,7 +60,7 @@ export const Selfi: React.FC = () => {
 	};
 
 	return (
-		<>
+		<div className="selfi">
 			<h2 className="selfi__title">Add a selfie</h2>
 			<p className="selfi__text">A selfie allows your photos to be synced with your account.</p>
 			<div className="selfi__wrapper">
@@ -106,6 +106,6 @@ export const Selfi: React.FC = () => {
 			<Modal overlay={true} active={isActive2} closeModal={closeModal2}>
 				<UploadOptions fileHandler={fileHandler} closeHandler={closeModal2} openCamera={openCamera} />
 			</Modal>
-		</>
+		</div>
 	);
 };
