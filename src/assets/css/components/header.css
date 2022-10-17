@@ -33,13 +33,14 @@
 
 .header__title {
 	font-size: 18px;
+	font-family: "Termina", sans-serif;
 	font-weight: 700;
 	line-height: 22px;
 	margin: 0 0 5px 0;
 }
 
 .header__info {
-	font-style: 14px;
+	font-size: 14px;
 	line-height: 18px;
 	margin: 0;
 }
@@ -114,6 +115,11 @@
 		font-size: 22px;
 		line-height: 26px;
 		margin: 0 40px 0 0;
+	}
+
+	.header__info {
+		font-size: 16px;
+		line-height: 21px;
 	}
 }
 

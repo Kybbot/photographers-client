@@ -1,5 +1,6 @@
 .success__title {
 	font-size: 18px;
+	font-family: "Termina", sans-serif;
 	font-weight: 700;
 	line-height: 22px;
 	margin: 20px 0;
@@ -7,6 +8,8 @@
 }
 
 .success__text {
+	font-size: 18px;
+	line-height: 23px;
 	margin: 0 0 20px 0;
 }
 
@@ -15,6 +18,7 @@
 }
 
 .success__text:last-child {
+	display: none;
 	margin: 20px 0 0 0;
 	text-align: center;
 }
@@ -35,8 +39,8 @@
 	}
 
 	.success__text {
-		font-size: 20px;
-		line-height: 24px;
+		font-size: 22px;
+		line-height: 28px;
 	}
 
 	.success__text:nth-child(3) {
@@ -44,6 +48,7 @@
 	}
 
 	.success__text:last-child {
+		display: block;
 		font-size: 18px;
 		line-height: 22px;
 	}

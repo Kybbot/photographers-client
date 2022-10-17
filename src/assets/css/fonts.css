@@ -1,29 +1,29 @@
-/* karla-regular - latin */
+/* Futura-pt 400 */
 @font-face {
-	font-family: "Karla";
+	font-family: "Futura PT";
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: local(""), url("../fonts/Karla/karla-v23-latin-regular.woff2") format("woff2"),
-		url("../fonts/Karla/karla-v23-latin-regular.woff") format("woff");
+	src: url("../fonts/Futura-pt/futura-pt-400.woff2") format("woff2"),
+		url("../fonts/Futura-pt/futura-pt-400.woff") format("woff");
 }
 
-/* karla-500 - latin */
+/* Futura-pt 500 */
 @font-face {
-	font-family: "Karla";
+	font-family: "Futura PT";
 	font-style: normal;
 	font-weight: 500;
 	font-display: swap;
-	src: local(""), url("../fonts/Karla/karla-v23-latin-500.woff2") format("woff2"),
-		url("../fonts/Karla/karla-v23-latin-500.woff") format("woff");
+	src: url("../fonts/Futura-pt/futura-pt-500.woff2") format("woff2"),
+		url("../fonts/Futura-pt/futura-pt-500.woff") format("woff");
 }
 
-/* karla-700 - latin */
+/* Termina 700 */
 @font-face {
-	font-family: "Karla";
+	font-family: "Termina";
 	font-style: normal;
 	font-weight: 700;
 	font-display: swap;
-	src: local(""), url("../fonts/Karla/karla-v23-latin-700.woff2") format("woff2"),
-		url("../fonts/Karla/karla-v23-latin-700.woff") format("woff");
+	src: url("../fonts/Termina/termina-700.woff2") format("woff2"),
+		url("../fonts/Termina/termina-700.woff") format("woff");
 }

@@ -1,5 +1,6 @@
 .selfi__title {
 	font-size: 22px;
+	font-family: "Termina", sans-serif;
 	font-weight: 700;
 	line-height: 26px;
 	text-align: center;
@@ -120,7 +121,7 @@
 }
 
 .selfi__subtext {
-	line-height: 20px;
+	line-height: 21px;
 	text-align: center;
 	color: #ffffff;
 	margin: 0 0 40px 0;

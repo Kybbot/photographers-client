@@ -1,5 +1,6 @@
 .otp__title {
 	font-size: 22px;
+	font-family: "Termina", sans-serif;
 	font-weight: 700;
 	line-height: 26px;
 	text-align: center;
@@ -8,8 +9,8 @@
 
 .otp__text {
 	font-size: 16px;
-	line-height: 20px;
-	margin: 0 0 20px 0;
+	line-height: 21px;
+	margin: 0 0 21px 0;
 }
 
 .otp__bold {
@@ -17,9 +18,9 @@
 }
 
 .otp__resend {
-	font-family: "Karla", sans-serif;
+	font-family: "Futura PT", sans-serif;
 	font-size: 16px;
-	line-height: 20px;
+	line-height: 21px;
 	font-weight: 400;
 	background-color: transparent;
 	border-style: none;
@@ -46,8 +47,8 @@
 	text-align: center;
 	font-size: 16px;
 	font-weight: 400;
-	font-family: "Karla", sans-serif;
-	line-height: 20px;
+	font-family: "Futura PT", sans-serif;
+	line-height: 21px;
 }
 
 .otp__number::-webkit-outer-spin-button,
@@ -56,7 +57,7 @@
 }
 
 @media (min-width: 1024px) {
-	.signup > .otp__title {
+	.signup .otp__title {
 		font-size: 30px;
 		line-height: 36px;
 		margin: 0 0 30px 0;

@@ -22,6 +22,7 @@
 
 .settigs__title {
 	font-size: 18px;
+	font-family: "Termina", sans-serif;
 	font-weight: 700;
 	line-height: 22px;
 	text-align: center;
@@ -31,7 +32,7 @@
 .settings__subtitle {
 	font-size: 16px;
 	font-weight: 500;
-	line-height: 20px;
+	line-height: 21px;
 	margin: 0 0 15px 0;
 }
 
@@ -172,17 +173,17 @@
 
 	.settings__name {
 		font-size: 16px;
-		line-height: 20px;
+		line-height: 21px;
 	}
 
 	.settings__text {
 		font-size: 16px;
-		line-height: 20px;
+		line-height: 21px;
 	}
 
 	.settings-notification__text {
 		font-size: 16px;
-		line-height: 20px;
+		line-height: 21px;
 	}
 
 	.settings-phone__text {

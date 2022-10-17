@@ -18,6 +18,7 @@ export const AlbumItem: React.FC<AlbumItemProps> = ({ index }) => {
 					height={215}
 				/>
 			</picture>
+			<span className="albums__name">Brooklyn Bridge Super Puper Duper</span>
 		</Link>
 	);
 };

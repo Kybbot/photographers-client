@@ -27,3 +27,5 @@
 @import "./settings/settings-notification.css";
 @import "./settings/settings-phone.css";
 @import "./settings/settings-final.css";
+
+@import "./terms.css";

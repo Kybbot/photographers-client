@@ -11,6 +11,8 @@
 
 .footer__title {
 	font-size: 18px;
+	font-family: "Termina", sans-serif;
+	letter-spacing: -0.02em;
 	font-weight: 700;
 	line-height: 22px;
 	letter-spacing: -0.02em;
@@ -81,6 +83,7 @@
 
 	.footer__email {
 		font-size: 18px;
+		line-height: 23px;
 	}
 
 	.footer__links {

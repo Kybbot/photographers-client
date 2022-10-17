@@ -38,4 +38,8 @@
 	.container__left {
 		max-width: 1230px;
 	}
+
+	.container--terms {
+		max-width: 700px;
+	}
 }
