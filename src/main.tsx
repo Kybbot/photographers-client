@@ -7,7 +7,6 @@ import { Elements } from "@stripe/react-stripe-js";
 import App from "./App";
 import { ScrollToTop } from "./components/ScrollToTop";
 
-import "react-phone-input-2/lib/style.css";
 import "swiper/css";
 import "./assets/css/index.css";
 
