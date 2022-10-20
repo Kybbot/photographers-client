@@ -8,9 +8,17 @@ type ModalProps = {
 	children: React.ReactNode;
 	displayType?: "block" | "flex";
 	closeModal: () => void;
+	dependencies?: [string];
 };
 
-export const Modal: React.FC<ModalProps> = ({ overlay, active, children, displayType, closeModal }) => {
+export const Modal: React.FC<ModalProps> = ({
+	overlay,
+	active,
+	children,
+	displayType,
+	closeModal,
+	...dependencies
+}) => {
 	const wrapperRef = React.useRef<HTMLDivElement>(null);
 
 	React.useEffect(() => {
@@ -42,7 +50,7 @@ export const Modal: React.FC<ModalProps> = ({ overlay, active, children, display
 		}
 
 		return () => document.removeEventListener("keydown", handleModalKeyboard);
-	}, [active, closeModal, displayType]);
+	}, [active, closeModal, displayType, dependencies]);
 
 	React.useEffect(() => {
 		if (active) {
