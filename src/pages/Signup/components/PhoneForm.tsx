@@ -1,10 +1,11 @@
-import React, { Dispatch, FormEvent } from "react";
+import React, { Dispatch, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import RPI, { PhoneInputProps } from "react-phone-input-2";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const ReactPhoneInput: React.FC<PhoneInputProps> = RPI.default ? RPI.default : RPI;
+
+import { Modal, PhoneNumber, PhoneNumberSelect } from "../../../components";
+
+import { useModal } from "../../../hooks/useModal";
+
+import { currentCountryType } from "../../../@types/phoneForm";
 
 type PhoneFormProps = {
 	phone: string;
@@ -13,6 +14,17 @@ type PhoneFormProps = {
 };
 
 export const PhoneForm: React.FC<PhoneFormProps> = ({ phone, setPhone, setPhoneResult }) => {
+	const [selectState, setSelectState] = useState("");
+
+	const [currentCountry, setCurrentCountry] = useState<currentCountryType>({
+		name: "United States",
+		dial_code: "+1",
+		code: "US",
+		mask: /^(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,4}).*/,
+	});
+
+	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
+
 	const formHandler = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setPhoneResult(true);
@@ -20,11 +32,19 @@ export const PhoneForm: React.FC<PhoneFormProps> = ({ phone, setPhone, setPhoneR
 
 	return (
 		<div className="phoneForm">
+			<Modal overlay={true} active={isActive1} displayType="flex" closeModal={closeModal1} dependencies={[selectState]}>
+				<PhoneNumberSelect
+					closeModal={closeModal1}
+					setCurrentCountry={setCurrentCountry}
+					setPhone={setPhone}
+					setSelectState={setSelectState}
+				/>
+			</Modal>
 			<h1 className="phoneForm__title">Let’s get started</h1>
 			<p className="phoneForm__text">Enter your phone number</p>
 			<form onSubmit={formHandler}>
-				<ReactPhoneInput enableSearch country={"us"} value={phone} onChange={(phone) => setPhone(phone)} />
-				<button type="submit" className="btn" disabled={phone.length < 10}>
+				<PhoneNumber currentCountry={currentCountry} setPhone={setPhone} openModal={openModal1} />
+				<button type="submit" className="btn" disabled={phone.length <= 7}>
 					Create account
 				</button>
 			</form>

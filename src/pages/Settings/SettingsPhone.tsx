@@ -1,15 +1,26 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import RPI, { PhoneInputProps } from "react-phone-input-2";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const ReactPhoneInput: React.FC<PhoneInputProps> = RPI.default ? RPI.default : RPI;
+
+import { Modal, PhoneNumber, PhoneNumberSelect } from "../../components";
+
+import { useModal } from "../../hooks/useModal";
+
+import { currentCountryType } from "../../@types/phoneForm";
 
 const SettingsPhone: React.FC = () => {
 	const navigate = useNavigate();
 
+	const [selectState, setSelectState] = useState("");
 	const [phone, setPhone] = React.useState("");
+
+	const [currentCountry, setCurrentCountry] = useState<currentCountryType>({
+		name: "United States",
+		dial_code: "+1",
+		code: "US",
+		mask: /^(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,4}).*/,
+	});
+
+	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 
 	const formHandler = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -18,11 +29,19 @@ const SettingsPhone: React.FC = () => {
 
 	return (
 		<div className="settings-phone">
+			<Modal overlay={true} active={isActive1} displayType="flex" closeModal={closeModal1} dependencies={[selectState]}>
+				<PhoneNumberSelect
+					closeModal={closeModal1}
+					setCurrentCountry={setCurrentCountry}
+					setPhone={setPhone}
+					setSelectState={setSelectState}
+				/>
+			</Modal>
 			<h1 className="settigs__title settings-phone__title">Mobile number</h1>
 			<p className="settings-phone__text">Update your number and we’ll send a verification code to this number.</p>
 			<form onSubmit={formHandler}>
-				<ReactPhoneInput enableSearch country={"us"} value={phone} onChange={(phone) => setPhone(phone)} />
-				<button type="submit" className="btn">
+				<PhoneNumber currentCountry={currentCountry} setPhone={setPhone} openModal={openModal1} />
+				<button type="submit" className="btn" disabled={phone.length <= 7}>
 					Next
 				</button>
 			</form>
