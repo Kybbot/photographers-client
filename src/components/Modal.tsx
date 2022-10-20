@@ -6,10 +6,11 @@ type ModalProps = {
 	overlay: boolean;
 	active: boolean;
 	children: React.ReactNode;
+	displayType?: "block" | "flex";
 	closeModal: () => void;
 };
 
-export const Modal: React.FC<ModalProps> = ({ overlay, active, children, closeModal }) => {
+export const Modal: React.FC<ModalProps> = ({ overlay, active, children, displayType, closeModal }) => {
 	const wrapperRef = React.useRef<HTMLDivElement>(null);
 
 	React.useEffect(() => {
@@ -22,7 +23,7 @@ export const Modal: React.FC<ModalProps> = ({ overlay, active, children, closeMo
 				const arrOfEllems = Array.from(elems);
 
 				for (const elem of elems) {
-					elem.style.display = "block";
+					elem.style.display = displayType ? displayType : "block";
 				}
 
 				handleModalKeyboard = onTab(wrapperRef, arrOfEllems, closeModal);
@@ -41,7 +42,7 @@ export const Modal: React.FC<ModalProps> = ({ overlay, active, children, closeMo
 		}
 
 		return () => document.removeEventListener("keydown", handleModalKeyboard);
-	}, [active, closeModal]);
+	}, [active, closeModal, displayType]);
 
 	React.useEffect(() => {
 		if (active) {
