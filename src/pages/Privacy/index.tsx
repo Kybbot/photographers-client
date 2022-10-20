@@ -33,7 +33,7 @@ const Privacy: React.FC = () => {
 						Your Personal Information may be processed by us in the country where it was collected and transferred to,
 						and maintained on, computers located outside of your state, province, country (including the United States),
 						or other governmental jurisdiction where privacy laws regarding processing of Personal Information may be
-						less stringent than the laws in your country. If youU+2019re located outside the United States and choose to
+						less stringent than the laws in your country. If you’re located outside the United States and choose to
 						provide your Personal Information to us, we may transfer your Personal Information to the United States and
 						process it there.
 					</p>
@@ -42,10 +42,10 @@ const Privacy: React.FC = () => {
 						Children under the age of 13 are not permitted to use the Service and we do not intentionally collect or
 						maintain Personal Information from those who are under 13 years old. Protecting the privacy of children is
 						very important to us. Thus, if we obtain actual knowledge that a user is under 13, we will take steps to
-						remove that userU+2019s Personal Information from our databases. We recommend that children between the ages
-						of 13 and 18 obtain their parentU+2019s permission before submitting information over the internet. By using
-						the Service, you are representing that you are at least 18 years old, or that you are at least 13 years old
-						and have your parentsU+2019 permission to use the Service.
+						remove that user’s Personal Information from our databases. We recommend that children between the ages of
+						13 and 18 obtain their parent’s permission before submitting information over the internet. By using the
+						Service, you are representing that you are at least 18 years old, or that you are at least 13 years old and
+						have your parents’ permission to use the Service.
 					</p>
 				</div>
 			</main>
