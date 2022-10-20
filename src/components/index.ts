@@ -1,5 +1,7 @@
 export * from "./OTP/OTP";
 export * from "./OTP/OTPForm";
+export * from "./PhoneNumber";
+export * from "./PhoneNumber/PhoneNumberSelect";
 export * from "./ScrollToTop";
 export * from "./Lightbox";
 export * from "./Payment/PaymentForm";
