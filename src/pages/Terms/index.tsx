@@ -6,7 +6,7 @@ const Terms: React.FC = () => {
 		<>
 			<header className="header">
 				<div className="header__container">
-					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" />
+					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
 				</div>
 			</header>
 			<main className="main">
@@ -56,7 +56,7 @@ const Terms: React.FC = () => {
 				<div className="footer__container">
 					<div className="footer__block">
 						<h2 className="footer__title">PhotoDrop is brought to you by</h2>
-						<img className="footer__logo" src="/footer-logo.svg" alt="Frameology" width={150} height={25} />
+						<img className="footer__logo" src="/footer-logo.svg" alt="Frameology" width={150} height={24} />
 						<p className="footer__text">
 							Our mission is to help people connect with their memories. If you framing some of the photos from your
 							experience, please consider using Frameology. It supports the photographers and makes PhotoDrop possible.

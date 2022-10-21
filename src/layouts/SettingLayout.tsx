@@ -16,11 +16,11 @@ const SettingsLayout: React.FC = () => {
 			<header className="header">
 				<div className="header__container">
 					<button className="header__btn header__btn--visible" aria-label="Go back" onClick={goBackHandler}>
-						<svg width="8" height="17" fill="none" focusable="false" aria-hidden="true">
+						<svg width="8" height="16" fill="none" focusable="false" aria-hidden="true">
 							<use xlinkHref="#left-arrow" />
 						</svg>
 					</button>
-					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={17} />
+					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
 				</div>
 			</header>
 			<main className="main">

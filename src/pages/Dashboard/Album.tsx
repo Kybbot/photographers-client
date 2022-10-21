@@ -41,7 +41,7 @@ const Album: React.FC = () => {
 		<>
 			<header className="header header--small">
 				<button className="header__btn header__btn--visible" aria-label="Go back" onClick={goBackHandler}>
-					<svg width="8" height="17" fill="none" focusable="false" aria-hidden="true">
+					<svg width="8" height="16" fill="none" focusable="false" aria-hidden="true">
 						<use xlinkHref="#left-arrow" />
 					</svg>
 				</button>
@@ -88,7 +88,7 @@ const Album: React.FC = () => {
 				<div className="footer__container">
 					<div className="footer__block">
 						<h2 className="footer__title">PhotoDrop is brought to you by</h2>
-						<img className="footer__logo" src="/footer-logo.svg" alt="Frameology" width={150} height={25} />
+						<img className="footer__logo" src="/footer-logo.svg" alt="Frameology" width={150} height={24} />
 						<p className="footer__text">
 							Our mission is to help people connect with their memories. If you framing some of the photos from your
 							experience, please consider using Frameology. It supports the photographers and makes PhotoDrop possible.

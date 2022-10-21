@@ -63,11 +63,8 @@
 
 .albums__container .swiper-slide {
 	width: 110px !important;
+	height: 140px !important;
 	margin-right: 5px;
-}
-
-.albums__container .swiper-wrapper {
-	padding: 2px 2px !important;
 }
 
 @media (min-width: 1024px) {
@@ -86,7 +83,7 @@
 
 	.albums__wrapper {
 		width: 200px;
-		height: 258px;
+		height: 255px;
 		border-radius: 20px;
 	}
 
@@ -98,6 +95,7 @@
 
 	.albums__container .swiper-slide {
 		width: 200px !important;
+		height: 255px !important;
 		margin-right: 5px;
 	}
 }

@@ -7,7 +7,7 @@ const OnBoardingLayout: React.FC = () => {
 			<header className="header">
 				<div className="container">
 					<div className="header__container">
-						<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={17} />
+						<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
 					</div>
 				</div>
 			</header>

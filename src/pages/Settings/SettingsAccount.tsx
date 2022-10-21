@@ -17,14 +17,14 @@ const SettingsAccount: React.FC = () => {
 				</div>
 				<div className="settings__arrow">
 					<Link to="/settings/phone" className="settings__link" aria-label="Change your name">
-						<svg className="settings__svg" width="8" height="17" fill="none" focusable="false" aria-hidden="true">
+						<svg className="settings__svg" width="8" height="16" fill="none" focusable="false" aria-hidden="true">
 							<use xlinkHref="#left-arrow" />
 						</svg>
 					</Link>
 				</div>
 			</div>
 			<div className="settings__element">
-				<svg className="settings__icon" width="25" height="21" fill="none" focusable="false" aria-hidden="true">
+				<svg className="settings__icon" width="25" height="20" fill="none" focusable="false" aria-hidden="true">
 					<use xlinkHref="#email" />
 				</svg>
 				<div className="settings__wrapper">
@@ -33,7 +33,7 @@ const SettingsAccount: React.FC = () => {
 				</div>
 				<div className="settings__arrow">
 					<Link to="/settings/email" className="settings__link" aria-label="Change your name">
-						<svg className="settings__svg" width="8" height="17" fill="none" focusable="false" aria-hidden="true">
+						<svg className="settings__svg" width="8" height="16" fill="none" focusable="false" aria-hidden="true">
 							<use xlinkHref="#left-arrow" />
 						</svg>
 					</Link>

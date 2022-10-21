@@ -107,7 +107,7 @@
 }
 
 .settings__arrow {
-	height: 17px;
+	height: 16px;
 	margin-left: auto;
 }
 
@@ -166,6 +166,15 @@
 	.settings__pencil {
 		width: 43px;
 		height: 43px;
+	}
+
+	.settings__arrow {
+		height: 20px;
+	}
+
+	.settings__svg {
+		width: 10px;
+		height: 20px;
 	}
 
 	.settings__name {

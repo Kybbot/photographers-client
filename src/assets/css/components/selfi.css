@@ -73,14 +73,12 @@
 	position: absolute;
 	right: 0;
 	bottom: 0;
-	background-color: var(--accent-color);
 	border-style: none;
 	border-radius: 50%;
 	height: 42px;
 	width: 42px;
 	padding: 0;
-	justify-content: center;
-	align-items: center;
+	overflow: hidden;
 	cursor: pointer;
 }
 
@@ -128,7 +126,7 @@
 	line-height: 21px;
 	text-align: center;
 	color: #ffffff;
-	margin: 0 0 40px 0;
+	margin: 0 0 42px 0;
 }
 
 .selfi__video {
@@ -141,6 +139,7 @@
 .selfi__fieldset {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 50px;
 	gap: 10px;
 	border-style: none;
 	margin: 0;
@@ -220,8 +219,14 @@
 	}
 
 	.selfi__form {
-		max-width: 380px;
-		max-height: 650px;
+		max-width: 379px;
+		max-height: 653px;
 		border-radius: 20px;
+	}
+
+	.selfi__save,
+	.selfi__retake {
+		font-size: 18px;
+		line-height: 23px;
 	}
 }

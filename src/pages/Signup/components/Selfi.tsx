@@ -79,7 +79,7 @@ export const Selfi: React.FC = () => {
 					aria-label="Add a selfie"
 					onClick={openSelfiForm}
 				>
-					<svg focusable="false" aria-hidden="true" width="24" height="24" fill="none" stroke="#ffffff" strokeWidth="2">
+					<svg focusable="false" aria-hidden="true" width="42" height="42" fill="none" stroke="#ffffff" strokeWidth="2">
 						<use xlinkHref="#plus" />
 					</svg>
 				</button>

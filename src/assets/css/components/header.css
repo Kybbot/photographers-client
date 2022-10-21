@@ -1,6 +1,5 @@
 .header {
-	padding: 20px 0 19px 0;
-	border-top: 1px solid #f1f0ec;
+	padding: 20px 0 18px 0;
 	border-bottom: 1px solid #f1f0ec;
 }
 
@@ -55,7 +54,7 @@
 	height: 24px;
 	position: absolute;
 	top: 50%;
-	transform: translateY(-50%);
+	transform: translateY(-45%);
 	left: 10px;
 	background-color: transparent;
 	border-style: none;
@@ -88,7 +87,7 @@
 
 @media (min-width: 1024px) {
 	.header {
-		padding: 19px 0;
+		padding: 19px 0 18px 0;
 	}
 
 	.header__container {

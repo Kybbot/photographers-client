@@ -58,7 +58,7 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, op
 			<div className="lightbox__container">
 				<div className="lightbox__wrapper">
 					<button type="button" className="lightbox__close" aria-label="Close lightbox" onClick={closeModal}>
-						<svg focusable="false" aria-hidden="true" width="17" height="17" fill="none">
+						<svg focusable="false" aria-hidden="true" width="15" height="15" fill="none">
 							<use xlinkHref="#close" />
 						</svg>
 					</button>
@@ -68,7 +68,7 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, op
 				</div>
 				<div className="lightbox__btns">
 					<a href={currentPrint} download="PrintExample.png" className="lightbox__btn lightbox__download">
-						<svg className="lightbox__svg" focusable="false" aria-hidden="true" width="25" height="21" fill="none">
+						<svg className="lightbox__svg" focusable="false" aria-hidden="true" width="24" height="21" fill="none">
 							<use xlinkHref="#download" />
 						</svg>
 						Download
@@ -79,7 +79,7 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, op
 						onClick={() => void shareHandler()}
 						data-title={copiedText}
 					>
-						<svg className="lightbox__svg" focusable="false" aria-hidden="true" width="25" height="21" fill="none">
+						<svg className="lightbox__svg" focusable="false" aria-hidden="true" width="24" height="21" fill="none">
 							<use xlinkHref="#share" />
 						</svg>
 						Share

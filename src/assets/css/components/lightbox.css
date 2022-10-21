@@ -25,7 +25,7 @@
 
 .lightbox__photo {
 	position: relative;
-	margin: 35px 0;
+	margin: 34px 0;
 }
 
 .lightbox__img {
@@ -44,9 +44,12 @@
 }
 
 .lightbox__close {
+	height: 15px;
+	width: 15px;
 	background-color: transparent;
 	border-style: none;
-	padding: 0 0 0 15px;
+	margin: 0 0 0 15px;
+	padding: 0;
 	cursor: pointer;
 	color: #ffffff;
 }
@@ -148,9 +151,19 @@
 		padding: 0;
 	}
 
+	.lightbox__btns .btn--transparent {
+		max-width: 200px;
+	}
+
 	.lightbox__btns--center {
 		right: 50%;
 		transform: translateX(50%);
+	}
+
+	.lightbox__share {
+		visibility: hidden;
+		opacity: 0;
+		display: none !important;
 	}
 
 	.lightbox__see {

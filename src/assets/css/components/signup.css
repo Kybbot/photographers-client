@@ -78,4 +78,13 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
+
+	.signup .header__btn.header__btn--visible {
+		display: none;
+	}
+
+	.header__btn svg {
+		height: 20px;
+		width: 10px;
+	}
 }
