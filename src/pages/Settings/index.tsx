@@ -78,9 +78,7 @@ const Settings: React.FC = () => {
 					aria-label="Edit avatar"
 					onClick={() => openModal1(selfiBtnRef)}
 				>
-					<svg width="16" height="22" fill="none" focusable="false" aria-hidden="true">
-						<use xlinkHref="#pencil" />
-					</svg>
+					<img src="/pencil.svg" width={36.5} height={36.5} alt="pencil" aria-hidden="true" />
 				</button>
 				<input
 					ref={fileInputRef}

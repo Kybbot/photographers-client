@@ -52,12 +52,10 @@
 	position: absolute;
 	right: -15px;
 	bottom: 0;
-	height: 35px;
-	width: 35px;
-	border: 2px solid #ffffff;
 	border-radius: 50%;
+	border-style: none;
+	background-color: transparent;
 	padding: 0;
-	background-color: var(--accent-color);
 	cursor: pointer;
 }
 
@@ -79,9 +77,18 @@
 	display: flex;
 	align-items: center;
 	padding: 10px 15px 9px 15px;
+	margin-bottom: 5px;
+}
+
+.settings__element::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	border: 1px solid #ceccb5;
 	border-radius: 10px;
-	margin-bottom: 5px;
 }
 
 .settings__element:last-child {
@@ -95,14 +102,14 @@
 .settings__name {
 	font-size: 14px;
 	font-weight: 500;
-	line-height: 18px;
+	line-height: 10px;
 	margin: 0 0 10px 0;
 }
 
 .settings__text {
 	font-size: 14px;
 	font-weight: 400;
-	line-height: 18px;
+	line-height: 11px;
 	margin: 0;
 }
 
@@ -163,9 +170,9 @@
 		height: 150px;
 	}
 
-	.settings__pencil {
-		width: 43px;
-		height: 43px;
+	.settings__pencil img {
+		width: 45px;
+		height: 45px;
 	}
 
 	.settings__arrow {
@@ -177,14 +184,17 @@
 		height: 20px;
 	}
 
+	.settings__element {
+		padding: 11px 15px 9px 15px;
+	}
+
 	.settings__name {
 		font-size: 16px;
-		line-height: 21px;
 	}
 
 	.settings__text {
 		font-size: 16px;
-		line-height: 21px;
+		line-height: 13px;
 	}
 
 	.settings-notification__text {
