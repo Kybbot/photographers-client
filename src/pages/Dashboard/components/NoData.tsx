@@ -2,25 +2,10 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Print } from "./Print";
-import { Lightbox, Modal } from "../../../components";
-
-import { useModal } from "../../../hooks/useModal";
 
 export const NoData: React.FC = () => {
-	const [currentPrint, setCurrentPrint] = React.useState<string>("");
-
-	const { isActive, openModal, closeModal } = useModal();
-
-	const openCurrentPrint = (btnRef: React.RefObject<HTMLButtonElement>, imgSrc: string) => {
-		setCurrentPrint(imgSrc);
-		openModal(btnRef);
-	};
-
 	return (
 		<section className="dashboard__container">
-			<Modal overlay={false} active={isActive} closeModal={closeModal}>
-				<Lightbox currentPrint={currentPrint} closeModal={closeModal} />
-			</Modal>
 			<div className="container">
 				<img className="dashboard__dec" src="/message.svg" alt="" arica-hidden="true" width={82} height={75} />
 				<h1 className="dashboard__title">Your photos will drop soon.</h1>
@@ -35,7 +20,7 @@ export const NoData: React.FC = () => {
 							.fill(0)
 							.map((_, index) => (
 								<SwiperSlide key={index}>
-									<Print index={index} openCurrentPrint={openCurrentPrint} />
+									<Print index={index} />
 								</SwiperSlide>
 							))}
 					</Swiper>
