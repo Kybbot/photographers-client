@@ -6,7 +6,7 @@ const SettingsNotification: React.FC = () => {
 			<form className="settings-notification__form">
 				<h1 className="settigs__title">Notification settings</h1>
 				<label htmlFor="settings-text" className="custom-checkbox">
-					<input type="checkbox" name="text" id="settings-text" className="custom-checkbox__input" checked />
+					<input type="checkbox" name="text" id="settings-text" className="custom-checkbox__input" disabled />
 					<div className="custom-checkbox__wrapper" aria-hidden="true">
 						<svg
 							className="custom-checkbox__svg"
@@ -22,7 +22,7 @@ const SettingsNotification: React.FC = () => {
 					Text messages
 				</label>
 				<label htmlFor="settings-email" className="custom-checkbox">
-					<input type="checkbox" name="email" id="settings-email" className="custom-checkbox__input" />
+					<input type="checkbox" name="email" id="settings-email" className="custom-checkbox__input" disabled />
 					<div className="custom-checkbox__wrapper" aria-hidden="true">
 						<svg
 							className="custom-checkbox__svg"
@@ -38,7 +38,13 @@ const SettingsNotification: React.FC = () => {
 					Email
 				</label>
 				<label htmlFor="settings-unsubscribe" className="custom-checkbox">
-					<input type="checkbox" name="unsubscribe" id="settings-unsubscribe" className="custom-checkbox__input" />
+					<input
+						type="checkbox"
+						name="unsubscribe"
+						id="settings-unsubscribe"
+						className="custom-checkbox__input"
+						disabled
+					/>
 					<div className="custom-checkbox__wrapper" aria-hidden="true">
 						<svg
 							className="custom-checkbox__svg"
@@ -57,8 +63,8 @@ const SettingsNotification: React.FC = () => {
 					Stop marketing notifications. You will still receive transactional notifications for purchases and when new
 					photos are available.
 				</p>
-				<button type="submit" className="btn">
-					Save
+				<button type="submit" className="btn" disabled>
+					Cooming Soon
 				</button>
 			</form>
 		</section>

@@ -7,9 +7,9 @@ const SettingsEmail: React.FC = () => {
 			<label className="sr-only" htmlFor="email">
 				Your email
 			</label>
-			<input type="text" className="input settings__input" autoComplete="email" name="email" id="email" />
-			<button type="submit" className="btn">
-				Save
+			<input type="text" className="input settings__input" autoComplete="email" name="email" id="email" disabled />
+			<button type="submit" className="btn" disabled>
+				Cooming Soon
 			</button>
 		</form>
 	);

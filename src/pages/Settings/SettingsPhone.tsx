@@ -40,9 +40,9 @@ const SettingsPhone: React.FC = () => {
 			<h1 className="settigs__title settings-phone__title">Mobile number</h1>
 			<p className="settings-phone__text">Update your number and we’ll send a verification code to this number.</p>
 			<form onSubmit={formHandler}>
-				<PhoneNumber currentCountry={currentCountry} setPhone={setPhone} openModal={openModal1} />
-				<button type="submit" className="btn" disabled={phone.length <= 7}>
-					Next
+				<PhoneNumber currentCountry={currentCountry} setPhone={setPhone} openModal={openModal1} disabled />
+				<button type="submit" className="btn" disabled>
+					Cooming Soon
 				</button>
 			</form>
 		</div>

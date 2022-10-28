@@ -4,11 +4,12 @@ import { currentCountryType } from "../../@types/phoneForm";
 
 type PhoneNumberProps = {
 	currentCountry: currentCountryType;
+	disabled?: boolean;
 	setPhone: Dispatch<React.SetStateAction<string>>;
 	openModal: (openBtnRef: React.RefObject<HTMLButtonElement> | React.RefObject<HTMLInputElement>) => void;
 };
 
-export const PhoneNumber: FC<PhoneNumberProps> = ({ currentCountry, setPhone, openModal }) => {
+export const PhoneNumber: FC<PhoneNumberProps> = ({ currentCountry, disabled, setPhone, openModal }) => {
 	const [phoneInput, setPhoneInput] = useState(currentCountry.dial_code);
 
 	const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +35,13 @@ export const PhoneNumber: FC<PhoneNumberProps> = ({ currentCountry, setPhone, op
 
 	return (
 		<div className="phone-number">
-			<button ref={btnRef} className="phone-number__btn" type="button" onClick={() => openModal(btnRef)}>
+			<button
+				ref={btnRef}
+				className="phone-number__btn"
+				type="button"
+				onClick={() => openModal(btnRef)}
+				disabled={disabled}
+			>
 				<img
 					className="phone-number__img"
 					src={`/flugs/${currentCountry.code.toLowerCase()}.svg`}
@@ -54,6 +61,7 @@ export const PhoneNumber: FC<PhoneNumberProps> = ({ currentCountry, setPhone, op
 				inputMode="numeric"
 				value={phoneInput}
 				onInput={handleChangeInput}
+				disabled={disabled}
 			/>
 		</div>
 	);

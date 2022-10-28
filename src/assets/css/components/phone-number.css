@@ -17,6 +17,10 @@
 	cursor: pointer;
 }
 
+.phone-number__btn:disabled {
+	cursor: initial;
+}
+
 .phone-number__img {
 	width: 28px;
 	height: 19px;
