@@ -85,13 +85,6 @@
 	justify-self: end;
 }
 
-.paymentForm__btns {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	row-gap: 15px;
-	column-gap: 10px;
-}
-
 .paymentForm__info + .paymentForm__btns {
 	margin-top: 31px;
 }

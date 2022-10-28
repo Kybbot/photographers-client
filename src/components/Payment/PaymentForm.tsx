@@ -1,86 +1,16 @@
 import React from "react";
-import { useStripe, useElements, PaymentRequestButtonElement } from "@stripe/react-stripe-js";
-
-import PayPalButton from "./PayPalButton";
 
 type PaymentFormProps = {
 	closeModal: () => void;
 	openCheckout: (openBtnRef: React.RefObject<HTMLButtonElement> | React.RefObject<HTMLInputElement>) => void;
 };
 
-type responseType = {
-	client_secret: string;
-};
-
 export const PaymentForm: React.FC<PaymentFormProps> = ({ closeModal, openCheckout }) => {
-	const stripe = useStripe();
-	const elements = useElements();
-
-	const [paymentRequest, setPaymentRequest] = React.useState();
-
 	const checkoutRef = React.useRef<HTMLButtonElement>(null);
 
 	const handeleCheckout = () => {
 		openCheckout(checkoutRef);
 	};
-
-	React.useEffect(() => {
-		void (async () => {
-			if (!stripe || !elements) {
-				return;
-			}
-
-			let clientSecret = "";
-
-			const fetchIntent = async () => {
-				const response = await fetch(`${import.meta.env.VITE_SERVER_ENDPOINT}/create-payment-intent`);
-				const data = (await response.json()) as responseType;
-				clientSecret = data.client_secret;
-			};
-
-			await fetchIntent();
-
-			if (!clientSecret) {
-				return;
-			}
-
-			const pr = stripe.paymentRequest({
-				country: "US",
-				currency: "usd",
-				total: {
-					label: "Demo total",
-					amount: 1099,
-				},
-				requestPayerName: true,
-				requestPayerEmail: true,
-			});
-
-			await pr.canMakePayment().then((result) => {
-				if (result) {
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-					//@ts-ignore
-					setPaymentRequest(pr);
-				}
-			});
-
-			pr.on("paymentmethod", async (event) => {
-				const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
-					clientSecret,
-					{ payment_method: event.paymentMethod.id },
-					{ handleActions: false }
-				);
-
-				if (confirmError) {
-					event.complete("fail");
-				} else {
-					event.complete("success");
-					if (paymentIntent.status === "requires_action") {
-						await stripe.confirmCardPayment(clientSecret);
-					}
-				}
-			});
-		})();
-	}, [stripe, elements]);
 
 	return (
 		<form className="paymentForm__content">
@@ -111,22 +41,6 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ closeModal, openChecko
 				</label>
 			</fieldset>
 			<div className="paymentForm__btns">
-				{paymentRequest && (
-					<PaymentRequestButtonElement
-						className="paymentForm__apple"
-						options={{
-							paymentRequest,
-							style: {
-								paymentRequestButton: {
-									height: "50px",
-									// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-									//@ts-ignore
-									borderRadius: "50px",
-								},
-							},
-						}}
-					/>
-				)}
 				<button
 					ref={checkoutRef}
 					type="button"
@@ -135,7 +49,6 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ closeModal, openChecko
 				>
 					Checkout
 				</button>
-				<PayPalButton />
 			</div>
 		</form>
 	);
