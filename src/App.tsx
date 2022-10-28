@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import SettingsLayout from "./layouts/SettingLayout";
-import OnBoardingLayout from "./layouts/OnboardingLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 
 import Dashboard from "./pages/Dashboard";
@@ -16,7 +15,6 @@ import SettingsPhone from "./pages/Settings/SettingsPhone";
 import SettingsOtp from "./pages/Settings/SettingsOtp";
 import SettingsEmail from "./pages/Settings/SettingsEmail";
 import SettingsSelfi from "./pages/Settings/SettingsSelfi";
-import SettingsFinal from "./pages/Settings/SettingsFinal";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import { Photos } from "./pages/Dashboard/components/Photos";
@@ -41,9 +39,6 @@ const App: React.FC = () => {
 				<Route path="otp" element={<SettingsOtp />} />
 				<Route path="email" element={<SettingsEmail />} />
 				<Route path="selfi" element={<SettingsSelfi />} />
-			</Route>
-			<Route path="onboarding" element={<OnBoardingLayout />}>
-				<Route index element={<SettingsFinal />} />
 			</Route>
 			<Route path="signup" element={<Signup />} />
 			<Route path="terms" element={<Terms />} />
