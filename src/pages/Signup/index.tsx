@@ -1,48 +1,101 @@
-import React, { FormEvent } from "react";
+import React, { FC, FormEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import { PhoneForm } from "./components/PhoneForm";
-import { Selfi } from "./components/Selfi";
-import { OTPForm } from "../../components";
+import { Modal, PhoneNumber, PhoneNumberSelect } from "../../components";
 
-const Signup: React.FC = () => {
-	const [phone, setPhone] = React.useState("");
-	const [phoneResult, setPhoneResult] = React.useState(false);
-	const [otpResult, setOtpResult] = React.useState(false);
+import { useModal } from "../../hooks/useModal";
+import { useFetch } from "../../hooks/useFetch";
+import { useAuth } from "../../stores/useAuth";
 
-	const goBackHandler = () => {
-		setPhoneResult(false);
-		setOtpResult(false);
-	};
+import { currentCountryType } from "../../@types/phoneForm";
 
-	const otpFormHandler = (event: FormEvent<HTMLFormElement>) => {
+const Signup: FC = () => {
+	const [phone, setPhone] = useState("");
+	const [selectState, setSelectState] = useState("");
+
+	const navigate = useNavigate();
+
+	const setUserPhone = useAuth((state) => state.setUserPhone);
+
+	const [currentCountry, setCurrentCountry] = useState<currentCountryType>({
+		name: "United States",
+		dial_code: "+1",
+		code: "US",
+		mask: /^(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,4}).*/,
+	});
+
+	const { loading, error, request } = useFetch();
+
+	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
+
+	const formHandler = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		setOtpResult(true);
+
+		const body = JSON.stringify({
+			phone_number: "+" + phone,
+		});
+
+		const response = await request<{ message: string }>("/login", "POST", body);
+
+		if (response?.success) {
+			setUserPhone(phone);
+			navigate("/verify");
+		}
 	};
 
 	return (
 		<div className="signup">
 			<header className="header">
 				<div className="header__container">
-					<button
-						onClick={goBackHandler}
-						className={`header__btn ${
-							(phoneResult && !otpResult) || (phoneResult && otpResult) ? "header__btn--visible" : ""
-						}`}
-						aria-label="Go back"
-					>
-						<svg width="8" height="17" fill="none" focusable="false" aria-hidden="true">
-							<use xlinkHref="#left-arrow" />
-						</svg>
-					</button>
 					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
 				</div>
 			</header>
 			<main className="main">
 				<div className="signup__wrapper">
 					<div className="container__settings">
-						{!phoneResult && <PhoneForm phone={phone} setPhone={setPhone} setPhoneResult={setPhoneResult} />}
-						{phoneResult && !otpResult && <OTPForm phone={phone} formHandler={otpFormHandler} />}
-						{otpResult && phoneResult && <Selfi />}
+						<div className="phoneForm">
+							<Modal
+								overlay={true}
+								active={isActive1}
+								displayType="flex"
+								closeModal={closeModal1}
+								dependencies={[selectState]}
+							>
+								<PhoneNumberSelect
+									closeModal={closeModal1}
+									setCurrentCountry={setCurrentCountry}
+									setPhone={setPhone}
+									setSelectState={setSelectState}
+								/>
+							</Modal>
+							<h1 className="phoneForm__title">Let’s get started</h1>
+							<p className="phoneForm__text">Enter your phone number</p>
+							<form
+								onSubmit={(event) => {
+									void formHandler(event);
+								}}
+							>
+								<PhoneNumber currentCountry={currentCountry} setPhone={setPhone} openModal={openModal1} />
+								<button type="submit" className="btn" disabled={phone.length <= 7 || loading}>
+									Create account {loading && <span className="spinner"></span>}
+								</button>
+							</form>
+							{error && <p className="error">{error}</p>}
+							<p className="phoneForm__description">
+								By proceeding, you consent to get WhatsApp or SMS messages, from PhotoDrop and its affiliates to the
+								number provided. Text “STOP” to 89203 to opt out.
+							</p>
+							<p className="phoneForm__description">
+								By continuing, you indicate that you have read and agree to our{" "}
+								<Link to="/terms" className="phoneForm__link">
+									Terms of Use
+								</Link>{" "}
+								&#38;{" "}
+								<Link to="/privacy" className="phoneForm__link">
+									Privacy Policy
+								</Link>
+							</p>
+						</div>
 					</div>
 				</div>
 			</main>
