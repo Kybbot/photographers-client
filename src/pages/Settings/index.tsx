@@ -104,32 +104,6 @@ const Settings: React.FC = () => {
 					</Link>
 				</div>
 			</div>
-			<div className="settings__element">
-				<div className="settings__wrapper">
-					<h3 className="settings__name">Account settings</h3>
-					<p className="settings__text">Update your phone and email.</p>
-				</div>
-				<div className="settings__arrow">
-					<Link to="/settings/account" className="settings__link" aria-label="Change your name">
-						<svg className="settings__svg" width="8" height="16" fill="none" focusable="false" aria-hidden="true">
-							<use xlinkHref="#left-arrow" />
-						</svg>
-					</Link>
-				</div>
-			</div>
-			<div className="settings__element">
-				<div className="settings__wrapper">
-					<h3 className="settings__name">Notification settings</h3>
-					<p className="settings__text">How should we contact you?</p>
-				</div>
-				<div className="settings__arrow">
-					<Link to="/settings/notifications" className="settings__link" aria-label="Change your name">
-						<svg className="settings__svg" width="8" height="16" fill="none" focusable="false" aria-hidden="true">
-							<use xlinkHref="#left-arrow" />
-						</svg>
-					</Link>
-				</div>
-			</div>
 		</section>
 	);
 };
