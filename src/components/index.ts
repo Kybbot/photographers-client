@@ -1,5 +1,4 @@
-export * from "./OTP/OTP";
-export * from "./OTP/OTPForm";
+export * from "./AuthRoutes";
 export * from "./PhoneNumber";
 export * from "./PhoneNumber/PhoneNumberSelect";
 export * from "./ScrollToTop";
