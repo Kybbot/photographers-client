@@ -39,3 +39,9 @@ html {
 	position: absolute;
 	width: 1px;
 }
+
+.error {
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-decoration-color: rgb(239, 88, 88);
+}

@@ -59,12 +59,14 @@
 	background-color: transparent;
 	border-style: none;
 	padding: 0;
-	align-self: flex-start;
+	align-items: center;
+	color: var(--main-text);
+	text-decoration: none;
 	cursor: pointer;
 }
 
 .header__btn--visible {
-	display: block;
+	display: flex;
 }
 
 .header__avatar {

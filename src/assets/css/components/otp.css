@@ -38,6 +38,11 @@
 	cursor: pointer;
 }
 
+.otp__resend:disabled {
+	opacity: 0.33;
+	cursor: initial;
+}
+
 .otp__code {
 	display: flex;
 	justify-content: space-between;
