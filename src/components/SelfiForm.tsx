@@ -15,14 +15,20 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, st
 	const [crop, setCrop] = React.useState({ x: 0, y: 0 });
 	const [zoom, setZoom] = React.useState(1);
 	const [minZoom, setMinZoom] = React.useState(1);
+	const [croppedAreaPixels, setCroppedAreaPixels] = React.useState<Area>({
+		width: 0,
+		height: 0,
+		x: 0,
+		y: 0,
+	});
 
 	const { width } = useWindowSize();
 
 	const retakeBtnRef = React.useRef<HTMLButtonElement>(null);
 	const videoRef = React.useRef<HTMLVideoElement>(null);
 
-	const onCropComplete = React.useCallback((croppedArea: Area, croppedAreaPixels: Area) => {
-		console.log(croppedArea, croppedAreaPixels);
+	const onCropComplete = React.useCallback((_croppedArea: Area, croppedAreaPixels: Area) => {
+		setCroppedAreaPixels(croppedAreaPixels);
 	}, []);
 
 	const retakeHandlerMb = () => {
@@ -35,17 +41,55 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, st
 		}
 	};
 
-	const formHandler = (event: FormEvent<HTMLFormElement>) => {
+	const transformImage = (imageUrl: string, area: Area) => {
+		const canvas = document.createElement("canvas");
+		const context = canvas.getContext("2d") as CanvasRenderingContext2D;
+
+		const img = new Image();
+		img.src = imageUrl;
+
+		canvas.width = area.width;
+		canvas.height = area.height;
+
+		context.drawImage(img, area.x, area.y, area.width, area.height, 0, 0, area.width, area.height);
+
+		return new Promise((resolve) => {
+			canvas.toBlob(resolve, "image/jpeg");
+		});
+	};
+
+	const formHandler = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		if (videoRef.current) {
-			const test = document.createElement("canvas");
-			test.getContext("2d")?.drawImage(videoRef.current, 0, 0, 285, 285);
-			test.toBlob((blob) => console.log(blob));
-			test.remove();
+			const canvas = document.createElement("canvas");
+			const context = canvas.getContext("2d") as CanvasRenderingContext2D;
+
+			canvas.width = 570;
+			canvas.height = 570;
+
+			context.drawImage(
+				videoRef.current,
+				videoRef.current.videoWidth / 2 - 285,
+				videoRef.current.videoHeight / 2 - 285,
+				570,
+				570,
+				0,
+				0,
+				570,
+				570
+			);
+			document.body.append(canvas);
+			canvas.toBlob((blob) => blob && console.log(URL.createObjectURL(blob)));
+			// canvas.remove();
 		}
 
-		console.log(fileData, stream);
+		if (fileData) {
+			const a = (await transformImage(fileData, croppedAreaPixels)) as Blob;
+
+			console.log(URL.createObjectURL(a));
+		}
+
 		closeHandler();
 	};
 
@@ -56,7 +100,12 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, st
 	}, [stream]);
 
 	return (
-		<form className="selfi__form selfi__form--visible" onSubmit={formHandler}>
+		<form
+			className="selfi__form selfi__form--visible"
+			onSubmit={(event) => {
+				void formHandler(event);
+			}}
+		>
 			<div className="selfi__container">
 				<button className="selfi__close" type="button" aria-label="Close selfi form" onClick={closeHandler}>
 					<svg width="17" height="17" fill="none" focusable="false" aria-hidden="true">
