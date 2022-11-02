@@ -1,17 +1,30 @@
 import React, { FormEvent } from "react";
 import Cropper, { Area } from "react-easy-crop";
 
-import { useWindowSize } from "../hooks/useWindowSize";
+import { transformImage } from "../utils/transformImage";
+import { transformVideo } from "../utils/transformVideo";
 
 type SelfiFormProps = {
 	fileData: string | null;
 	fileInputRef: React.RefObject<HTMLInputElement>;
 	stream: MediaStream | null;
+	documentWidth: number | undefined;
+	loading: boolean;
 	closeHandler: () => void;
 	openOptions?: (openBtnRef: React.RefObject<HTMLButtonElement>) => void;
+	uploadSelfi: (img: Blob) => Promise<void>;
 };
 
-export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, stream, closeHandler, openOptions }) => {
+export const SelfiForm: React.FC<SelfiFormProps> = ({
+	fileData,
+	fileInputRef,
+	stream,
+	documentWidth,
+	loading,
+	closeHandler,
+	openOptions,
+	uploadSelfi,
+}) => {
 	const [crop, setCrop] = React.useState({ x: 0, y: 0 });
 	const [zoom, setZoom] = React.useState(1);
 	const [minZoom, setMinZoom] = React.useState(1);
@@ -21,8 +34,7 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, st
 		x: 0,
 		y: 0,
 	});
-
-	const { width } = useWindowSize();
+	const [selfi, setSelfi] = React.useState<string | MediaStream | null>(null);
 
 	const retakeBtnRef = React.useRef<HTMLButtonElement>(null);
 	const videoRef = React.useRef<HTMLVideoElement>(null);
@@ -41,63 +53,31 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, st
 		}
 	};
 
-	const transformImage = (imageUrl: string, area: Area) => {
-		const canvas = document.createElement("canvas");
-		const context = canvas.getContext("2d") as CanvasRenderingContext2D;
-
-		const img = new Image();
-		img.src = imageUrl;
-
-		canvas.width = area.width;
-		canvas.height = area.height;
-
-		context.drawImage(img, area.x, area.y, area.width, area.height, 0, 0, area.width, area.height);
-
-		return new Promise((resolve) => {
-			canvas.toBlob(resolve, "image/jpeg");
-		});
-	};
-
 	const formHandler = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		if (videoRef.current) {
-			const canvas = document.createElement("canvas");
-			const context = canvas.getContext("2d") as CanvasRenderingContext2D;
-
-			canvas.width = 570;
-			canvas.height = 570;
-
-			context.drawImage(
-				videoRef.current,
-				videoRef.current.videoWidth / 2 - 285,
-				videoRef.current.videoHeight / 2 - 285,
-				570,
-				570,
-				0,
-				0,
-				570,
-				570
-			);
-			document.body.append(canvas);
-			canvas.toBlob((blob) => blob && console.log(URL.createObjectURL(blob)));
-			// canvas.remove();
+		if (selfi && typeof selfi === "string") {
+			const selfiImg = (await transformImage(selfi, croppedAreaPixels)) as Blob;
+			void uploadSelfi(selfiImg);
+		} else {
+			const selfiImg = (await transformVideo(videoRef)) as Blob;
+			void uploadSelfi(selfiImg);
 		}
-
-		if (fileData) {
-			const a = (await transformImage(fileData, croppedAreaPixels)) as Blob;
-
-			console.log(URL.createObjectURL(a));
-		}
-
-		closeHandler();
 	};
 
 	React.useEffect(() => {
+		if (fileData) {
+			setSelfi(fileData);
+		}
+
+		if (stream) {
+			setSelfi(stream);
+		}
+
 		if (videoRef.current) {
 			videoRef.current.srcObject = stream;
 		}
-	}, [stream]);
+	}, [fileData, stream]);
 
 	return (
 		<form
@@ -141,7 +121,7 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, st
 					)}
 				</div>
 				<fieldset className="selfi__fieldset">
-					{width && width < 1024 ? (
+					{documentWidth && documentWidth < 1024 ? (
 						<button className="btn selfi__retake selfi__retake--mb" type="button" onClick={retakeHandlerMb}>
 							Retake
 						</button>
@@ -155,8 +135,8 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({ fileData, fileInputRef, st
 							Retake
 						</button>
 					)}
-					<button className="btn selfi__save" type="submit">
-						Save
+					<button className="btn selfi__save" type="submit" disabled={!selfi}>
+						Save {loading && <span className="spinner spinner--black"></span>}
 					</button>
 				</fieldset>
 			</div>
