@@ -5,7 +5,8 @@ import { Modal, PhoneNumber, PhoneNumberSelect } from "../../components";
 
 import { useModal } from "../../hooks/useModal";
 import { useFetch } from "../../hooks/useFetch";
-import { useAuth } from "../../stores/useAuth";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { setUserPhone } from "../../redux/reducers/authSlice";
 
 import { currentCountryType } from "../../@types/phoneForm";
 
@@ -15,7 +16,7 @@ const Signup: FC = () => {
 
 	const navigate = useNavigate();
 
-	const setUserPhone = useAuth((state) => state.setUserPhone);
+	const dispatch = useAppDispatch();
 
 	const [currentCountry, setCurrentCountry] = useState<currentCountryType>({
 		name: "United States",
@@ -38,7 +39,7 @@ const Signup: FC = () => {
 		const response = await request<{ message: string }>("/login", "POST", body);
 
 		if (response?.success) {
-			setUserPhone(phone);
+			dispatch(setUserPhone(phone));
 			navigate("/verify");
 		}
 	};

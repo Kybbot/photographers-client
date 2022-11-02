@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { OTP } from "./components/OTP";
 
 import { useFetch } from "../../hooks/useFetch";
-import { useAuth } from "../../stores/useAuth";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { getUserPhone, setLoggedIn } from "../../redux/reducers/authSlice";
 
 import { verifyResponse } from "../../@types/api";
 
@@ -15,7 +16,8 @@ const Verify: FC = () => {
 
 	const navigate = useNavigate();
 
-	const [userPhone, setLoggedIn] = useAuth((state) => [state.userPhone, state.setLoggedIn]);
+	const dispatch = useAppDispatch();
+	const userPhone = useAppSelector(getUserPhone);
 
 	const { loading, error, request } = useFetch();
 
@@ -31,8 +33,12 @@ const Verify: FC = () => {
 
 		if (response?.success) {
 			localStorage.setItem("PHOTODROP_TOKEN", response.data.token.accessToken);
-			setLoggedIn(true);
-			navigate("/initial-selfi");
+			dispatch(setLoggedIn(true));
+			if (!response.data.user.selfie_image.length) {
+				navigate("/initial-selfi");
+			} else {
+				navigate("/");
+			}
 		}
 	};
 
