@@ -3,9 +3,14 @@
 	height: 20px;
 	width: 20px;
 	border: 3px solid #ffffff;
-	border-color: #fff transparent #fff transparent;
+	border-color: #ffffff transparent #ffffff transparent;
 	border-radius: 50%;
 	animation: spinner 1s linear infinite;
+}
+
+.spinner--black {
+	border: 3px solid #000000;
+	border-color: #000000 transparent #000000 transparent;
 }
 
 @keyframes spinner {
