@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import DashboardLayout from "../layouts/DashboardLayout";
 import SettingsLayout from "../layouts/SettingLayout";
@@ -18,30 +18,22 @@ import Terms from "../pages/Terms";
 import Privacy from "../pages/Privacy";
 import NotFound from "../pages/NotFound";
 
-import { useFact } from "../api/api";
+import { useAppSelector } from "../hooks/reduxHooks";
+import { getUserData } from "../redux/reducers/userSlice";
 
 export const AuthRoutes: FC = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
 
-	const { data, error, isLoading, isError } = useFact();
+	const userData = useAppSelector(getUserData);
 
 	useEffect(() => {
-		if (data && data.success && !data.data.selfie_image.length) {
+		if (userData && !userData.selfie_image.length) {
 			navigate("/initial-selfi");
+		} else if (userData && userData.selfie_image.length && location.pathname === "/initial-selfi") {
+			navigate("/");
 		}
-	}, [data, navigate]);
-
-	if (isLoading) {
-		return null;
-	}
-
-	if (isError) {
-		if (error instanceof Error) {
-			return <p>{"An error has occurred: " + error.message}</p>;
-		} else {
-			return <p>{"An error has occurred: " + error.error.message}</p>;
-		}
-	}
+	}, [userData, location, navigate]);
 
 	return (
 		<Routes>
