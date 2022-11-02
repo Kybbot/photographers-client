@@ -1,12 +1,25 @@
 export type verifyResponse = {
 	newUser: boolean;
 	token: { accessToken: string };
-	user: { person_id: number; phone_number: string };
+	user: { person_id: number; phone_number: string; selfie_image: string };
 };
 
-export type UserData = {
+export type UserResponse = {
 	client_name: string;
 	phone_number: string;
+	selfie_image: string;
+};
+
+export type SelfiResponse = {
+	id: number;
+	selfie_url: string;
+};
+
+export type NameResponse = {
+	id: number;
+	client_name: string;
+	phone_number: string;
+	verified: boolean;
 	selfie_image: string;
 };
 
