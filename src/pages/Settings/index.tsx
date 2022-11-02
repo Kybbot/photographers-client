@@ -1,15 +1,26 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { Modal, SelfiForm, UploadOptions } from "../../components";
 
 import { useModal } from "../../hooks/useModal";
+import { useAuthFetch } from "../../hooks/useAuthFetch";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { changeUserSelfie, getUserData } from "../../redux/reducers/userSlice";
 
-import realAvatar from "../../assets/img/real-avatar.jpg";
+import { SelfiResponse } from "../../@types/api";
 
 const Settings: React.FC = () => {
-	const [file, setFile] = React.useState<string | null>(realAvatar);
+	const userData = useAppSelector(getUserData);
+	const dispatch = useAppDispatch();
+
+	const [file, setFile] = React.useState<string | null>(null);
 	const [stream, setStream] = React.useState<MediaStream | null>(null);
+
+	const { width } = useWindowSize();
+
+	const { loading, error, request } = useAuthFetch();
 
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
@@ -36,13 +47,25 @@ const Settings: React.FC = () => {
 			const file = event.target.files[0];
 
 			setFile(URL.createObjectURL(file));
+			openModal1(selfiBtnRef);
+		}
+	};
+
+	const openSelfiForm = () => {
+		if (width && width < 1024) {
+			openModal1(selfiBtnRef);
+			fileInputRef.current?.click();
+		} else {
+			openModal2(selfiBtnRef);
 		}
 	};
 
 	const closeSelfiForm = () => {
 		cleanStream();
 		closeModal1();
-		if (!file) setFile(realAvatar);
+		if (userData) {
+			setFile(userData.selfie_image);
+		}
 	};
 
 	const openCamera = async () => {
@@ -53,30 +76,54 @@ const Settings: React.FC = () => {
 		closeModal2();
 	};
 
+	const uploadSelfi = async (img: Blob) => {
+		const formData = new FormData();
+		formData.append("Content-Type", "multipart/form-data");
+		formData.append("file", img, "selfi.jpeg");
+
+		const result = await request<SelfiResponse>("/selfie", "POST", formData, {}, true);
+
+		if (result?.success) {
+			dispatch(changeUserSelfie(result.data.selfie_url));
+		}
+		closeSelfiForm();
+	};
+
+	useEffect(() => {
+		if (userData) {
+			setFile(userData.selfie_image);
+		}
+	}, [userData]);
+
 	return (
 		<section className="settings-welcome">
-			<Modal overlay={true} active={isActive1} closeModal={closeModal1}>
+			<Modal overlay={true} active={isActive1} closeModal={closeModal1} displayType="flex">
 				<SelfiForm
 					fileData={file}
 					fileInputRef={fileInputRef}
 					stream={stream}
+					documentWidth={width}
+					loading={loading}
 					closeHandler={closeSelfiForm}
 					openOptions={openModal2}
+					uploadSelfi={uploadSelfi}
 				/>
 			</Modal>
 			<Modal overlay={true} active={isActive2} closeModal={closeModal2}>
 				<UploadOptions fileHandler={fileHandler} closeHandler={closeModal2} openCamera={openCamera} />
 			</Modal>
-			<h1 className="settigs__title">Welcome, Jane Smith.</h1>
+			<h1 className="settigs__title">
+				Welcome{userData && !!userData.client_name.length && ` ,${userData.client_name}`}.
+			</h1>
 			<h2 className="settings__subtitle">Your selfie</h2>
 			<div className="settings__avatar">
-				<img src={realAvatar} alt="avatar" className="settings__img" width={100} height={100} />
+				<img src={file ? file : "/avatar.png"} alt="Selfi" className="settings__img" width={100} height={100} />
 				<button
 					ref={selfiBtnRef}
 					type="button"
 					className="settings__pencil"
 					aria-label="Edit avatar"
-					onClick={() => openModal1(selfiBtnRef)}
+					onClick={openSelfiForm}
 				>
 					<img src="/pencil.svg" width={36.5} height={36.5} alt="pencil" aria-hidden="true" />
 				</button>
@@ -91,6 +138,7 @@ const Settings: React.FC = () => {
 					aria-hidden="true"
 				/>
 			</div>
+			{error && <p className="error">{error}</p>}
 			<div className="settings__element">
 				<div className="settings__wrapper">
 					<h3 className="settings__name">Your name</h3>
