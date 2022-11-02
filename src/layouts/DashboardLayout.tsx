@@ -1,16 +1,26 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
-import realAvatar from "../assets/img/real-avatar.jpg";
+import { useAppSelector } from "../hooks/reduxHooks";
+import { getUserData } from "../redux/reducers/userSlice";
 
 const DashboardLayout: React.FC = () => {
+	const userData = useAppSelector(getUserData);
+
 	return (
 		<div className="dashboard">
 			<header className="header">
 				<div className="header__container">
 					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
 					<Link to="/settings" className="header__avatar" aria-label="Settings">
-						<img src={realAvatar} alt="avatar" aria-hidden="true" className="header__img" width={35} height={35} />
+						<img
+							src={userData ? userData.selfie_image : "/avatar.png"}
+							alt="avatar"
+							aria-hidden="true"
+							className="header__img"
+							width={35}
+							height={35}
+						/>
 					</Link>
 				</div>
 			</header>
