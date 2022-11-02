@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
+import { store } from "./redux/store";
 import App from "./App";
 import { ScrollToTop } from "./components/ScrollToTop";
 
@@ -18,8 +18,6 @@ type responseType = {
 
 const vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty("--vh", `${vh}px`);
-
-const queryClient = new QueryClient();
 
 void (async () => {
 	const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISH_KEY, {
@@ -35,16 +33,15 @@ void (async () => {
 	};
 
 	ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-		<React.StrictMode>
+		<>
 			<BrowserRouter>
-				<QueryClientProvider client={queryClient}>
-					<ReactQueryDevtools initialIsOpen={false} />
+				<Provider store={store}>
 					<ScrollToTop />
 					<Elements options={options} stripe={stripePromise}>
 						<App />
 					</Elements>
-				</QueryClientProvider>
+				</Provider>
 			</BrowserRouter>
-		</React.StrictMode>
+		</>
 	);
 })();
