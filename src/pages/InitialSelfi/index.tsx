@@ -1,15 +1,27 @@
 import React, { ChangeEvent } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Modal, SelfiForm, UploadOptions } from "../../components";
 
 import { useModal } from "../../hooks/useModal";
+import { useAuthFetch } from "../../hooks/useAuthFetch";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { changeUserSelfie } from "../../redux/reducers/userSlice";
+
+import { SelfiResponse } from "../../@types/api";
 
 const InitialSelfi: React.FC = () => {
 	const [file, setFile] = React.useState<string | null>(null);
 	const [stream, setStream] = React.useState<MediaStream | null>(null);
 
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
+
+	const { width } = useWindowSize();
+
+	const dispatch = useAppDispatch();
+
+	const { loading, error, request } = useAuthFetch();
 
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
@@ -25,7 +37,7 @@ const InitialSelfi: React.FC = () => {
 				track.stop();
 			});
 
-			openModal1(selfiBtnRef);
+			setStream(null);
 		}
 	};
 
@@ -36,12 +48,17 @@ const InitialSelfi: React.FC = () => {
 			const file = event.target.files[0];
 
 			setFile(URL.createObjectURL(file));
+			openModal1(selfiBtnRef);
 		}
 	};
 
 	const openSelfiForm = () => {
-		fileInputRef.current?.click();
-		openModal1(selfiBtnRef);
+		if (width && width < 1024) {
+			openModal1(selfiBtnRef);
+			fileInputRef.current?.click();
+		} else {
+			openModal2(selfiBtnRef);
+		}
 	};
 
 	const closeSelfiForm = () => {
@@ -56,6 +73,20 @@ const InitialSelfi: React.FC = () => {
 		setStream(stream);
 		openModal1(selfiBtnRef);
 		closeModal2();
+	};
+
+	const uploadSelfi = async (img: Blob) => {
+		const formData = new FormData();
+		formData.append("Content-Type", "multipart/form-data");
+		formData.append("file", img, "selfi.jpeg");
+
+		const result = await request<SelfiResponse>("/selfie", "POST", formData, {}, true);
+
+		if (result?.success) {
+			dispatch(changeUserSelfie(result.data.selfie_url));
+			navigate("/");
+		}
+		closeSelfiForm();
 	};
 
 	return (
@@ -110,13 +141,17 @@ const InitialSelfi: React.FC = () => {
 									onChange={fileHandler}
 								/>
 							</div>
+							{error && <p className="error">{error}</p>}
 							<Modal overlay={true} active={isActive1} closeModal={closeModal1}>
 								<SelfiForm
 									fileData={file}
 									fileInputRef={fileInputRef}
 									stream={stream}
+									documentWidth={width}
+									loading={loading}
 									closeHandler={closeSelfiForm}
 									openOptions={openModal2}
+									uploadSelfi={uploadSelfi}
 								/>
 							</Modal>
 							<Modal overlay={true} active={isActive2} closeModal={closeModal2}>
