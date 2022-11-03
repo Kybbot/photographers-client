@@ -2,8 +2,8 @@ import { useCallback, useState } from "react";
 
 import { ApiResponse } from "../@types/api";
 
-export const useAuthFetch = () => {
-	const [loading, setLoading] = useState(false);
+export const useAuthFetch = (isLoading = false) => {
+	const [loading, setLoading] = useState(isLoading);
 	const [error, setError] = useState<string | null>(null);
 	const [success, setSuccess] = useState(false);
 
@@ -11,7 +11,7 @@ export const useAuthFetch = () => {
 		async <T>(endpoint: string, method?: string, body?: BodyInit, headers?: HeadersInit, isItImage?: boolean) => {
 			setError(null);
 			setSuccess(false);
-			setLoading(true);
+			if (!isLoading) setLoading(true);
 
 			headers = {
 				Authorization: `Bearer ${localStorage.getItem("PHOTODROP_TOKEN") || ""}`,
@@ -54,7 +54,7 @@ export const useAuthFetch = () => {
 				setLoading(false);
 			}
 		},
-		[]
+		[isLoading]
 	);
 
 	return { loading, error, success, request };
