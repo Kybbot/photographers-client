@@ -6,7 +6,6 @@ import SettingsLayout from "../layouts/SettingLayout";
 
 import Dashboard from "../pages/Dashboard";
 import Album from "../pages/Dashboard/Album";
-import { Photos } from "../pages/Dashboard/components/Photos";
 
 import Settings from "../pages/Settings";
 import SettingsName from "../pages/Settings/SettingsName";
@@ -39,7 +38,6 @@ export const AuthRoutes: FC = () => {
 		<Routes>
 			<Route path="/" element={<DashboardLayout />}>
 				<Route index element={<Dashboard />} />
-				<Route path="photos" element={<Photos />} />
 			</Route>
 			<Route path="album/:id" element={<Album />} />
 			<Route path="settings" element={<SettingsLayout />}>
