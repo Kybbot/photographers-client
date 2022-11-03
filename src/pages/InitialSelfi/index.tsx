@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Modal, SelfiForm, UploadOptions } from "../../components";
 
@@ -93,7 +93,9 @@ const InitialSelfi: React.FC = () => {
 		<div className="signup">
 			<header className="header">
 				<div className="header__container">
-					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
+					<Link className="header__link" to="/">
+						<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
+					</Link>
 				</div>
 			</header>
 			<main className="main">

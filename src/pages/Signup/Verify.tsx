@@ -70,7 +70,9 @@ const Verify: FC = () => {
 							<use xlinkHref="#left-arrow" />
 						</svg>
 					</Link>
-					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
+					<Link className="header__link" to="/">
+						<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
+					</Link>
 				</div>
 			</header>
 			<main className="main">

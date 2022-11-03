@@ -7,7 +7,9 @@ const NotFound: React.FC = () => {
 			<header className="header">
 				<div className="container">
 					<div className="header__container">
-						<img src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
+						<Link className="header__link" to="/">
+							<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
+						</Link>
 					</div>
 				</div>
 			</header>

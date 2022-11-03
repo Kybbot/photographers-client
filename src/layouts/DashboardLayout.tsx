@@ -11,7 +11,9 @@ const DashboardLayout: React.FC = () => {
 		<div className="dashboard">
 			<header className="header">
 				<div className="header__container">
-					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
+					<Link className="header__link" to="/">
+						<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
+					</Link>
 					<Link to="/settings" className="header__avatar" aria-label="Settings">
 						<img
 							src={userData ? userData.selfie_image : "/avatar.png"}

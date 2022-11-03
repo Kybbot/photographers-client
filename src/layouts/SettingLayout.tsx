@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { Outlet, useNavigate, useLocation, Link } from "react-router-dom";
 
 const SettingsLayout: React.FC = () => {
 	const navigate = useNavigate();
@@ -20,7 +20,9 @@ const SettingsLayout: React.FC = () => {
 							<use xlinkHref="#left-arrow" />
 						</svg>
 					</button>
-					<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
+					<Link className="header__link" to="/">
+						<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
+					</Link>
 				</div>
 			</header>
 			<main className="main">
