@@ -67,9 +67,9 @@ const Album: React.FC = () => {
 					</Modal>
 					<div className="container container--full">
 						<div className="album__gallery">
-							{arrOfPhotos.map((item, index) => (
+							{/* {arrOfPhotos.map((item, index) => (
 								<PhotosItem key={index} url={item} openCurrentPhoto={openCurrentPhoto} />
-							))}
+							))} */}
 						</div>
 					</div>
 					<div className="container">

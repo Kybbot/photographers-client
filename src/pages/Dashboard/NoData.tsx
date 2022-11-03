@@ -1,7 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { Print } from "./Print";
+import { Print } from "./components/Print";
 
 export const NoData: React.FC = () => {
 	return (

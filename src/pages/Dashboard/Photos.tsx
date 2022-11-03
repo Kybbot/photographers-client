@@ -2,22 +2,19 @@ import React from "react";
 import { useStripe } from "@stripe/react-stripe-js";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { AlbumItem } from "./AlbumItem";
-import { PhotosItem } from "./PhotosItem";
-import { Lightbox, Modal, StripeCheckout, StripeError, PaymentForm } from "../../../components";
+import { AlbumItem } from "./components/AlbumItem";
+import { PhotosItem } from "./components/PhotosItem";
+import { Lightbox, Modal, StripeCheckout, StripeError, PaymentForm } from "../../components";
 
-import { useModal } from "../../../hooks/useModal";
-
-const arrOfPhotos = [
-	"https://images.pexels.com/photos/13148555/pexels-photo-13148555.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-	"https://images.pexels.com/photos/13014389/pexels-photo-13014389.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-	"https://images.pexels.com/photos/13162210/pexels-photo-13162210.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-	"https://images.pexels.com/photos/13054281/pexels-photo-13054281.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-	"https://images.pexels.com/photos/13391438/pexels-photo-13391438.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-];
+import { useModal } from "../../hooks/useModal";
+import { useAppSelector } from "../../hooks/reduxHooks";
+import { getUserAlbums, getUserPhotos } from "../../redux/reducers/userSlice";
 
 export const Photos: React.FC = () => {
 	const stripe = useStripe();
+
+	const userAlbums = useAppSelector(getUserAlbums);
+	const userPhotos = useAppSelector(getUserPhotos);
 
 	const [currentPhoto, setCurrentPhoto] = React.useState("");
 
@@ -48,13 +45,11 @@ export const Photos: React.FC = () => {
 					<h2 className="albums__title">Albums</h2>
 					<div className="albums__container">
 						<Swiper slidesPerView={"auto"} slidesOffsetAfter={15}>
-							{Array(3)
-								.fill(0)
-								.map((_, index) => (
-									<SwiperSlide key={index}>
-										<AlbumItem index={index} />
-									</SwiperSlide>
-								))}
+							{userAlbums.map((item) => (
+								<SwiperSlide key={item.id}>
+									<AlbumItem data={item} />
+								</SwiperSlide>
+							))}
 						</Swiper>
 					</div>
 				</div>
@@ -65,8 +60,8 @@ export const Photos: React.FC = () => {
 				</div>
 				<div className="container container--full">
 					<div className="photos__gallery">
-						{arrOfPhotos.map((item, index) => (
-							<PhotosItem key={index} url={item} openCurrentPhoto={openCurrentPhoto} />
+						{userPhotos.map((item) => (
+							<PhotosItem key={item.id} data={item} openCurrentPhoto={openCurrentPhoto} />
 						))}
 					</div>
 				</div>
