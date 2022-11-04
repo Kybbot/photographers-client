@@ -59,7 +59,7 @@ const App: React.FC = () => {
 		}
 	}, [isLoggedIn, userData, clientRequest, albumsRequest, photosRequest, dispatch]);
 
-	if (clientLoading || albumsLoading || photosLoading) {
+	if ((clientLoading && isLoggedIn) || (albumsLoading && isLoggedIn) || (photosLoading && isLoggedIn)) {
 		return <Loader />;
 	}
 

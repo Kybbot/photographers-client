@@ -3,10 +3,18 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { RootState } from "../store";
 
+import { getExpirationDate, isExpired } from "../../utils/jwt";
+
 type AuthStore = {
 	isLoggedIn: boolean;
 	userPhone: string;
 };
+
+const token = isExpired(getExpirationDate(localStorage.getItem("PHOTODROP_TOKEN") || ""));
+
+if (token) {
+	localStorage.setItem("PHOTODROP_TOKEN", "");
+}
 
 const initialState: AuthStore = {
 	isLoggedIn: !!localStorage.getItem("PHOTODROP_TOKEN"),
