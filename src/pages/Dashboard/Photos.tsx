@@ -31,7 +31,7 @@ export const Photos: React.FC = () => {
 				<Lightbox currentPrint={currentPhoto} closeModal={closeModal1} />
 			</Modal>
 			<Modal overlay={true} active={isActive2} closeModal={closeModal2} displayType="flex">
-				<PaymentForm closeModal={closeModal2} />
+				<PaymentForm albumName={userAlbums[0].album_name} closeModal={closeModal2} />
 			</Modal>
 			<div className="albums">
 				<div className="container__left">

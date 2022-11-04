@@ -2,10 +2,11 @@ import React, { FormEvent } from "react";
 import { useAuthFetch } from "../hooks/useAuthFetch";
 
 type PaymentFormProps = {
+	albumName: string;
 	closeModal: () => void;
 };
 
-export const PaymentForm: React.FC<PaymentFormProps> = ({ closeModal }) => {
+export const PaymentForm: React.FC<PaymentFormProps> = ({ albumName, closeModal }) => {
 	const { loading, error, request } = useAuthFetch();
 
 	const formHandler = async (event: FormEvent<HTMLFormElement>) => {
@@ -36,7 +37,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ closeModal }) => {
 			</div>
 			<div className="paymentForm__info">
 				<p className="paymentForm__text">
-					Get all the photos from <b>Brooklyn Bridge</b> in hi-resolution with no watermark.
+					Get all the photos from <b>{albumName}</b> in hi-resolution with no watermark.
 				</p>
 				<b className="paymentForm__price">$5</b>
 			</div>

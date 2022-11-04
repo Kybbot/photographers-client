@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 type LightboxProps = {
 	currentPrint: string;
@@ -9,8 +9,11 @@ type LightboxProps = {
 export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, openCheckout }) => {
 	const [copied, setCopied] = React.useState(false);
 	const [copiedText, setCopiedText] = React.useState("");
+	const [printUrl, setPrintUrl] = React.useState(currentPrint);
+	const [isLoaded, setLoaded] = React.useState(false);
 
 	const checkoutRef = React.useRef<HTMLButtonElement>(null);
+	const imgRef = React.useRef<HTMLImageElement>(null);
 
 	const shareData = {
 		title: "PhotoDrop",
@@ -47,24 +50,45 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, op
 		}
 	};
 
+	const closeHandler = () => {
+		setPrintUrl("");
+		closeModal();
+	};
+
 	const handeleCheckout = () => {
 		if (openCheckout) {
 			openCheckout(checkoutRef);
 		}
 	};
 
+	useEffect(() => {
+		setPrintUrl(currentPrint);
+		setLoaded(false);
+
+		if (imgRef.current) {
+			imgRef.current.onload = () => {
+				setLoaded(true);
+			};
+		}
+	}, [currentPrint]);
+
 	return (
 		<section className="lightbox">
 			<div className="lightbox__container">
 				<div className="lightbox__wrapper">
-					<button type="button" className="lightbox__close" aria-label="Close lightbox" onClick={closeModal}>
+					<button type="button" className="lightbox__close" aria-label="Close lightbox" onClick={closeHandler}>
 						<svg focusable="false" aria-hidden="true" width="15" height="15" fill="none">
 							<use xlinkHref="#close" />
 						</svg>
 					</button>
 				</div>
 				<div className="lightbox__photo">
-					<img src={currentPrint} alt="Print example" className="lightbox__img" />
+					{!isLoaded && (
+						<div className="lightbox__loader">
+							<span className="spinner spinner--big"></span>
+						</div>
+					)}
+					<img ref={imgRef} src={printUrl} alt="Print example" className="lightbox__img" />
 				</div>
 				<div className="lightbox__btns">
 					<a href={currentPrint} download="PrintExample.png" className="lightbox__btn lightbox__download">

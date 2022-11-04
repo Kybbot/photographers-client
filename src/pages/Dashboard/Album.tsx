@@ -20,7 +20,8 @@ const Album: React.FC = () => {
 
 	const { loading, error, request } = useAuthFetch(true);
 
-	const stripeBtnRef = React.useRef<HTMLButtonElement>(null);
+	const stripeBtnRef1 = React.useRef<HTMLButtonElement>(null);
+	const stripeBtnRef2 = React.useRef<HTMLButtonElement>(null);
 
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
@@ -76,7 +77,12 @@ const Album: React.FC = () => {
 											<span className="header__amount">{albumData.photos.length} photos</span>
 										</p>
 									</div>
-									<button className="header__buy" type="button">
+									<button
+										ref={stripeBtnRef1}
+										className="header__buy"
+										type="button"
+										onClick={() => openModal2(stripeBtnRef1)}
+									>
 										Unlock your photos
 									</button>
 								</div>
@@ -89,7 +95,7 @@ const Album: React.FC = () => {
 								<Lightbox currentPrint={currentPhoto} closeModal={closeModal1} />
 							</Modal>
 							<Modal overlay={true} active={isActive2} closeModal={closeModal2} displayType="flex">
-								<PaymentForm closeModal={closeModal2} />
+								<PaymentForm albumName={albumData.album[0].album_name} closeModal={closeModal2} />
 							</Modal>
 							<div className="container container--full">
 								<div className="album__gallery">
@@ -100,10 +106,10 @@ const Album: React.FC = () => {
 							</div>
 							<div className="container">
 								<button
-									ref={stripeBtnRef}
+									ref={stripeBtnRef2}
 									type="button"
 									className="btn album__btn"
-									onClick={() => openModal2(stripeBtnRef)}
+									onClick={() => openModal2(stripeBtnRef2)}
 								>
 									Unlock your photos
 								</button>
