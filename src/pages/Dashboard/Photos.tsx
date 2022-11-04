@@ -65,11 +65,18 @@ export const Photos: React.FC = () => {
 						))}
 					</div>
 				</div>
-				<div className="container">
-					<button ref={stripeBtnRef} type="button" className="btn photos__btn" onClick={() => openModal2(stripeBtnRef)}>
-						Unlock your photos
-					</button>
-				</div>
+				{userAlbums.length === 1 && (
+					<div className="container">
+						<button
+							ref={stripeBtnRef}
+							type="button"
+							className="btn photos__btn"
+							onClick={() => openModal2(stripeBtnRef)}
+						>
+							Unlock your photos
+						</button>
+					</div>
+				)}
 			</div>
 		</section>
 	);
