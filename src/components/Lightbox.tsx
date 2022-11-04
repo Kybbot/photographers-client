@@ -97,6 +97,7 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, op
 					</button> */}
 				</div>
 			</div>
+			<div className="lightbox__gradient"></div>
 		</section>
 	);
 };

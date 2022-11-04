@@ -134,6 +134,11 @@
 		line-height: 10px;
 	}
 
+	.header__btn {
+		width: 10px;
+		height: 20px;
+	}
+
 	.header__buy {
 		display: flex;
 		padding: 0;
