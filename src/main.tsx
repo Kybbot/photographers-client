@@ -10,9 +10,6 @@ import { ScrollToTop } from "./components/ScrollToTop";
 import "swiper/css";
 import "./assets/css/index.css";
 
-const vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty("--vh", `${vh}px`);
-
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<>
 		<BrowserRouter>
