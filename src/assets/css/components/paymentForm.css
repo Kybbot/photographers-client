@@ -6,7 +6,7 @@
 	left: 50%;
 	bottom: 0;
 	transform: translateX(-50%);
-	padding: 20px 15px 40px 15px;
+	padding: 21px 15px 40px 15px;
 	background-color: var(--main-bg);
 	border-radius: 20px 20px 0px 0px;
 	box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
@@ -129,10 +129,6 @@
 		line-height: 26px;
 	}
 
-	.paymentForm__info {
-		margin-bottom: 20px;
-	}
-
 	.paymentForm__text,
 	.paymentForm__price,
 	.paymentForm__label {
@@ -142,5 +138,9 @@
 
 	.paymentForm__checkout {
 		padding: 11px 20px;
+	}
+
+	.paymentForm__info + .paymentForm__btns {
+		margin-top: 30px;
 	}
 }

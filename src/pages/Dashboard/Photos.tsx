@@ -1,18 +1,15 @@
 import React from "react";
-import { useStripe } from "@stripe/react-stripe-js";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { AlbumItem } from "./components/AlbumItem";
 import { PhotosItem } from "./components/PhotosItem";
-import { Lightbox, Modal, StripeCheckout, StripeError, PaymentForm } from "../../components";
+import { Lightbox, Modal, PaymentForm } from "../../components";
 
 import { useModal } from "../../hooks/useModal";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { getUserAlbums, getUserPhotos } from "../../redux/reducers/userSlice";
 
 export const Photos: React.FC = () => {
-	const stripe = useStripe();
-
 	const userAlbums = useAppSelector(getUserAlbums);
 	const userPhotos = useAppSelector(getUserPhotos);
 
@@ -22,7 +19,6 @@ export const Photos: React.FC = () => {
 
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
-	const { isActive: isActive3, openModal: openModal3, closeModal: closeModal3 } = useModal();
 
 	const openCurrentPhoto = (btnRef: React.RefObject<HTMLButtonElement>, url: string) => {
 		setCurrentPhoto(url);
@@ -32,13 +28,10 @@ export const Photos: React.FC = () => {
 	return (
 		<section className="dashboard__container">
 			<Modal overlay={false} active={isActive1} closeModal={closeModal1}>
-				<Lightbox currentPrint={currentPhoto} closeModal={closeModal1} openCheckout={openModal3} />
+				<Lightbox currentPrint={currentPhoto} closeModal={closeModal1} />
 			</Modal>
-			<Modal overlay={true} active={isActive2} closeModal={closeModal2}>
-				<PaymentForm openCheckout={openModal3} closeModal={closeModal2} />
-			</Modal>
-			<Modal overlay={true} active={isActive3} closeModal={closeModal3}>
-				{stripe ? <StripeCheckout closeModal={closeModal3} /> : <StripeError closeModal={closeModal3} />}
+			<Modal overlay={true} active={isActive2} closeModal={closeModal2} displayType="flex">
+				<PaymentForm closeModal={closeModal2} />
 			</Modal>
 			<div className="albums">
 				<div className="container__left">

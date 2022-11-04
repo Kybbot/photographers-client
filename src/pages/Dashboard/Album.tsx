@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useStripe } from "@stripe/react-stripe-js";
 
 import { PhotosItem } from "./components/PhotosItem";
-import { Lightbox, Modal, StripeCheckout, StripeError, PaymentForm, Loader } from "../../components";
+import { Lightbox, Modal, PaymentForm, Loader } from "../../components";
 
 import { useModal } from "../../hooks/useModal";
 import { useAuthFetch } from "../../hooks/useAuthFetch";
@@ -13,8 +12,6 @@ import { formatDate } from "../../utils/formatDate";
 import { AlbumDataResponse } from "../../@types/api";
 
 const Album: React.FC = () => {
-	const stripe = useStripe();
-
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -27,7 +24,6 @@ const Album: React.FC = () => {
 
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
-	const { isActive: isActive3, openModal: openModal3, closeModal: closeModal3 } = useModal();
 
 	const openCurrentPhoto = (btnRef: React.RefObject<HTMLButtonElement>, url: string) => {
 		setCurrentPhoto(url);
@@ -90,13 +86,10 @@ const Album: React.FC = () => {
 					<main className="main">
 						<section className="album">
 							<Modal overlay={false} active={isActive1} closeModal={closeModal1}>
-								<Lightbox currentPrint={currentPhoto} closeModal={closeModal1} openCheckout={openModal3} />
+								<Lightbox currentPrint={currentPhoto} closeModal={closeModal1} />
 							</Modal>
-							<Modal overlay={true} active={isActive2} closeModal={closeModal2}>
-								<PaymentForm closeModal={closeModal2} openCheckout={openModal3} />
-							</Modal>
-							<Modal overlay={true} active={isActive3} closeModal={closeModal3}>
-								{stripe ? <StripeCheckout closeModal={closeModal3} /> : <StripeError closeModal={closeModal3} />}
+							<Modal overlay={true} active={isActive2} closeModal={closeModal2} displayType="flex">
+								<PaymentForm closeModal={closeModal2} />
 							</Modal>
 							<div className="container container--full">
 								<div className="album__gallery">
