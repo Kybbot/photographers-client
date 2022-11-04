@@ -26,7 +26,7 @@ export const useFetch = () => {
 				headers,
 			};
 
-			const response = await fetch(`${import.meta.env.VITE_SERVER_ENDPOINT2}${endpoint}`, init);
+			const response = await fetch(`${import.meta.env.VITE_SERVER_ENDPOINT}${endpoint}`, init);
 
 			const data = (await response.json()) as ApiResponse<T>;
 
