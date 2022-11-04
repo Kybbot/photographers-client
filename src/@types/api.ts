@@ -46,6 +46,11 @@ export type PhotoType = {
 
 export type PhotosResponse = PhotoType[];
 
+export type AlbumDataResponse = {
+	album: [AlbumType];
+	photos: PhotoType[];
+};
+
 export type ApiResult<T> = {
 	data: T;
 	success: true;

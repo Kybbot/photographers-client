@@ -3,13 +3,8 @@
 	border-bottom: 1px solid #f1f0ec;
 }
 
-.header--small {
-	position: relative;
-	padding: 10px 0;
-}
-
-.header--small > .header__btn {
-	left: 7px;
+.header--album {
+	padding: 11px 0 10px 0;
 }
 
 .header__container {
@@ -27,7 +22,8 @@
 }
 
 .header__content {
-	margin-left: 40px;
+	width: initial;
+	margin-left: 23px;
 }
 
 .header__link {
@@ -39,13 +35,13 @@
 	font-size: 18px;
 	font-family: "Termina", sans-serif;
 	font-weight: 700;
-	line-height: 22px;
+	line-height: 13px;
 	margin: 0 0 10px 0;
 }
 
 .header__info {
 	font-size: 14px;
-	line-height: 18px;
+	line-height: 10px;
 	margin: 0;
 }
 
@@ -55,12 +51,12 @@
 
 .header__btn {
 	display: none;
-	width: 24px;
-	height: 24px;
+	width: 8px;
+	height: 16px;
 	position: absolute;
 	top: 50%;
-	transform: translateY(-45%);
-	left: 10px;
+	transform: translateY(-50%);
+	left: 15px;
 	background-color: transparent;
 	border-style: none;
 	padding: 0;
@@ -92,6 +88,10 @@
 	border-radius: 50%;
 }
 
+.header__buy {
+	display: none;
+}
+
 @media (min-width: 1024px) {
 	.header {
 		padding: 19px 0 18px 0;
@@ -112,29 +112,50 @@
 		right: 40px;
 	}
 
-	.header__btn {
-		left: 40px;
+	.header__content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 	}
 
-	.header__content {
+	.header__wrapper {
 		display: flex;
 		align-items: center;
 	}
 
 	.header__title {
 		font-size: 22px;
-		line-height: 26px;
+		line-height: 13px;
 		margin: 0 38px 0 0;
 	}
 
 	.header__info {
 		font-size: 16px;
-		line-height: 21px;
+		line-height: 10px;
+	}
+
+	.header__buy {
+		display: flex;
+		padding: 0;
+		font-family: "Futura PT", sans-serif;
+		font-size: 22px;
+		line-height: 15px;
+		font-weight: 500;
+		color: var(--accent-color);
+		background-color: transparent;
+		border-style: none;
+		cursor: pointer;
 	}
 }
 
-@media (min-width: 1260px) {
+@media (min-width: 1250px) {
 	.header__content {
-		margin-left: 0;
+		margin-left: 0px;
+	}
+}
+
+@media (min-width: 1320px) {
+	.header--album .header__btn {
+		left: 40px;
 	}
 }
