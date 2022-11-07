@@ -51,7 +51,6 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, op
 	};
 
 	const closeHandler = () => {
-		setPrintUrl("");
 		closeModal();
 	};
 
