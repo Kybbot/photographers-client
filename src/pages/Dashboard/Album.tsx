@@ -95,7 +95,7 @@ const Album: React.FC = () => {
 								<Lightbox currentPrint={currentPhoto} closeModal={closeModal1} />
 							</Modal>
 							<Modal overlay={true} active={isActive2} closeModal={closeModal2} displayType="flex">
-								<PaymentForm albumName={albumData.album[0].album_name} closeModal={closeModal2} />
+								<PaymentForm albumData={albumData.album[0]} closeModal={closeModal2} />
 							</Modal>
 							<div className="container container--full">
 								<div className="album__gallery">

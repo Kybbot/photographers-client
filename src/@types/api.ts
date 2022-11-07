@@ -51,6 +51,10 @@ export type AlbumDataResponse = {
 	photos: PhotoType[];
 };
 
+export type StripeResponse = {
+	url: string;
+};
+
 export type ApiResult<T> = {
 	data: T;
 	success: true;
