@@ -71,9 +71,9 @@ const Album: React.FC = () => {
 							<div className="container">
 								<div className="header__content">
 									<div className="header__wrapper">
-										<h1 className="header__title">{albumData.album[0].album_name}</h1>
+										<h1 className="header__title">{albumData.album.album_name}</h1>
 										<p className="header__info">
-											<span className="header__date">{formatDate(albumData.album[0].date)}</span> •{" "}
+											<span className="header__date">{formatDate(albumData.album.date)}</span> •{" "}
 											<span className="header__amount">{albumData.photos.length} photos</span>
 										</p>
 									</div>
@@ -95,7 +95,7 @@ const Album: React.FC = () => {
 								<Lightbox currentPrint={currentPhoto} closeModal={closeModal1} />
 							</Modal>
 							<Modal overlay={true} active={isActive2} closeModal={closeModal2} displayType="flex">
-								<PaymentForm albumData={albumData.album[0]} closeModal={closeModal2} />
+								<PaymentForm albumData={albumData.album} closeModal={closeModal2} />
 							</Modal>
 							<div className="container container--full">
 								<div className="album__gallery">

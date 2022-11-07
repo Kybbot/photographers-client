@@ -47,7 +47,7 @@ export type PhotoType = {
 export type PhotosResponse = PhotoType[];
 
 export type AlbumDataResponse = {
-	album: [AlbumType];
+	album: AlbumType;
 	photos: PhotoType[];
 };
 
