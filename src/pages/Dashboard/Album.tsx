@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, RefObject, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { PhotosItem } from "./components/PhotosItem";
@@ -9,25 +9,25 @@ import { useAuthFetch } from "../../hooks/useAuthFetch";
 
 import { formatDate } from "../../utils/formatDate";
 
-import { AlbumDataResponse } from "../../@types/api";
+import { AlbumDataResponse, PhotoType } from "../../@types/api";
 
-const Album: React.FC = () => {
+const Album: FC = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
 	const [albumData, setAlbumData] = useState<AlbumDataResponse | null>(null);
-	const [currentPhoto, setCurrentPhoto] = React.useState("");
+	const [currentPhoto, setCurrentPhoto] = useState<PhotoType>();
 
 	const { loading, error, request } = useAuthFetch(true);
 
-	const stripeBtnRef1 = React.useRef<HTMLButtonElement>(null);
-	const stripeBtnRef2 = React.useRef<HTMLButtonElement>(null);
+	const stripeBtnRef1 = useRef<HTMLButtonElement>(null);
+	const stripeBtnRef2 = useRef<HTMLButtonElement>(null);
 
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
 
-	const openCurrentPhoto = (btnRef: React.RefObject<HTMLButtonElement>, url: string) => {
-		setCurrentPhoto(url);
+	const openCurrentPhoto = (btnRef: RefObject<HTMLButtonElement>, photo: PhotoType) => {
+		setCurrentPhoto(photo);
 		openModal1(btnRef);
 	};
 
@@ -74,17 +74,21 @@ const Album: React.FC = () => {
 										<h1 className="header__title">{albumData.album.album_name}</h1>
 										<p className="header__info">
 											<span className="header__date">{formatDate(albumData.album.date)}</span> •{" "}
-											<span className="header__amount">{albumData.photos.length} photos</span>
+											<span className={`header__amount ${albumData.album.owned ? "header__amount--default" : ""}`}>
+												{albumData.photos.length} photos
+											</span>
 										</p>
 									</div>
-									<button
-										ref={stripeBtnRef1}
-										className="header__buy"
-										type="button"
-										onClick={() => openModal2(stripeBtnRef1)}
-									>
-										Unlock your photos
-									</button>
+									{!albumData.album.owned && (
+										<button
+											ref={stripeBtnRef1}
+											className="header__buy"
+											type="button"
+											onClick={() => openModal2(stripeBtnRef1)}
+										>
+											Unlock your photos
+										</button>
+									)}
 								</div>
 							</div>
 						</div>
@@ -92,7 +96,12 @@ const Album: React.FC = () => {
 					<main className="main">
 						<section className="album">
 							<Modal overlay={false} active={isActive1} closeModal={closeModal1}>
-								<Lightbox currentPrint={currentPhoto} closeModal={closeModal1} />
+								<Lightbox
+									currentPhoto={currentPhoto || albumData.photos[0]}
+									owned={albumData.album.owned}
+									closeModal={closeModal1}
+									openCheckout={openModal2}
+								/>
 							</Modal>
 							<Modal overlay={true} active={isActive2} closeModal={closeModal2} displayType="flex">
 								<PaymentForm albumData={albumData.album} closeModal={closeModal2} />
@@ -100,20 +109,27 @@ const Album: React.FC = () => {
 							<div className="container container--full">
 								<div className="album__gallery">
 									{albumData.photos.map((item, index) => (
-										<PhotosItem key={index} data={item} openCurrentPhoto={openCurrentPhoto} />
+										<PhotosItem
+											key={index}
+											data={item}
+											owned={albumData.album.owned}
+											openCurrentPhoto={openCurrentPhoto}
+										/>
 									))}
 								</div>
 							</div>
-							<div className="container">
-								<button
-									ref={stripeBtnRef2}
-									type="button"
-									className="btn album__btn"
-									onClick={() => openModal2(stripeBtnRef2)}
-								>
-									Unlock your photos
-								</button>
-							</div>
+							{!albumData.album.owned && (
+								<div className="container">
+									<button
+										ref={stripeBtnRef2}
+										type="button"
+										className="btn album__btn"
+										onClick={() => openModal2(stripeBtnRef2)}
+									>
+										Unlock your photos
+									</button>
+								</div>
+							)}
 						</section>
 					</main>
 					<footer className="footer">

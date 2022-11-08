@@ -1,17 +1,18 @@
-import React from "react";
+import React, { FC, RefObject, useRef } from "react";
 
 import { PhotoType } from "../../../@types/api";
 
 type PhotosItemProps = {
 	data: PhotoType;
-	openCurrentPhoto: (btnRef: React.RefObject<HTMLButtonElement>, url: string) => void;
+	owned?: boolean;
+	openCurrentPhoto: (btnRef: RefObject<HTMLButtonElement>, url: PhotoType) => void;
 };
 
-export const PhotosItem: React.FC<PhotosItemProps> = ({ data, openCurrentPhoto }) => {
-	const btnRef = React.useRef<HTMLButtonElement>(null);
+export const PhotosItem: FC<PhotosItemProps> = ({ data, owned, openCurrentPhoto }) => {
+	const btnRef = useRef<HTMLButtonElement>(null);
 
 	const handleButton = () => {
-		openCurrentPhoto(btnRef, data.marked_url);
+		openCurrentPhoto(btnRef, data);
 	};
 
 	return (
@@ -22,7 +23,7 @@ export const PhotosItem: React.FC<PhotosItemProps> = ({ data, openCurrentPhoto }
 			onClick={handleButton}
 			aria-label="Open photo in lightbox"
 		>
-			<img src={data.marked_logo} alt="Random" className="photos__img" />
+			<img src={data.owned || owned ? data.photo_logo : data.marked_logo} alt="Random" className="photos__img" />
 		</button>
 	);
 };

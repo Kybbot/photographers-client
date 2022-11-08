@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, RefObject, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { AlbumItem } from "./components/AlbumItem";
@@ -9,29 +9,34 @@ import { useModal } from "../../hooks/useModal";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { getUserAlbums, getUserPhotos } from "../../redux/reducers/userSlice";
 
-export const Photos: React.FC = () => {
+import { PhotoType } from "../../@types/api";
+
+export const Photos: FC = () => {
 	const userAlbums = useAppSelector(getUserAlbums);
 	const userPhotos = useAppSelector(getUserPhotos);
 
-	const [currentPhoto, setCurrentPhoto] = React.useState("");
+	const [currentAlbum, setCurrentAlbum] = useState(userAlbums[0]);
+	const [currentPhoto, setCurrentPhoto] = useState<PhotoType>(userPhotos[0]);
 
-	const stripeBtnRef = React.useRef<HTMLButtonElement>(null);
+	const stripeBtnRef = useRef<HTMLButtonElement>(null);
 
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
 
-	const openCurrentPhoto = (btnRef: React.RefObject<HTMLButtonElement>, url: string) => {
-		setCurrentPhoto(url);
+	const openCurrentPhoto = (btnRef: RefObject<HTMLButtonElement>, photo: PhotoType) => {
+		const album = userAlbums.find((item) => item.id === +photo.album_id);
+		if (album) setCurrentAlbum(album);
+		setCurrentPhoto(photo);
 		openModal1(btnRef);
 	};
 
 	return (
 		<section className="dashboard__container">
 			<Modal overlay={false} active={isActive1} closeModal={closeModal1}>
-				<Lightbox currentPrint={currentPhoto} closeModal={closeModal1} />
+				<Lightbox currentPhoto={currentPhoto} closeModal={closeModal1} openCheckout={openModal2} />
 			</Modal>
 			<Modal overlay={true} active={isActive2} closeModal={closeModal2} displayType="flex">
-				<PaymentForm albumData={userAlbums[0]} closeModal={closeModal2} />
+				<PaymentForm albumData={currentAlbum} closeModal={closeModal2} />
 			</Modal>
 			<div className="albums">
 				<div className="container__left">
@@ -58,7 +63,7 @@ export const Photos: React.FC = () => {
 						))}
 					</div>
 				</div>
-				{userAlbums.length === 1 && (
+				{userAlbums.length === 1 && !userAlbums[0].owned && (
 					<div className="container">
 						<button
 							ref={stripeBtnRef}

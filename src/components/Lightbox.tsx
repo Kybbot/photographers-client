@@ -1,23 +1,29 @@
-import React, { useEffect } from "react";
+import React, { FC, RefObject, useEffect, useRef, useState } from "react";
+
+import { PhotoType } from "../@types/api";
 
 type LightboxProps = {
-	currentPrint: string;
+	currentPhoto: PhotoType;
+	owned?: boolean;
 	closeModal: () => void;
-	openCheckout?: (openBtnRef: React.RefObject<HTMLButtonElement> | React.RefObject<HTMLInputElement>) => void;
+	openCheckout?: (openBtnRef: RefObject<HTMLButtonElement> | RefObject<HTMLInputElement>) => void;
 };
 
-export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, openCheckout }) => {
-	const [copied, setCopied] = React.useState(false);
-	const [copiedText, setCopiedText] = React.useState("");
-	const [printUrl, setPrintUrl] = React.useState(currentPrint);
-	const [isLoaded, setLoaded] = React.useState(false);
+export const Lightbox: FC<LightboxProps> = ({ currentPhoto, owned, closeModal, openCheckout }) => {
+	const [copied, setCopied] = useState(false);
+	const [copiedText, setCopiedText] = useState("");
 
-	const checkoutRef = React.useRef<HTMLButtonElement>(null);
-	const imgRef = React.useRef<HTMLImageElement>(null);
+	const [print, setPrint] = useState(currentPhoto);
+
+	const [isLoaded, setLoaded] = useState(false);
+	const [isDownloading, setDownloading] = useState(false);
+
+	const checkoutRef = useRef<HTMLButtonElement>(null);
+	const imgRef = useRef<HTMLImageElement>(null);
 
 	const shareData = {
 		title: "PhotoDrop",
-		url: currentPrint,
+		url: print.photo_url,
 	};
 
 	const copyToClipBoard = async (url: string) => {
@@ -50,6 +56,21 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, op
 		}
 	};
 
+	const downloadHandlere = async () => {
+		setDownloading(true);
+		const image = await fetch(print.photo_url);
+		const imageBlog = await image.blob();
+		const imageURL = URL.createObjectURL(imageBlog);
+
+		const link = document.createElement("a");
+		link.href = imageURL;
+		link.download = "Image";
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+		setDownloading(false);
+	};
+
 	const closeHandler = () => {
 		closeModal();
 	};
@@ -61,7 +82,7 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, op
 	};
 
 	useEffect(() => {
-		setPrintUrl(currentPrint);
+		setPrint(currentPhoto);
 		setLoaded(false);
 
 		if (imgRef.current) {
@@ -69,7 +90,7 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, op
 				setLoaded(true);
 			};
 		}
-	}, [currentPrint]);
+	}, [currentPhoto]);
 
 	return (
 		<section className="lightbox">
@@ -87,37 +108,63 @@ export const Lightbox: React.FC<LightboxProps> = ({ currentPrint, closeModal, op
 							<span className="spinner spinner--big"></span>
 						</div>
 					)}
-					<img ref={imgRef} src={printUrl} alt="Print example" className="lightbox__img" />
+					<img
+						ref={imgRef}
+						src={print.owned || owned ? print.photo_url : print.marked_url}
+						alt="Print example"
+						className="lightbox__img"
+					/>
 				</div>
 				<div className="lightbox__btns">
-					<a href={currentPrint} download="PrintExample.png" className="lightbox__btn lightbox__download">
-						<svg className="lightbox__svg" focusable="false" aria-hidden="true" width="24" height="21" fill="none">
-							<use xlinkHref="#download" />
-						</svg>
-						Download
-					</a>
-					<button
-						type="button"
-						className={`lightbox__btn lightbox__share ${copied ? "lightbox__share--active" : ""}`}
-						onClick={() => void shareHandler()}
-						data-title={copiedText}
-					>
-						<svg className="lightbox__svg" focusable="false" aria-hidden="true" width="24" height="21" fill="none">
-							<use xlinkHref="#share" />
-						</svg>
-						Share
-					</button>
-					<button type="button" className="btn btn--transparent lightbox__see">
-						See in a frame
-					</button>
-					{/* <button
-						ref={checkoutRef}
-						type="button"
-						className="btn btn--white lightbox__unlock"
-						onClick={() => void handeleCheckout()}
-					>
-						Unlock photos
-					</button> */}
+					{print.owned || owned ? (
+						<>
+							<button
+								className="lightbox__btn lightbox__download"
+								onClick={() => {
+									void downloadHandlere();
+								}}
+							>
+								{isDownloading ? (
+									<div className="lightbox__spinner"></div>
+								) : (
+									<svg
+										className="lightbox__svg"
+										focusable="false"
+										aria-hidden="true"
+										width="24"
+										height="21"
+										fill="none"
+									>
+										<use xlinkHref="#download" />
+									</svg>
+								)}
+								Download
+							</button>
+							<button
+								type="button"
+								className={`lightbox__btn lightbox__share ${copied ? "lightbox__share--active" : ""}`}
+								onClick={() => void shareHandler()}
+								data-title={copiedText}
+							>
+								<svg className="lightbox__svg" focusable="false" aria-hidden="true" width="24" height="21" fill="none">
+									<use xlinkHref="#share" />
+								</svg>
+								Share
+							</button>
+							<button type="button" className="btn btn--transparent lightbox__see">
+								See in a frame
+							</button>
+						</>
+					) : (
+						<button
+							ref={checkoutRef}
+							type="button"
+							className="btn btn--white lightbox__unlock"
+							onClick={() => void handeleCheckout()}
+						>
+							Unlock photos
+						</button>
+					)}
 				</div>
 			</div>
 			<div className="lightbox__gradient"></div>

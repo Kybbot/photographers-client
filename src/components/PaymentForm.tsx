@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React, { FC, FormEvent, useEffect, useState } from "react";
 
 import { useAuthFetch } from "../hooks/useAuthFetch";
 
@@ -9,14 +9,16 @@ type PaymentFormProps = {
 	closeModal: () => void;
 };
 
-export const PaymentForm: React.FC<PaymentFormProps> = ({ albumData, closeModal }) => {
+export const PaymentForm: FC<PaymentFormProps> = ({ albumData, closeModal }) => {
 	const { loading, error, request } = useAuthFetch();
+
+	const [album, setAlbum] = useState(albumData);
 
 	const formHandler = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		const body = JSON.stringify({
-			album_id: albumData.id,
+			album_id: album.id,
 		});
 
 		const result = await request<StripeResponse>("/create-checkout-session", "POST", body);
@@ -25,6 +27,10 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ albumData, closeModal 
 			window.location.href = result.data.url;
 		}
 	};
+
+	useEffect(() => {
+		setAlbum(albumData);
+	}, [albumData]);
 
 	return (
 		<form
@@ -43,7 +49,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ albumData, closeModal 
 			</div>
 			<div className="paymentForm__info">
 				<p className="paymentForm__text">
-					Get all the photos from <b>{albumData.album_name}</b> in hi-resolution with no watermark.
+					Get all the photos from <b>{album.album_name}</b> in hi-resolution with no watermark.
 				</p>
 				<b className="paymentForm__price">$5</b>
 			</div>

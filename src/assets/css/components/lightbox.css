@@ -84,8 +84,29 @@
 }
 
 .lightbox__download {
+	position: relative;
 	color: var(--btn-text);
 	text-decoration: none;
+}
+
+.lightbox__spinner {
+	display: block;
+	height: 20px;
+	width: 20px;
+	border: 3px solid #ffffff;
+	border-color: #ffffff transparent #ffffff transparent;
+	border-radius: 50%;
+	margin: 0 auto 5px auto;
+	animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 .lightbox__share {

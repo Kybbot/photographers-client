@@ -49,6 +49,10 @@
 	color: var(--accent-color);
 }
 
+.header__amount--default {
+	color: var(--main-text);
+}
+
 .header__btn {
 	display: none;
 	width: 8px;

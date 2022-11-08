@@ -30,6 +30,7 @@ export type AlbumType = {
 	album_name: string;
 	album_location: string;
 	album_logo: string;
+	owned: boolean;
 };
 
 export type AlbumsResponse = AlbumType[];
@@ -42,6 +43,7 @@ export type PhotoType = {
 	marked_logo: string;
 	photo_url: string;
 	photo_logo: string;
+	owned?: boolean;
 };
 
 export type PhotosResponse = PhotoType[];
