@@ -9,6 +9,7 @@
 	justify-content: center;
 	align-items: center;
 	background-color: var(--main-bg);
+	z-index: 999;
 }
 
 .loader__gif {
