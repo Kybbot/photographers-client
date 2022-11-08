@@ -57,18 +57,21 @@ export const Lightbox: FC<LightboxProps> = ({ currentPhoto, owned, closeModal, o
 	};
 
 	const downloadHandlere = async () => {
-		setDownloading(true);
-		const image = await fetch(print.photo_url);
-		const imageBlog = await image.blob();
-		const imageURL = URL.createObjectURL(imageBlog);
+		// setDownloading(true);
+		const imageURL = await fetch(print.photo_url)
+			.then((response) => response.blob())
+			.then((result) => URL.createObjectURL(result));
+		// const image = await fetch(print.photo_url);
+		// const imageBlog = await image.blob();
+		// const imageURL = URL.createObjectURL(imageBlog);
 
-		const link = document.createElement("a");
-		link.href = imageURL;
-		link.download = "Image";
-		document.body.appendChild(link);
-		link.click();
-		document.body.removeChild(link);
-		setDownloading(false);
+		const a = document.createElement("a");
+		a.href = imageURL;
+		a.download = "Photo.jpg";
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
+		// setDownloading(false);
 	};
 
 	const closeHandler = () => {
