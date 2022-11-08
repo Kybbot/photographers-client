@@ -58,19 +58,16 @@ export const Lightbox: FC<LightboxProps> = ({ currentPhoto, owned, closeModal, o
 
 	const downloadHandlere = async () => {
 		setDownloading(true);
-		await fetch(print.photo_url, {
-			mode: "no-cors",
-		})
-			.then((response) => response.blob())
-			.then((blob) => {
-				const blobUrl = window.URL.createObjectURL(blob);
-				const a = document.createElement("a");
-				a.download = "image.jpg";
-				a.href = blobUrl;
-				document.body.appendChild(a);
-				a.click();
-				a.remove();
-			});
+		const image = await fetch(print.photo_url);
+		const imageBlog = await image.blob();
+		const imageURL = URL.createObjectURL(imageBlog);
+
+		const link = document.createElement("a");
+		link.href = imageURL;
+		link.download = "Image";
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
 		setDownloading(false);
 	};
 
