@@ -13,9 +13,9 @@ import { AuthRoutes, Loader } from "./components";
 import { useAuthFetch } from "./hooks/useAuthFetch";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
 import { getIsLoggedIn } from "./redux/reducers/authSlice";
-import { getUserData, setUserAlbums, setUserData, setUserPhotos } from "./redux/reducers/userSlice";
+import { getUserData, setUserData } from "./redux/reducers/userSlice";
 
-import { AlbumsResponse, PhotosResponse, UserResponse } from "./@types/api";
+import { UserResponse } from "./@types/api";
 
 const App: React.FC = () => {
 	const isLoggedIn = useAppSelector(getIsLoggedIn);
@@ -24,8 +24,6 @@ const App: React.FC = () => {
 	const userData = useAppSelector(getUserData);
 
 	const { loading: clientLoading, error: clientError, request: clientRequest } = useAuthFetch(true);
-	const { loading: albumsLoading, error: albumsError, request: albumsRequest } = useAuthFetch(true);
-	const { loading: photosLoading, error: photosError, request: photosRequest } = useAuthFetch(true);
 
 	useEffect(() => {
 		const getUserData = async () => {
@@ -36,28 +34,10 @@ const App: React.FC = () => {
 			}
 		};
 
-		const getUserAlbums = async () => {
-			const result = await albumsRequest<AlbumsResponse>("/albums", "GET");
-
-			if (result?.success) {
-				dispatch(setUserAlbums(result.data));
-			}
-		};
-
-		const getUserPhotos = async () => {
-			const result = await photosRequest<PhotosResponse>("/photos", "GET");
-
-			if (result?.success) {
-				dispatch(setUserPhotos(result.data));
-			}
-		};
-
 		if (!userData && isLoggedIn) {
 			void getUserData();
-			void getUserAlbums();
-			void getUserPhotos();
 		}
-	}, [isLoggedIn, userData, clientRequest, albumsRequest, photosRequest, dispatch]);
+	}, [isLoggedIn, userData, clientRequest, dispatch]);
 
 	useEffect(() => {
 		function handleResize() {
@@ -72,12 +52,12 @@ const App: React.FC = () => {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
-	if ((clientLoading && isLoggedIn) || (albumsLoading && isLoggedIn) || (photosLoading && isLoggedIn)) {
+	if (clientLoading && isLoggedIn) {
 		return <Loader />;
 	}
 
-	if (clientError || albumsError || photosError) {
-		return <p>An error has occurred: {clientError || albumsError || photosError}</p>;
+	if (clientError) {
+		return <p>An error has occurred: {clientError}</p>;
 	}
 
 	if (isLoggedIn) {
