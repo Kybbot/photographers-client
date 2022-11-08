@@ -113,7 +113,7 @@ const Settings: React.FC = () => {
 				<UploadOptions fileHandler={fileHandler} closeHandler={closeModal2} openCamera={openCamera} />
 			</Modal>
 			<h1 className="settigs__title">
-				Welcome{userData && !!userData.client_name.length && ` ,${userData.client_name}`}.
+				Welcome{userData && !!userData.client_name.length && `, ${userData.client_name}`}.
 			</h1>
 			<h2 className="settings__subtitle">Your selfie</h2>
 			<div className="settings__avatar">

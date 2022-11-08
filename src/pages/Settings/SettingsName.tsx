@@ -1,4 +1,5 @@
 import React, { FC, FormEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { NameResponse } from "../../@types/api";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
@@ -6,6 +7,8 @@ import { useAuthFetch } from "../../hooks/useAuthFetch";
 import { changeUserName, getUserData } from "../../redux/reducers/userSlice";
 
 const SettingsName: FC = () => {
+	const navigate = useNavigate();
+
 	const dispatch = useAppDispatch();
 	const userData = useAppSelector(getUserData);
 
@@ -24,6 +27,7 @@ const SettingsName: FC = () => {
 
 		if (result?.success) {
 			dispatch(changeUserName(result.data.client_name));
+			navigate("/settings");
 		}
 	};
 
