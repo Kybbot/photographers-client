@@ -24,6 +24,14 @@ export const PaymentForm: FC<PaymentFormProps> = ({ albumData, closeModal }) => 
 		const result = await request<StripeResponse>("/create-checkout-session", "POST", body);
 
 		if (result?.success) {
+			localStorage.setItem(
+				"AlbumData",
+				JSON.stringify({
+					albumId: albumData.id,
+					albumName: albumData.album_name,
+					albumPhoto: albumData.album_logo,
+				})
+			);
 			window.location.href = result.data.url;
 		}
 	};

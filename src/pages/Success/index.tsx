@@ -1,13 +1,17 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import successImg from "../../assets/img/success.jpg";
-
-const Success: React.FC = () => {
+const Success: FC = () => {
 	const navigate = useNavigate();
 
+	const albumData = JSON.parse(localStorage.getItem("AlbumData") || "") as {
+		albumId: number;
+		albumName: string;
+		albumPhoto: string;
+	};
+
 	const btnHandler = () => {
-		navigate("/album/1");
+		navigate(`/album/${albumData.albumId}`);
 	};
 
 	return (
@@ -23,12 +27,12 @@ const Success: React.FC = () => {
 				<div className="container__settings h-100">
 					<h2 className="success__title">Thank you</h2>
 					<p className="success__text">
-						The album <b>Brooklyn Bridge</b> is now unlocked.
+						The album <b>{albumData.albumName}</b> is now unlocked.
 					</p>
 					<p className="success__text">
 						You can now download, share, post, and print your hi-res, watermark-free, glorious memories.
 					</p>
-					<img className="success__img" src={successImg} alt="" />
+					<img className="success__img" src={albumData.albumPhoto} alt="Album" />
 					<button type="button" className="btn" onClick={btnHandler}>
 						See photos
 					</button>

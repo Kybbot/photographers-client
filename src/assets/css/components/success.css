@@ -26,9 +26,10 @@
 .success__img {
 	display: block;
 	width: 100%;
-	height: auto;
+	height: 200px;
 	border-radius: 20px;
 	margin-bottom: 30px;
+	object-fit: cover;
 }
 
 @media (min-width: 1024px) {
@@ -51,5 +52,9 @@
 		display: block;
 		font-size: 18px;
 		line-height: 22px;
+	}
+
+	.success__img {
+		height: 250px;
 	}
 }
