@@ -64,7 +64,7 @@ export const Lightbox: FC<LightboxProps> = ({ currentPhoto, owned, closeModal, o
 
 		const link = document.createElement("a");
 		link.href = imageURL;
-		link.download = "Image";
+		link.download = "Image.jpg";
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
