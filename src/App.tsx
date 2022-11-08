@@ -8,7 +8,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 
-import { AuthRoutes, Loader } from "./components";
+import { AuthRoutes } from "./components";
 
 import { useAuthFetch } from "./hooks/useAuthFetch";
 import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
@@ -23,7 +23,7 @@ const App: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const userData = useAppSelector(getUserData);
 
-	const { loading: clientLoading, error: clientError, request: clientRequest } = useAuthFetch(true);
+	const { error: clientError, request: clientRequest } = useAuthFetch();
 
 	useEffect(() => {
 		const getUserData = async () => {
@@ -51,10 +51,6 @@ const App: React.FC = () => {
 
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
-
-	if (clientLoading && isLoggedIn) {
-		return <Loader />;
-	}
 
 	if (clientError) {
 		return <p>An error has occurred: {clientError}</p>;
