@@ -57,31 +57,25 @@ export const Lightbox: FC<LightboxProps> = ({ currentPhoto, owned, closeModal, o
 	};
 
 	const downloadHandlere = async () => {
-		// setDownloading(true);
-		await fetch(print.photo_url, {
-			mode: "no-cors",
-		})
-			.then((response) => response.blob())
-			.then((blob) => {
-				const blobUrl = window.URL.createObjectURL(blob);
-				const a = document.createElement("a");
-				a.download = `${print.id}.${print.photo_url.split(".")[4]}`;
-				a.href = blobUrl;
-				document.body.appendChild(a);
-				a.click();
-				a.remove();
-			});
-		// const image = await fetch(print.photo_url);
-		// const imageBlog = await image.blob();
-		// const imageURL = URL.createObjectURL(imageBlog);
-
-		// const a = document.createElement("a");
-		// a.href = imageURL;
-		// a.download = "Photo.jpg";
-		// document.body.appendChild(a);
-		// a.click();
-		// document.body.removeChild(a);
-		// setDownloading(false);
+		setDownloading(true);
+		try {
+			await fetch(print.photo_url, {
+				mode: "no-cors",
+			})
+				.then((response) => response.blob())
+				.then((blob) => {
+					const blobUrl = window.URL.createObjectURL(blob);
+					const a = document.createElement("a");
+					a.download = `${print.id}.${print.photo_url.split(".")[4]}`;
+					a.href = blobUrl;
+					document.body.appendChild(a);
+					a.click();
+					a.remove();
+				});
+		} catch (error) {
+			alert(error);
+		}
+		setDownloading(false);
 	};
 
 	const closeHandler = () => {
