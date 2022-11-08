@@ -65,7 +65,7 @@ export const Lightbox: FC<LightboxProps> = ({ currentPhoto, owned, closeModal, o
 			.then((blob) => {
 				const blobUrl = window.URL.createObjectURL(blob);
 				const a = document.createElement("a");
-				a.download = `${print.id}.${print.photo_url.split(".")[4]}`;
+				a.download = "image";
 				a.href = blobUrl;
 				document.body.appendChild(a);
 				a.click();
