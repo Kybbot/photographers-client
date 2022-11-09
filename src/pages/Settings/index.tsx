@@ -84,8 +84,7 @@ const Settings: React.FC = () => {
 		const result = await request<SelfiResponse>("/selfie", "POST", formData, {}, true);
 
 		if (result?.success) {
-			setFile(result.data.selfie_url);
-			dispatch(changeUserSelfie(result.data.selfie_url));
+			dispatch(changeUserSelfie(URL.createObjectURL(img)));
 		}
 		closeSelfiForm();
 	};
