@@ -15,7 +15,7 @@ export const Lightbox: FC<LightboxProps> = ({ currentPhoto, owned, closeModal, o
 
 	const [print, setPrint] = useState(currentPhoto);
 
-	const [isLoaded, setLoaded] = useState(false);
+	const [isLoaded, setLoaded] = useState(true);
 	const [isDownloading, setDownloading] = useState(false);
 
 	const checkoutRef = useRef<HTMLButtonElement>(null);
@@ -83,14 +83,16 @@ export const Lightbox: FC<LightboxProps> = ({ currentPhoto, owned, closeModal, o
 
 	useEffect(() => {
 		setPrint(currentPhoto);
-		setLoaded(false);
+		if (print.id !== currentPhoto.id) {
+			setLoaded(false);
+		}
 
 		if (imgRef.current) {
 			imgRef.current.onload = () => {
 				setLoaded(true);
 			};
 		}
-	}, [currentPhoto]);
+	}, [print, currentPhoto]);
 
 	return (
 		<section className="lightbox">
