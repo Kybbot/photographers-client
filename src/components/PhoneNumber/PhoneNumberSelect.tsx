@@ -99,14 +99,15 @@ export const PhoneNumberSelect: FC<PhoneNumberSelectProps> = ({
 							type="button"
 							onClick={() => handleButtonClick(item)}
 						>
-							{/* <img
-								className="phone-number__img"
+							<img
+								// className="phone-number__img"
+								data-src={`/flugs/${item.code.toLowerCase()}.svg`}
 								src={`/flugs/${item.code.toLowerCase()}.svg`}
 								alt={item.name}
 								width={28}
 								height={19}
 								loading="lazy"
-							/> */}
+							/>
 							{item.name}
 						</button>
 					))}

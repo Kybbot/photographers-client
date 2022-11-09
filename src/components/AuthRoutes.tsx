@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import DashboardLayout from "../layouts/DashboardLayout";
 import SettingsLayout from "../layouts/SettingLayout";
@@ -22,17 +22,16 @@ import { getUserData } from "../redux/reducers/userSlice";
 
 export const AuthRoutes: FC = () => {
 	const navigate = useNavigate();
-	const location = useLocation();
 
 	const userData = useAppSelector(getUserData);
 
 	useEffect(() => {
 		if (userData && !userData.selfie_image.length) {
 			navigate("/initial-selfi");
-		} else if (userData && userData.selfie_image.length && location.pathname === "/initial-selfi") {
+		} else if (userData && userData.selfie_image.length && window.location.pathname === "/initial-selfi") {
 			navigate("/");
 		}
-	}, [userData, location, navigate]);
+	}, [userData, navigate]);
 
 	return (
 		<Routes>

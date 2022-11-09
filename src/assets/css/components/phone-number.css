@@ -102,6 +102,10 @@
 	cursor: pointer;
 }
 
+.phone-number__country > img {
+	border-radius: 3px;
+}
+
 .phone-number__country:last-child {
 	border-bottom: none;
 }
