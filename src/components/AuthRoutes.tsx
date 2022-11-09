@@ -9,7 +9,6 @@ import Album from "../pages/Dashboard/Album";
 
 import Settings from "../pages/Settings";
 import SettingsName from "../pages/Settings/SettingsName";
-import SettingsSelfi from "../pages/Settings/SettingsSelfi";
 
 import InitialSelfi from "../pages/InitialSelfi";
 import Success from "../pages/Success";
@@ -41,7 +40,6 @@ export const AuthRoutes: FC = () => {
 			<Route path="album/:id" element={<Album />} />
 			<Route path="settings" element={<SettingsLayout />}>
 				<Route index element={<Settings />} />
-				<Route path="selfi" element={<SettingsSelfi />} />
 				<Route path="name" element={<SettingsName />} />
 			</Route>
 			<Route path="initial-selfi" element={<InitialSelfi />} />
