@@ -16,7 +16,6 @@ export const Lightbox: FC<LightboxProps> = ({ currentPhoto, owned, closeModal, o
 	const [print, setPrint] = useState(currentPhoto);
 
 	const [isLoaded, setLoaded] = useState(true);
-	const [isDownloading, setDownloading] = useState(false);
 
 	const checkoutRef = useRef<HTMLButtonElement>(null);
 	const imgRef = useRef<HTMLImageElement>(null);
@@ -54,21 +53,6 @@ export const Lightbox: FC<LightboxProps> = ({ currentPhoto, owned, closeModal, o
 		} else {
 			await copyToClipBoard(shareData.url);
 		}
-	};
-
-	const downloadHandlere = async () => {
-		setDownloading(true);
-		const imageURL = await fetch(print.photo_url)
-			.then((response) => response.blob())
-			.then((result) => URL.createObjectURL(result));
-
-		const link = document.createElement("a");
-		link.href = imageURL;
-		link.download = "Image.jpg";
-		document.body.appendChild(link);
-		link.click();
-		document.body.removeChild(link);
-		setDownloading(false);
 	};
 
 	const closeHandler = () => {
@@ -120,28 +104,12 @@ export const Lightbox: FC<LightboxProps> = ({ currentPhoto, owned, closeModal, o
 				<div className="lightbox__btns">
 					{print.owned || owned ? (
 						<>
-							<button
-								className="lightbox__btn lightbox__download"
-								onClick={() => {
-									void downloadHandlere();
-								}}
-							>
-								{isDownloading ? (
-									<div className="lightbox__spinner"></div>
-								) : (
-									<svg
-										className="lightbox__svg"
-										focusable="false"
-										aria-hidden="true"
-										width="24"
-										height="21"
-										fill="none"
-									>
-										<use xlinkHref="#download" />
-									</svg>
-								)}
+							<a href={print.photo_url} download="Print" className="lightbox__btn lightbox__download">
+								<svg className="lightbox__svg" focusable="false" aria-hidden="true" width="24" height="21" fill="none">
+									<use xlinkHref="#download" />
+								</svg>
 								Download
-							</button>
+							</a>
 							<button
 								type="button"
 								className={`lightbox__btn lightbox__share ${copied ? "lightbox__share--active" : ""}`}
