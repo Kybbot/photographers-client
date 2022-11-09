@@ -5,19 +5,19 @@ export const transformVideo = (videoRef: RefObject<HTMLVideoElement>) => {
 		const canvas = document.createElement("canvas");
 		const context = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-		canvas.width = 500;
-		canvas.height = 500;
+		canvas.width = videoRef.current.videoWidth;
+		canvas.height = videoRef.current.videoHeight;
 
 		context.drawImage(
 			videoRef.current,
-			videoRef.current.videoWidth / 2 - 250,
-			videoRef.current.videoHeight / 2 - 250,
-			500,
-			500,
 			0,
 			0,
-			500,
-			500
+			videoRef.current.videoWidth,
+			videoRef.current.videoHeight,
+			0,
+			0,
+			videoRef.current.videoWidth,
+			videoRef.current.videoHeight
 		);
 
 		return new Promise((resolve) => {
