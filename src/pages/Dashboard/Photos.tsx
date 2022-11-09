@@ -7,6 +7,7 @@ import { Lightbox, Modal, PaymentForm } from "../../components";
 
 import { useModal } from "../../hooks/useModal";
 import { useAppSelector } from "../../hooks/reduxHooks";
+import { useLazyLoadImages } from "../../hooks/useLazyLoadImages";
 import { getUserAlbums, getUserPhotos } from "../../redux/reducers/userSlice";
 
 import { PhotoType } from "../../@types/api";
@@ -19,6 +20,7 @@ export const Photos: FC = () => {
 	const [currentPhoto, setCurrentPhoto] = useState<PhotoType>(userPhotos[0]);
 
 	const stripeBtnRef = useRef<HTMLButtonElement>(null);
+	const photosGalleryDiv = useRef<HTMLDivElement>(null);
 
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
@@ -29,6 +31,8 @@ export const Photos: FC = () => {
 		setCurrentPhoto(photo);
 		openModal1(btnRef);
 	};
+
+	useLazyLoadImages(photosGalleryDiv, []);
 
 	return (
 		<section className="dashboard__container">
@@ -57,7 +61,7 @@ export const Photos: FC = () => {
 					<h2 className="photos__title">All Photos</h2>
 				</div>
 				<div className="container container--full">
-					<div className="photos__gallery">
+					<div className="photos__gallery" ref={photosGalleryDiv}>
 						{userPhotos.map((item) => (
 							<PhotosItem key={item.id} data={item} openCurrentPhoto={openCurrentPhoto} />
 						))}

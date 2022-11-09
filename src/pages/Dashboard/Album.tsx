@@ -6,6 +6,7 @@ import { Lightbox, Modal, PaymentForm, Loader } from "../../components";
 
 import { useModal } from "../../hooks/useModal";
 import { useAuthFetch } from "../../hooks/useAuthFetch";
+import { useLazyLoadImages } from "../../hooks/useLazyLoadImages";
 
 import { formatDate } from "../../utils/formatDate";
 
@@ -22,6 +23,7 @@ const Album: FC = () => {
 
 	const stripeBtnRef1 = useRef<HTMLButtonElement>(null);
 	const stripeBtnRef2 = useRef<HTMLButtonElement>(null);
+	const photosGalleryDiv = useRef<HTMLDivElement>(null);
 
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
@@ -48,6 +50,8 @@ const Album: FC = () => {
 			void getAlbumData();
 		}
 	}, [location, albumData, request]);
+
+	useLazyLoadImages(photosGalleryDiv, [albumData]);
 
 	if (loading) {
 		return <Loader />;
@@ -107,7 +111,7 @@ const Album: FC = () => {
 								<PaymentForm albumData={albumData.album} closeModal={closeModal2} />
 							</Modal>
 							<div className="container container--full">
-								<div className="album__gallery">
+								<div className="album__gallery" ref={photosGalleryDiv}>
 									{albumData.photos.map((item, index) => (
 										<PhotosItem
 											key={index}
