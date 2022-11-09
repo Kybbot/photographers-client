@@ -7,13 +7,13 @@ import { AlbumsResponse, PhotosResponse, UserResponse } from "../../@types/api";
 
 type UserStore = {
 	userData: UserResponse | null;
-	albums: AlbumsResponse;
+	albums: AlbumsResponse | null;
 	photos: PhotosResponse;
 };
 
 const initialState: UserStore = {
 	userData: null,
-	albums: [],
+	albums: null,
 	photos: [],
 };
 
@@ -46,7 +46,6 @@ export const userSlice = createSlice({
 export const { setUserData, changeUserSelfie, changeUserName, setUserAlbums, setUserPhotos } = userSlice.actions;
 
 export const getUserData = (state: RootState) => state.user.userData;
-export const getUserAlbumsLength = (state: RootState) => state.user.albums.length;
 export const getUserAlbums = (state: RootState) => state.user.albums;
 export const getUserPhotos = (state: RootState) => state.user.photos;
 

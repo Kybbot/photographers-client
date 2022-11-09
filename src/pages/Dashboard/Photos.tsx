@@ -8,15 +8,18 @@ import { Lightbox, Modal, PaymentForm } from "../../components";
 import { useModal } from "../../hooks/useModal";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { useLazyLoadImages } from "../../hooks/useLazyLoadImages";
-import { getUserAlbums, getUserPhotos } from "../../redux/reducers/userSlice";
+import { getUserPhotos } from "../../redux/reducers/userSlice";
 
-import { PhotoType } from "../../@types/api";
+import { AlbumsResponse, PhotoType } from "../../@types/api";
 
-export const Photos: FC = () => {
-	const userAlbums = useAppSelector(getUserAlbums);
+type PhotosProps = {
+	albums: AlbumsResponse;
+};
+
+export const Photos: FC<PhotosProps> = ({ albums }) => {
 	const userPhotos = useAppSelector(getUserPhotos);
 
-	const [currentAlbum, setCurrentAlbum] = useState(userAlbums[0]);
+	const [currentAlbum, setCurrentAlbum] = useState(albums[0]);
 	const [currentPhoto, setCurrentPhoto] = useState<PhotoType>(userPhotos[0]);
 
 	const stripeBtnRef = useRef<HTMLButtonElement>(null);
@@ -26,7 +29,7 @@ export const Photos: FC = () => {
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
 
 	const openCurrentPhoto = (btnRef: RefObject<HTMLButtonElement>, photo: PhotoType) => {
-		const album = userAlbums.find((item) => item.id === +photo.album_id);
+		const album = albums.find((item) => item.id === +photo.album_id);
 		if (album) setCurrentAlbum(album);
 		setCurrentPhoto(photo);
 		openModal1(btnRef);
@@ -47,7 +50,7 @@ export const Photos: FC = () => {
 					<h2 className="albums__title">Albums</h2>
 					<div className="albums__container">
 						<Swiper slidesPerView={"auto"} slidesOffsetAfter={15}>
-							{userAlbums.map((item) => (
+							{albums.map((item) => (
 								<SwiperSlide key={item.id}>
 									<AlbumItem data={item} />
 								</SwiperSlide>
@@ -67,7 +70,7 @@ export const Photos: FC = () => {
 						))}
 					</div>
 				</div>
-				{userAlbums.length === 1 && !userAlbums[0].owned && (
+				{albums.length === 1 && !albums[0].owned && (
 					<div className="container">
 						<button
 							ref={stripeBtnRef}

@@ -6,17 +6,17 @@ import { Loader } from "../../components";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { useAuthFetch } from "../../hooks/useAuthFetch";
-import { getUserAlbumsLength, setUserAlbums, setUserPhotos } from "../../redux/reducers/userSlice";
+import { getUserAlbums, setUserAlbums, setUserPhotos } from "../../redux/reducers/userSlice";
 
 import { AlbumsResponse, PhotosResponse } from "../../@types/api";
 
 const Dashboard: FC = () => {
-	const userAlbumsLength = useAppSelector(getUserAlbumsLength);
+	const userAlbums = useAppSelector(getUserAlbums);
 
 	const dispatch = useAppDispatch();
 
-	const { loading: albumsLoading, error: albumsError, request: albumsRequest } = useAuthFetch(userAlbumsLength === 0);
-	const { loading: photosLoading, error: photosError, request: photosRequest } = useAuthFetch(userAlbumsLength === 0);
+	const { loading: albumsLoading, error: albumsError, request: albumsRequest } = useAuthFetch(!userAlbums);
+	const { loading: photosLoading, error: photosError, request: photosRequest } = useAuthFetch(!userAlbums);
 
 	useEffect(() => {
 		const getUserAlbums = async () => {
@@ -35,11 +35,11 @@ const Dashboard: FC = () => {
 			}
 		};
 
-		if (userAlbumsLength === 0) {
+		if (!userAlbums) {
 			void getUserAlbums();
 			void getUserPhotos();
 		}
-	}, [userAlbumsLength, albumsRequest, photosRequest, dispatch]);
+	}, [userAlbums, albumsRequest, photosRequest, dispatch]);
 
 	if (albumsLoading || photosLoading) {
 		return <Loader />;
@@ -49,8 +49,8 @@ const Dashboard: FC = () => {
 		return <p>An error has occurred: {albumsError || photosError}</p>;
 	}
 
-	if (userAlbumsLength > 0) {
-		return <Photos />;
+	if (userAlbums && userAlbums.length > 0) {
+		return <Photos albums={userAlbums} />;
 	} else {
 		return <NoData />;
 	}
