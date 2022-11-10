@@ -1,5 +1,7 @@
 import React, { ChangeEvent, Dispatch, FC, SetStateAction, useMemo, useRef, useState } from "react";
 
+import { useLazyLoadImages } from "../../hooks/useLazyLoadImages";
+
 import { countries } from "../../utils/countries";
 
 import { currentCountryType } from "../../@types/phoneForm";
@@ -7,8 +9,8 @@ import { currentCountryType } from "../../@types/phoneForm";
 type PhoneNumberSelectProps = {
 	closeModal: () => void;
 	setCurrentCountry: Dispatch<SetStateAction<currentCountryType>>;
-	setPhone: Dispatch<React.SetStateAction<string>>;
-	setSelectState: React.Dispatch<React.SetStateAction<string>>;
+	setPhone: Dispatch<SetStateAction<string>>;
+	setSelectState: Dispatch<SetStateAction<string>>;
 };
 
 export const PhoneNumberSelect: FC<PhoneNumberSelectProps> = ({
@@ -40,40 +42,7 @@ export const PhoneNumberSelect: FC<PhoneNumberSelectProps> = ({
 		closeModal();
 	};
 
-	// useEffect(() => {
-	// 	const obserOptions = {
-	// 		root: null,
-	// 		rootMargin: "0px",
-	// 		threshols: 0.7,
-	// 	};
-
-	// 	const observerCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-	// 		entries.forEach((entry) => {
-	// 			if (entry.isIntersecting) {
-	// 				const dataSrc = entry.target.children.item(0)!.getAttribute("data-src");
-	// 				console.log("dataSrc:", dataSrc);
-	// 				console.log(entry.target.children.item(0)!.getAttribute("src") !== dataSrc!);
-	// 				if (entry.target.children.item(0)!.getAttribute("src") !== dataSrc!) {
-	// 					entry.target.children.item(0)?.setAttribute("src", dataSrc!);
-	// 					observer.unobserve(entry.target);
-	// 				}
-	// 			}
-	// 		});
-	// 	};
-
-	// 	const countrysListDiv = countrysListRef.current;
-
-	// 	const observer = new IntersectionObserver(observerCallback, obserOptions);
-	// 	if (countrysListDiv) {
-	// 		Array.from(countrysListDiv.children).forEach((item) => observer.observe(item));
-	// 	}
-
-	// 	return () => {
-	// 		if (countrysListDiv) {
-	// 			Array.from(countrysListDiv.children).forEach((item) => observer.unobserve(item));
-	// 		}
-	// 	};
-	// }, [currentCountries]);
+	useLazyLoadImages(countrysListRef, [currentCountries]);
 
 	return (
 		<div className="phone-number__select phone-number__select--visible">
@@ -100,9 +69,9 @@ export const PhoneNumberSelect: FC<PhoneNumberSelectProps> = ({
 							onClick={() => handleButtonClick(item)}
 						>
 							<img
-								// className="phone-number__img"
+								className="phone-number__img"
 								data-src={`/flugs/${item.code.toLowerCase()}.svg`}
-								src={`/flugs/${item.code.toLowerCase()}.svg`}
+								src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
 								alt={item.name}
 								width={28}
 								height={19}
