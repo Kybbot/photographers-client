@@ -14,16 +14,18 @@ const Privacy: React.FC = () => {
 					<Link className="header__link" to="/">
 						<img className="header__logo" src="/logo.svg" alt="PhotoDrop" width={125} height={16} />
 					</Link>
-					<Link to="/settings" className="header__avatar terms__avatar" aria-label="Settings">
-						<img
-							src={userData ? userData.selfie_image : "/avatar.png"}
-							alt="avatar"
-							aria-hidden="true"
-							className="header__img"
-							width={35}
-							height={35}
-						/>
-					</Link>
+					{userData && (
+						<Link to="/settings" className="header__avatar terms__avatar" aria-label="Settings">
+							<img
+								src={userData.selfie_image}
+								alt="avatar"
+								aria-hidden="true"
+								className="header__img"
+								width={35}
+								height={35}
+							/>
+						</Link>
+					)}
 				</div>
 			</header>
 			<main className="main">
