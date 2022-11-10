@@ -77,7 +77,7 @@ const Signup: FC = () => {
 								}}
 							>
 								<PhoneNumber currentCountry={currentCountry} setPhone={setPhone} openModal={openModal1} />
-								<button type="submit" className="btn" disabled={phone.length <= 7 || loading}>
+								<button type="submit" className="btn" disabled={!phone || phone.length <= 7 || loading}>
 									Create account {loading && <span className="spinner"></span>}
 								</button>
 							</form>
