@@ -1,10 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { getUserData } from "../../redux/reducers/userSlice";
 
-const Terms: React.FC = () => {
+const Terms: FC = () => {
 	const userData = useAppSelector(getUserData);
 
 	return (

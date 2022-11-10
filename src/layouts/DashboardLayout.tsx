@@ -1,10 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 import { useAppSelector } from "../hooks/reduxHooks";
 import { getUserData } from "../redux/reducers/userSlice";
 
-const DashboardLayout: React.FC = () => {
+const DashboardLayout: FC = () => {
 	const userData = useAppSelector(getUserData);
 
 	return (

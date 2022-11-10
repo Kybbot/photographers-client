@@ -1,27 +1,22 @@
-import React from "react";
+import { RefObject, useCallback, useState } from "react";
 
 type useModalProps = () => {
 	isActive: boolean;
-	openModal: (openBtnRef: React.RefObject<HTMLButtonElement> | React.RefObject<HTMLInputElement>) => void;
+	openModal: (openBtnRef: RefObject<HTMLButtonElement> | RefObject<HTMLInputElement>) => void;
 	closeModal: () => void;
 };
 
 export const useModal: useModalProps = () => {
-	const [isActive, setActive] = React.useState(false);
-	const [openBtn, setOpenBtn] = React.useState<
-		React.RefObject<HTMLButtonElement> | React.RefObject<HTMLInputElement>
-	>();
+	const [isActive, setActive] = useState(false);
+	const [openBtn, setOpenBtn] = useState<RefObject<HTMLButtonElement> | RefObject<HTMLInputElement>>();
 
-	const openModal = React.useCallback(
-		(openBtnRef: React.RefObject<HTMLButtonElement> | React.RefObject<HTMLInputElement>) => {
-			document.body.style.overflow = "hidden";
-			setOpenBtn(openBtnRef);
-			setActive(true);
-		},
-		[]
-	);
+	const openModal = useCallback((openBtnRef: RefObject<HTMLButtonElement> | RefObject<HTMLInputElement>) => {
+		document.body.style.overflow = "hidden";
+		setOpenBtn(openBtnRef);
+		setActive(true);
+	}, []);
 
-	const closeModal = React.useCallback(() => {
+	const closeModal = useCallback(() => {
 		document.body.style.overflow = "initial";
 		if (openBtn) {
 			openBtn.current?.focus();

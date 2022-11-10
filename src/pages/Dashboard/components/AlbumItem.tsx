@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { AlbumType } from "../../../@types/api";
@@ -7,7 +7,7 @@ type AlbumItemProps = {
 	data: AlbumType;
 };
 
-export const AlbumItem: React.FC<AlbumItemProps> = ({ data }) => {
+export const AlbumItem: FC<AlbumItemProps> = ({ data }) => {
 	return (
 		<Link to={`/album/${data.id}`} className="albums__wrapper" type="button">
 			<img src={data.album_logo} alt={data.album_name} className="albums__img" width={167} height={215} />

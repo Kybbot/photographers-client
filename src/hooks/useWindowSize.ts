@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 type Size = {
 	width: number | undefined;
@@ -8,12 +8,12 @@ type Size = {
 type useWindowSizeType = () => Size;
 
 export const useWindowSize: useWindowSizeType = () => {
-	const [windowSize, setWindowSize] = React.useState<Size>({
+	const [windowSize, setWindowSize] = useState<Size>({
 		width: undefined,
 		height: undefined,
 	});
 
-	React.useEffect(() => {
+	useEffect(() => {
 		function handleResize() {
 			setWindowSize({
 				width: window.innerWidth,

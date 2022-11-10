@@ -1,27 +1,20 @@
-import React from "react";
+import React, { FC, ReactNode, useEffect, useRef } from "react";
 
 import { onTab } from "../utils/onTab";
 
 type ModalProps = {
 	overlay: boolean;
 	active: boolean;
-	children: React.ReactNode;
+	children: ReactNode;
 	displayType?: "block" | "flex";
 	closeModal: () => void;
 	dependencies?: [string];
 };
 
-export const Modal: React.FC<ModalProps> = ({
-	overlay,
-	active,
-	children,
-	displayType,
-	closeModal,
-	...dependencies
-}) => {
-	const wrapperRef = React.useRef<HTMLDivElement>(null);
+export const Modal: FC<ModalProps> = ({ overlay, active, children, displayType, closeModal, ...dependencies }) => {
+	const wrapperRef = useRef<HTMLDivElement>(null);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		let handleModalKeyboard: (event: KeyboardEvent) => void;
 
 		if (active) {
@@ -52,7 +45,7 @@ export const Modal: React.FC<ModalProps> = ({
 		return () => document.removeEventListener("keydown", handleModalKeyboard);
 	}, [active, closeModal, displayType, dependencies]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (active) {
 			wrapperRef.current?.querySelector("button")?.focus();
 		}

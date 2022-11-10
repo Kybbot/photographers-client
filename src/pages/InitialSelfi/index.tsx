@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, FC, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { Modal, SelfiForm, UploadOptions } from "../../components";
@@ -11,9 +11,9 @@ import { changeUserSelfie } from "../../redux/reducers/userSlice";
 
 import { SelfiResponse } from "../../@types/api";
 
-const InitialSelfi: React.FC = () => {
-	const [file, setFile] = React.useState<string | null>(null);
-	const [stream, setStream] = React.useState<MediaStream | null>(null);
+const InitialSelfi: FC = () => {
+	const [file, setFile] = useState<string | null>(null);
+	const [stream, setStream] = useState<MediaStream | null>(null);
 
 	const navigate = useNavigate();
 
@@ -26,8 +26,8 @@ const InitialSelfi: React.FC = () => {
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
 
-	const selfiBtnRef = React.useRef<HTMLButtonElement>(null);
-	const fileInputRef = React.useRef<HTMLInputElement>(null);
+	const selfiBtnRef = useRef<HTMLButtonElement>(null);
+	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const cleanStream = () => {
 		if (stream) {

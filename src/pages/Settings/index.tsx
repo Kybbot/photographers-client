@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from "react";
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Modal, SelfiForm, UploadOptions } from "../../components";
@@ -11,12 +11,12 @@ import { changeUserSelfie, getUserData } from "../../redux/reducers/userSlice";
 
 import { SelfiResponse } from "../../@types/api";
 
-const Settings: React.FC = () => {
+const Settings: FC = () => {
 	const userData = useAppSelector(getUserData);
 	const dispatch = useAppDispatch();
 
-	const [file, setFile] = React.useState<string | null>(null);
-	const [stream, setStream] = React.useState<MediaStream | null>(null);
+	const [file, setFile] = useState<string | null>(null);
+	const [stream, setStream] = useState<MediaStream | null>(null);
 
 	const { width } = useWindowSize();
 
@@ -25,8 +25,8 @@ const Settings: React.FC = () => {
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
 
-	const selfiBtnRef = React.useRef<HTMLButtonElement>(null);
-	const fileInputRef = React.useRef<HTMLInputElement>(null);
+	const selfiBtnRef = useRef<HTMLButtonElement>(null);
+	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const cleanStream = () => {
 		if (stream) {

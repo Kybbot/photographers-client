@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Signup from "./pages/Signup";
@@ -17,7 +17,7 @@ import { getUserData, setUserData } from "./redux/reducers/userSlice";
 
 import { UserResponse } from "./@types/api";
 
-const App: React.FC = () => {
+const App: FC = () => {
 	const isLoggedIn = useAppSelector(getIsLoggedIn);
 
 	const dispatch = useAppDispatch();

@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React, { FC, FormEvent, RefObject, useCallback, useEffect, useRef, useState } from "react";
 import Cropper, { Area } from "react-easy-crop";
 
 import { transformImage } from "../utils/transformImage";
@@ -6,16 +6,16 @@ import { transformVideo } from "../utils/transformVideo";
 
 type SelfiFormProps = {
 	fileData: string | null;
-	fileInputRef: React.RefObject<HTMLInputElement>;
+	fileInputRef: RefObject<HTMLInputElement>;
 	stream: MediaStream | null;
 	documentWidth: number | undefined;
 	loading: boolean;
 	closeHandler: () => void;
-	openOptions?: (openBtnRef: React.RefObject<HTMLButtonElement>) => void;
+	openOptions?: (openBtnRef: RefObject<HTMLButtonElement>) => void;
 	uploadSelfi: (img: Blob) => Promise<void>;
 };
 
-export const SelfiForm: React.FC<SelfiFormProps> = ({
+export const SelfiForm: FC<SelfiFormProps> = ({
 	fileData,
 	fileInputRef,
 	stream,
@@ -25,21 +25,21 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({
 	openOptions,
 	uploadSelfi,
 }) => {
-	const [crop, setCrop] = React.useState({ x: 0, y: 0 });
-	const [zoom, setZoom] = React.useState(1);
-	const [minZoom, setMinZoom] = React.useState(1);
-	const [croppedAreaPixels, setCroppedAreaPixels] = React.useState<Area>({
+	const [crop, setCrop] = useState({ x: 0, y: 0 });
+	const [zoom, setZoom] = useState(1);
+	const [minZoom, setMinZoom] = useState(1);
+	const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>({
 		width: 0,
 		height: 0,
 		x: 0,
 		y: 0,
 	});
-	const [selfi, setSelfi] = React.useState<string | MediaStream | null>(null);
+	const [selfi, setSelfi] = useState<string | MediaStream | null>(null);
 
-	const retakeBtnRef = React.useRef<HTMLButtonElement>(null);
-	const videoRef = React.useRef<HTMLVideoElement>(null);
+	const retakeBtnRef = useRef<HTMLButtonElement>(null);
+	const videoRef = useRef<HTMLVideoElement>(null);
 
-	const onCropComplete = React.useCallback((_croppedArea: Area, croppedAreaPixels: Area) => {
+	const onCropComplete = useCallback((_croppedArea: Area, croppedAreaPixels: Area) => {
 		setCroppedAreaPixels(croppedAreaPixels);
 	}, []);
 
@@ -65,7 +65,7 @@ export const SelfiForm: React.FC<SelfiFormProps> = ({
 		}
 	};
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (fileData) {
 			setSelfi(fileData);
 		}

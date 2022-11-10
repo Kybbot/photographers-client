@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, FC } from "react";
 
 type UploadOptionsProps = {
 	closeHandler: () => void;
@@ -6,7 +6,7 @@ type UploadOptionsProps = {
 	openCamera: () => Promise<void>;
 };
 
-export const UploadOptions: React.FC<UploadOptionsProps> = ({ fileHandler, closeHandler, openCamera }) => {
+export const UploadOptions: FC<UploadOptionsProps> = ({ fileHandler, closeHandler, openCamera }) => {
 	const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
 		fileHandler(event);
 		closeHandler();

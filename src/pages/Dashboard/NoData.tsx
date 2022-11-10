@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Print } from "./components/Print";
 
-export const NoData: React.FC = () => {
+export const NoData: FC = () => {
 	return (
 		<section className="dashboard__container">
 			<div className="container">

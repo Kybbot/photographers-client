@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FC } from "react";
 import { Outlet, useNavigate, useLocation, Link } from "react-router-dom";
 
-const SettingsLayout: React.FC = () => {
+const SettingsLayout: FC = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 

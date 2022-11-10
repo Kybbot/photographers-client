@@ -1,5 +1,7 @@
+import { RefObject } from "react";
+
 export const onTab = (
-	wrapper: React.RefObject<HTMLDivElement>,
+	wrapper: RefObject<HTMLDivElement>,
 	allEllements: (HTMLButtonElement & HTMLInputElement)[],
 	closeModal: () => void
 ) => {

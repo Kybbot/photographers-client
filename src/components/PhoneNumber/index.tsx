@@ -1,12 +1,12 @@
-import React, { ChangeEvent, Dispatch, FC, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, Dispatch, FC, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
 
 import { currentCountryType } from "../../@types/phoneForm";
 
 type PhoneNumberProps = {
 	currentCountry: currentCountryType;
 	disabled?: boolean;
-	setPhone: Dispatch<React.SetStateAction<string>>;
-	openModal: (openBtnRef: React.RefObject<HTMLButtonElement> | React.RefObject<HTMLInputElement>) => void;
+	setPhone: Dispatch<SetStateAction<string>>;
+	openModal: (openBtnRef: RefObject<HTMLButtonElement> | RefObject<HTMLInputElement>) => void;
 };
 
 export const PhoneNumber: FC<PhoneNumberProps> = ({ currentCountry, disabled, setPhone, openModal }) => {

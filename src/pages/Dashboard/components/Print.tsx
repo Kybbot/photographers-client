@@ -1,10 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 
 type PrintProps = {
 	index: number;
 };
 
-export const Print: React.FC<PrintProps> = ({ index }) => {
+export const Print: FC<PrintProps> = ({ index }) => {
 	return (
 		<div className="dashboard__wrapper">
 			<picture className="dashboard__picture">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, memo, useLayoutEffect, useRef } from "react";
 
 import { usePrevious } from "../../../hooks/usePrevious";
 
@@ -6,11 +6,11 @@ export interface OTPInputProps extends React.InputHTMLAttributes<HTMLInputElemen
 	focus?: boolean;
 }
 
-export const OTPInput: React.FC<OTPInputProps> = React.memo(({ focus, ...rest }) => {
-	const inputRef = React.useRef<HTMLInputElement>(null);
+export const OTPInput: FC<OTPInputProps> = memo(({ focus, ...rest }) => {
+	const inputRef = useRef<HTMLInputElement>(null);
 	const prevFocus = usePrevious(!!focus);
 
-	React.useLayoutEffect(() => {
+	useLayoutEffect(() => {
 		if (inputRef.current) {
 			if (focus) {
 				inputRef.current.focus();
