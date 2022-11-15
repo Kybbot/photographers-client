@@ -1,14 +1,4 @@
-import React, {
-	ChangeEvent,
-	KeyboardEvent,
-	ClipboardEvent,
-	Dispatch,
-	FC,
-	memo,
-	useState,
-	useCallback,
-	SetStateAction,
-} from "react";
+import React, { ChangeEvent, KeyboardEvent, ClipboardEvent, Dispatch, FC, useState, SetStateAction } from "react";
 
 import { OTPInput } from "./OTPInput";
 
@@ -21,146 +11,122 @@ export type OTPProps = {
 	onChangeOTP: (otp: string) => void;
 };
 
-export const OTP: FC<OTPProps> = memo(({ length, isNumberInput, disabled, otpValues, setOTPValues, onChangeOTP }) => {
+export const OTP: FC<OTPProps> = ({ length, isNumberInput, disabled, otpValues, setOTPValues, onChangeOTP }) => {
 	const [activeInput, setActiveInput] = useState(0);
 
-	const handleOtpChange = useCallback(
-		(otp: string[]) => {
-			const otpValue = otp.join("");
-			onChangeOTP(otpValue);
-		},
-		[onChangeOTP]
-	);
+	const handleOtpChange = (otp: string[]) => {
+		const otpValue = otp.join("");
+		onChangeOTP(otpValue);
+	};
 
-	const getRightValue = useCallback(
-		(str: string) => {
-			const changedValue = str;
+	const getRightValue = (str: string) => {
+		const changedValue = str;
 
-			if (!isNumberInput || !changedValue) {
-				return changedValue;
-			}
+		if (!isNumberInput || !changedValue) {
+			return changedValue;
+		}
 
-			return Number(changedValue) >= 0 ? changedValue : "";
-		},
-		[isNumberInput]
-	);
+		return Number(changedValue) >= 0 ? changedValue : "";
+	};
 
-	const changeCodeAtFocus = useCallback(
-		(str: string) => {
-			const updatedOTPValues = [...otpValues];
-			updatedOTPValues[activeInput] = str[0] || "";
-			setOTPValues(updatedOTPValues);
-			handleOtpChange(updatedOTPValues);
-		},
-		[activeInput, handleOtpChange, otpValues, setOTPValues]
-	);
+	const changeCodeAtFocus = (str: string) => {
+		const updatedOTPValues = [...otpValues];
+		updatedOTPValues[activeInput] = str[0] || "";
+		setOTPValues(updatedOTPValues);
+		handleOtpChange(updatedOTPValues);
+	};
 
-	const focusInput = useCallback(
-		(inputIndex: number) => {
-			const selectedIndex = Math.max(Math.min(length - 1, inputIndex), 0);
-			setActiveInput(selectedIndex);
-		},
-		[length]
-	);
+	const focusInput = (inputIndex: number) => {
+		const selectedIndex = Math.max(Math.min(length - 1, inputIndex), 0);
+		setActiveInput(selectedIndex);
+	};
 
-	const focusNextInput = useCallback(() => {
+	const focusNextInput = () => {
 		focusInput(activeInput + 1);
-	}, [activeInput, focusInput]);
+	};
 
-	const focusPrevInput = useCallback(() => {
+	const focusPrevInput = () => {
 		focusInput(activeInput - 1);
-	}, [activeInput, focusInput]);
+	};
 
-	const handleOnFocus = useCallback(
-		(inputIndex: number) => {
-			focusInput(inputIndex);
-		},
-		[focusInput]
-	);
+	const handleOnFocus = (inputIndex: number) => {
+		focusInput(inputIndex);
+	};
 
-	const handleOnBlur = useCallback(() => {
+	const handleOnBlur = () => {
 		setActiveInput(-1);
-	}, []);
+	};
 
-	const handleOnChange = useCallback(
-		(event: ChangeEvent<HTMLInputElement>) => {
-			const val = getRightValue(event.currentTarget.value);
+	const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const val = getRightValue(event.currentTarget.value);
 
-			if (!val) {
-				event.preventDefault();
-				return;
-			}
-
-			changeCodeAtFocus(val);
-			focusNextInput();
-		},
-		[changeCodeAtFocus, focusNextInput, getRightValue]
-	);
-
-	const handleOnKeyDown = useCallback(
-		(event: KeyboardEvent<HTMLInputElement>) => {
-			const pressedKey = event.key;
-
-			switch (pressedKey) {
-				case "Backspace":
-				case "Delete": {
-					event.preventDefault();
-					if (otpValues[activeInput]) {
-						changeCodeAtFocus("");
-					} else {
-						focusPrevInput();
-					}
-					break;
-				}
-				case "ArrowLeft": {
-					event.preventDefault();
-					focusPrevInput();
-					break;
-				}
-				case "ArrowRight": {
-					event.preventDefault();
-					focusNextInput();
-					break;
-				}
-				default: {
-					if (pressedKey.match(/^[^a-zA-Z0-9]$/)) {
-						event.preventDefault();
-					}
-					break;
-				}
-			}
-		},
-		[activeInput, changeCodeAtFocus, focusNextInput, focusPrevInput, otpValues]
-	);
-
-	const handleOnPaste = useCallback(
-		(event: ClipboardEvent<HTMLInputElement>) => {
+		if (!val) {
 			event.preventDefault();
-			const pastedData = event.clipboardData
-				.getData("text/plain")
-				.slice(0, length - activeInput)
-				.split("");
+			return;
+		}
 
-			if (pastedData) {
-				let nextFocusIndex = 0;
-				const updatedOTPValues = [...otpValues];
+		changeCodeAtFocus(val);
+		focusNextInput();
+	};
 
-				for (let i = 0; i < updatedOTPValues.length; i++) {
-					if (i >= activeInput) {
-						const changedValue = getRightValue(pastedData.shift() || updatedOTPValues[i]);
-						if (changedValue) {
-							updatedOTPValues[i] = changedValue;
-							nextFocusIndex = i;
-						}
+	const handleOnKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+		const pressedKey = event.key;
+
+		switch (pressedKey) {
+			case "Backspace":
+			case "Delete": {
+				event.preventDefault();
+				if (otpValues[activeInput]) {
+					changeCodeAtFocus("");
+				} else {
+					focusPrevInput();
+				}
+				break;
+			}
+			case "ArrowLeft": {
+				event.preventDefault();
+				focusPrevInput();
+				break;
+			}
+			case "ArrowRight": {
+				event.preventDefault();
+				focusNextInput();
+				break;
+			}
+			default: {
+				if (pressedKey.match(/^[^a-zA-Z0-9]$/)) {
+					event.preventDefault();
+				}
+				break;
+			}
+		}
+	};
+
+	const handleOnPaste = (event: ClipboardEvent<HTMLInputElement>) => {
+		event.preventDefault();
+		const pastedData = event.clipboardData
+			.getData("text/plain")
+			.slice(0, length - activeInput)
+			.split("");
+
+		if (pastedData) {
+			let nextFocusIndex = 0;
+			const updatedOTPValues = [...otpValues];
+
+			for (let i = 0; i < updatedOTPValues.length; i++) {
+				if (i >= activeInput) {
+					const changedValue = getRightValue(pastedData.shift() || updatedOTPValues[i]);
+					if (changedValue) {
+						updatedOTPValues[i] = changedValue;
+						nextFocusIndex = i;
 					}
 				}
-
-				setOTPValues(updatedOTPValues);
-				setActiveInput(Math.min(nextFocusIndex + 1, length - 1));
 			}
-		},
-		[activeInput, getRightValue, length, otpValues, setOTPValues]
-	);
+
+			setOTPValues(updatedOTPValues);
+			setActiveInput(Math.min(nextFocusIndex + 1, length - 1));
+		}
+	};
 
 	return (
 		<>
@@ -188,4 +154,4 @@ export const OTP: FC<OTPProps> = memo(({ length, isNumberInput, disabled, otpVal
 				))}
 		</>
 	);
-});
+};

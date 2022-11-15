@@ -1,4 +1,4 @@
-import React, { FC, RefObject, useRef, useState } from "react";
+import React, { FC, RefObject, useCallback, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { AlbumItem } from "./components/AlbumItem";
@@ -28,12 +28,15 @@ export const Photos: FC<PhotosProps> = ({ albums }) => {
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
 
-	const openCurrentPhoto = (btnRef: RefObject<HTMLButtonElement>, photo: PhotoType) => {
-		const album = albums.find((item) => item.id === +photo.album_id);
-		if (album) setCurrentAlbum(album);
-		setCurrentPhoto(photo);
-		openModal1(btnRef);
-	};
+	const openCurrentPhoto = useCallback(
+		(btnRef: RefObject<HTMLButtonElement>, photo: PhotoType) => {
+			const album = albums.find((item) => item.id === +photo.album_id);
+			if (album) setCurrentAlbum(album);
+			setCurrentPhoto(photo);
+			openModal1(btnRef);
+		},
+		[albums, openModal1]
+	);
 
 	useLazyLoadImages(photosGalleryDiv, []);
 

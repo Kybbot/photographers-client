@@ -1,4 +1,4 @@
-import React, { FC, RefObject, useEffect, useRef, useState } from "react";
+import React, { FC, RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { PhotosItem } from "./components/PhotosItem";
@@ -28,10 +28,13 @@ const Album: FC = () => {
 	const { isActive: isActive1, openModal: openModal1, closeModal: closeModal1 } = useModal();
 	const { isActive: isActive2, openModal: openModal2, closeModal: closeModal2 } = useModal();
 
-	const openCurrentPhoto = (btnRef: RefObject<HTMLButtonElement>, photo: PhotoType) => {
-		setCurrentPhoto(photo);
-		openModal1(btnRef);
-	};
+	const openCurrentPhoto = useCallback(
+		(btnRef: RefObject<HTMLButtonElement>, photo: PhotoType) => {
+			setCurrentPhoto(photo);
+			openModal1(btnRef);
+		},
+		[openModal1]
+	);
 
 	const goBackHandler = () => {
 		navigate("/");

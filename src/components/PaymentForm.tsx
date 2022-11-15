@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useEffect, useState } from "react";
+import React, { FC, FormEvent, memo, useEffect, useState } from "react";
 
 import { useAuthFetch } from "../hooks/useAuthFetch";
 
@@ -9,7 +9,7 @@ type PaymentFormProps = {
 	closeModal: () => void;
 };
 
-export const PaymentForm: FC<PaymentFormProps> = ({ albumData, closeModal }) => {
+export const PaymentForm: FC<PaymentFormProps> = memo(({ albumData, closeModal }) => {
 	const { loading, error, request } = useAuthFetch();
 
 	const [album, setAlbum] = useState(albumData);
@@ -69,4 +69,4 @@ export const PaymentForm: FC<PaymentFormProps> = ({ albumData, closeModal }) => 
 			{error && <p className="error">{error}</p>}
 		</form>
 	);
-};
+});

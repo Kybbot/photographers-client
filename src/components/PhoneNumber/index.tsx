@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch, FC, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, Dispatch, FC, memo, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
 
 import { currentCountryType } from "../../@types/phoneForm";
 
@@ -9,7 +9,7 @@ type PhoneNumberProps = {
 	openModal: (openBtnRef: RefObject<HTMLButtonElement> | RefObject<HTMLInputElement>) => void;
 };
 
-export const PhoneNumber: FC<PhoneNumberProps> = ({ currentCountry, disabled, setPhone, openModal }) => {
+export const PhoneNumber: FC<PhoneNumberProps> = memo(({ currentCountry, disabled, setPhone, openModal }) => {
 	const [phoneInput, setPhoneInput] = useState(currentCountry.dial_code);
 
 	const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -65,4 +65,4 @@ export const PhoneNumber: FC<PhoneNumberProps> = ({ currentCountry, disabled, se
 			/>
 		</div>
 	);
-};
+});

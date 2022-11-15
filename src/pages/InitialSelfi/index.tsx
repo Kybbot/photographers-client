@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useRef, useState } from "react";
+import React, { ChangeEvent, FC, useCallback, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { Modal, SelfiForm, UploadOptions } from "../../components";
@@ -29,7 +29,7 @@ const InitialSelfi: FC = () => {
 	const selfiBtnRef = useRef<HTMLButtonElement>(null);
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
-	const cleanStream = () => {
+	const cleanStream = useCallback(() => {
 		if (stream) {
 			const tracks = stream.getTracks();
 
@@ -39,18 +39,21 @@ const InitialSelfi: FC = () => {
 
 			setStream(null);
 		}
-	};
+	}, [stream]);
 
-	const fileHandler = (event: ChangeEvent<HTMLInputElement>) => {
-		cleanStream();
+	const fileHandler = useCallback(
+		(event: ChangeEvent<HTMLInputElement>) => {
+			cleanStream();
 
-		if (event.target.files) {
-			const file = event.target.files[0];
+			if (event.target.files) {
+				const file = event.target.files[0];
 
-			setFile(URL.createObjectURL(file));
-			openModal1(selfiBtnRef);
-		}
-	};
+				setFile(URL.createObjectURL(file));
+				openModal1(selfiBtnRef);
+			}
+		},
+		[cleanStream, openModal1]
+	);
 
 	const openSelfiForm = () => {
 		if (width && width < 1024) {
@@ -67,13 +70,13 @@ const InitialSelfi: FC = () => {
 		closeModal1();
 	};
 
-	const openCamera = async () => {
+	const openCamera = useCallback(async () => {
 		setFile(null);
 		const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
 		setStream(stream);
 		openModal1(selfiBtnRef);
 		closeModal2();
-	};
+	}, [openModal1, closeModal2]);
 
 	const uploadSelfi = async (img: Blob) => {
 		const formData = new FormData();

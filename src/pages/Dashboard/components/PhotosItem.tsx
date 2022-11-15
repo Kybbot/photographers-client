@@ -1,4 +1,4 @@
-import React, { FC, RefObject, useRef } from "react";
+import React, { FC, memo, RefObject, useRef } from "react";
 
 import { PhotoType } from "../../../@types/api";
 
@@ -8,7 +8,7 @@ type PhotosItemProps = {
 	openCurrentPhoto: (btnRef: RefObject<HTMLButtonElement>, url: PhotoType) => void;
 };
 
-export const PhotosItem: FC<PhotosItemProps> = ({ data, owned, openCurrentPhoto }) => {
+export const PhotosItem: FC<PhotosItemProps> = memo(({ data, owned, openCurrentPhoto }) => {
 	const btnRef = useRef<HTMLButtonElement>(null);
 
 	const handleButton = () => {
@@ -31,4 +31,4 @@ export const PhotosItem: FC<PhotosItemProps> = ({ data, owned, openCurrentPhoto 
 			/>
 		</button>
 	);
-};
+});
